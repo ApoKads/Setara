@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use App\Models\Job;
 use App\Models\User;
 use App\Models\Disability;
 use App\Models\UserProfile;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -17,7 +19,8 @@ class UserProfile extends Model
     protected $fillable = [
         'name',
         'age',
-        'about'
+        'about',
+        'user_id'
     ];
 
     public function user(): BelongsTo{
@@ -26,6 +29,10 @@ class UserProfile extends Model
 
     public function disabilities():BelongsToMany{
         return $this->belongsToMany(Disability::class,'disability_user_profile','user_profile_id','disability_id');
+    }
+
+    public function jobs():HasMany{
+        return $this->hasMany(Job::class,'user_profile_id');
     }
     
 }

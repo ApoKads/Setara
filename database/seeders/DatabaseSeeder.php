@@ -2,11 +2,12 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
+use App\Models\Job;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\User;
 use App\Models\Admin;
-use App\Models\Company;
 // use App\Models\UserDisability;
+use App\Models\Company;
 use App\Models\Disability;
 use App\Models\UserProfile;
 use Illuminate\Database\Seeder;
@@ -74,6 +75,23 @@ class DatabaseSeeder extends Seeder
             'user_profile_id'=>1,
             'disability_id'=>2
 
+        ]);
+        Job::factory()->create([
+            'company_id'=>1,
+            'user_profile_id'=>1,
+            'name'=>'Bartender Gion',
+            'description'=>'Tukang sushi nih boskyu',
+            'wage' => 4351000,
+            'location' =>'Market Lane'
+        ]);
+
+        Job::factory()->create([
+            'company_id'=>1,
+            'user_profile_id'=>1,
+            'name'=>'Office Boy Aeon',
+            'description'=>'Tukang Nyapu lantai 2 nih boskyu',
+            'wage' => 2375000,
+            'location' =>'AeonSentul'
         ]);
         
     }
