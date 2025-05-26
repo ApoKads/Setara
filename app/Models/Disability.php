@@ -15,7 +15,7 @@ class Disability extends Model
         'name',
     ];
     
-    public function users(): BelongsToMany{
+    public function profiles(): BelongsToMany{
         return $this->belongsToMany(UserProfile::class,'disability_user_profile','disability_id','user_profile_id');
     }
 

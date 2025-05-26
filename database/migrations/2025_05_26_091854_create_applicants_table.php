@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('applicants', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_profile_id')->constrained('user_profiles','id')->cascadeOnDelete();
+            $table->foreignId('job_id')->constrained('jobs','id')->cascadeOnDelete();
+            $table->text('note');
             $table->timestamps();
         });
     }

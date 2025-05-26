@@ -3,8 +3,8 @@
 namespace App\Models;
 
 use App\Models\Company;
-use App\Models\UserProfile;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -24,7 +24,9 @@ class Job extends Model
     public function company():BelongsTo{
         return $this->belongsTo(Company::class,'company_id');
     }
-    public function user():BelongsTo{
-        return $this->belongsTo(UserProfile::class,'user_profile_id');
+
+    public function applicant():HasOne{
+        return $this->hasOne(Applicant::class,'job_id');
     }
+
 }

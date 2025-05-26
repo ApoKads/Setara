@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\Job;
 use App\Models\User;
 use App\Models\Disability;
 use App\Models\UserProfile;
@@ -31,8 +30,8 @@ class UserProfile extends Model
         return $this->belongsToMany(Disability::class,'disability_user_profile','user_profile_id','disability_id');
     }
 
-    public function jobs():HasMany{
-        return $this->hasMany(Job::class,'user_profile_id');
+    public function applicants():HasMany{
+        return $this->hasMany(Applicant::class,'user_profile_id');
     }
     
 }

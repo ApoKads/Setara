@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Admin;
 // use App\Models\UserDisability;
 use App\Models\Company;
+use App\Models\Applicant;
 use App\Models\Disability;
 use App\Models\UserProfile;
 use Illuminate\Database\Seeder;
@@ -78,7 +79,6 @@ class DatabaseSeeder extends Seeder
         ]);
         Job::factory()->create([
             'company_id'=>1,
-            'user_profile_id'=>1,
             'name'=>'Bartender Gion',
             'description'=>'Tukang sushi nih boskyu',
             'wage' => 4351000,
@@ -87,12 +87,21 @@ class DatabaseSeeder extends Seeder
 
         Job::factory()->create([
             'company_id'=>1,
-            'user_profile_id'=>1,
             'name'=>'Office Boy Aeon',
             'description'=>'Tukang Nyapu lantai 2 nih boskyu',
             'wage' => 2375000,
             'location' =>'AeonSentul'
         ]);
-        
+
+        Applicant::factory()->create([
+            'user_profile_id'=> 1,
+            'job_id'=>1,
+            'note'=>'lorem ipsum et dolor semua kedetek',
+        ]);
+        Applicant::factory()->create([
+            'user_profile_id'=> 1,
+            'job_id'=>2,
+            'note'=>'lorem ipsum et dolor semua kedetek',
+        ]);
     }
 }
