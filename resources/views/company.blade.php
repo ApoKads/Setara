@@ -4,12 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Homepage</title>
+    <title>Document</title>
     @vite('resources/css/app.css')
 </head>
 <body>
-    <h1>
-        Hello, {{ $profile['name'] }}
-    </h1>
+    <h1>This is Company</h1>
+    <h2>{{ $company['name'] }}</h2>
 </body>
 </html>

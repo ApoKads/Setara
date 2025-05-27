@@ -15,7 +15,15 @@ Route::get('/',function(){
 });
 
 
+Route::get('admin/dashboard',function(){
+    return view('admin');
+});
 
+Route::get('company/dashboard',function(){
+    return view('company',[
+        'company'=>Auth::user()->company()->first()
+    ]);
+});
 
 Route::get('/home', function () {
     return view('home',[
