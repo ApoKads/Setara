@@ -8,8 +8,8 @@
     @vite('resources/css/app.css')
 </head>
 <body>
-    <h1>This is Company</h1>
+    <h1>This is Company Profile</h1>
     <h2>{{ $company['name'] }}</h2>
-    <a href="/company/dashboard/profile">test tombol</a>
+    <h2>{{ $company['description'] }}</h2>
 </body>
 </html>
