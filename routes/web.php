@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\UserMiddleware;
 use App\Http\Middleware\AdminMiddleware;
+use App\Http\Middleware\GuestMiddleware;
 use App\Http\Controllers\LoginController;
 use App\Http\Middleware\CompanyMiddleware;
 
@@ -15,7 +16,7 @@ Route::controller(LoginController::class)->group(function () {
 
 Route::get('/',function(){
     return view('login');
-});
+})->middleware(GuestMiddleware::class);
 
 
 // Admin Route
