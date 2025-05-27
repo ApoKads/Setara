@@ -18,24 +18,38 @@ Route::get('/',function(){
 });
 
 
-Route::get('admin/dashboard',function(){
-    return view('admin');
-})->middleware(AdminMiddleware::class);
+// Admin Route
+Route::middleware(['auth', AdminMiddleware::class])->prefix('admin')->group(function () {
+    Route::get('/dashboard', function () {
+        return view('admin');
+    });
+    
+});
 
-Route::get('company/dashboard',function(){
-    return view('company',[
-        'company'=>Auth::user()->company()->first()
-    ]);
-})->middleware(CompanyMiddleware::class);
 
-Route::get('company/dashboard/profile',function(){
-    return view('companyProfile',[
-        'company'=>Auth::user()->company()->first()
-    ]);
-})->middleware(CompanyMiddleware::class);
+// Company Route
+Route::middleware(['auth', CompanyMiddleware::class])->prefix('company')->group(function () {
+    Route::get('/dashboard', function () {
+        return view('company', [
+            'company' => Auth::user()->company()->first()
+        ]);
+    });
+    
+    Route::get('/dashboard/profile', function () {
+        return view('companyProfile', [
+            'company' => Auth::user()->company()->first()
+        ]);
+    });
+    
+});
 
-Route::get('/home', function () {
-    return view('home',[
-        'profile'=> Auth::user()->profile()->first()
-    ]);
-})->middleware(UserMiddleware::class);
+
+// User Route
+Route::middleware(['auth', UserMiddleware::class])->group(function () {
+    Route::get('/home', function () {
+        return view('home', [
+            'profile' => Auth::user()->profile()->first()
+        ]);
+    });
+    
+});
