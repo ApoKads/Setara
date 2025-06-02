@@ -7,6 +7,7 @@ use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\GuestMiddleware;
 use App\Http\Controllers\LoginController;
 use App\Http\Middleware\CompanyMiddleware;
+use App\Http\Controllers\CompanyListPageController;
 
 Route::controller(LoginController::class)->group(function () {
     Route::get('/login', 'showLoginForm')->name('login');
@@ -53,8 +54,9 @@ Route::middleware(['auth', UserMiddleware::class])->group(function () {
         ]);
     });
 
-    Route::get('/company',function(){
-        return view('listcompany');
+
+    Route::controller(CompanyListPageController::class)->group(function(){
+        Route::get('/company','index');
     });
     
 });

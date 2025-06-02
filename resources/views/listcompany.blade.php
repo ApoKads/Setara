@@ -51,15 +51,16 @@
   </div>
 
   <div class="w-full flex justify-center">
-        <div class="w-[90%]">
+        <div class="w-[90%] mb-10">
             <div class="grid grid-cols-3 w-full gap-12 mt-10">
-                <x-company-list.company-card ></x-company-list.company-card>
-                <x-company-list.company-card ></x-company-list.company-card>
-                <x-company-list.company-card ></x-company-list.company-card>
+                @forelse ($companyCard as $card)
+                    <x-company-list.company-card :card="$card" ></x-company-list.company-card>
+                @empty
+                    <p>There isn't a company available...</p>
+                @endforelse
         
             </div>
         </div>
-
   </div>
   
 

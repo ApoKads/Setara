@@ -8,9 +8,11 @@ use App\Models\User;
 use App\Models\Admin;
 // use App\Models\UserDisability;
 use App\Models\Company;
+use App\Models\Category;
 use App\Models\Applicant;
 use App\Models\Disability;
 use App\Models\UserProfile;
+use App\Models\CategoryCompany;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use App\Models\DisabilityUserProfile;
@@ -28,6 +30,17 @@ class DatabaseSeeder extends Seeder
         Disability::factory()->create([
             'name'=>'Tuna Netra'
         ]);
+
+        Category::factory()->create([
+            'name'=>'Perbankan',
+            'color'=>'yellow'
+        ]);
+
+        Category::factory()->create([
+            'name'=>'Jasa',
+            'color'=>'red'
+        ]);
+
         // User::factory(10)->create();
 
         User::factory()->create([
@@ -49,6 +62,30 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('password'),
             'role' => 'company'
         ]);
+        User::factory()->create([
+            'email' => 'testUser4@example.com',
+            'email_verified_at' => now(),
+            'password' => Hash::make('password'),
+            'role' => 'company'
+        ]);
+        User::factory()->create([
+            'email' => 'testUser5@example.com',
+            'email_verified_at' => now(),
+            'password' => Hash::make('password'),
+            'role' => 'company'
+        ]);
+        User::factory()->create([
+            'email' => 'testUser6@example.com',
+            'email_verified_at' => now(),
+            'password' => Hash::make('password'),
+            'role' => 'company'
+        ]);
+        User::factory()->create([
+            'email' => 'testUser7@example.com',
+            'email_verified_at' => now(),
+            'password' => Hash::make('password'),
+            'role' => 'company'
+        ]);
 
         UserProfile::factory()->create([
             'name' => 'Test User',
@@ -64,8 +101,40 @@ class DatabaseSeeder extends Seeder
         Company::factory()->create([
             'user_id'=>3,
             'name'=>'PT JAYA ABADI',
+            'location'=>'Jakarta Barat',
             'description'=>'lorem ipsum et dolor sit amet'
         ]);
+
+        Company::factory()->create([
+            'user_id'=>4,
+            'name'=>'PT PEMIMPIN ASIA',
+            'location'=>'Balikpapan',
+            'description'=>'Datang tak diundang, pulang harus di bom'
+        ]);
+
+        Company::factory()->create([
+            'user_id'=>5,
+            'name'=>'PT CAHAYA YEDIJA',
+            'location'=>'Depok',
+            'description'=>'Anak Perusahaan dari perusahaan BG Corp dengan Alias Winion'
+        ]);
+
+        Company::factory()->create([
+            'user_id'=>6,
+            'name'=>'PT UNDRA SUKSES',
+            'location'=>'Surabaya',
+            'description'=>'Tim Sukses PPTI 18'
+
+        ]);
+
+        Company::factory()->create([
+            'user_id'=>7,
+            'name'=>'PT UNDRA SUKSES 2',
+            'location'=>'Surabaya',
+            'description'=>'Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur corporis nihil illo dolorem totam aliquid, quisquam commodi officiis dolores exercitationem, odio unde necessitatibus expedita itaque rerum, cum laudantium impedit minima eius. Assumenda architecto sequi sunt, quos, numquam, molestiae facere consequatur molestias perferendis aliquam alias laboriosam consequuntur quis porro harum saepe!'
+
+        ]);
+
 
         DisabilityUserProfile::factory()->create([
             'user_profile_id'=>1,
@@ -77,6 +146,37 @@ class DatabaseSeeder extends Seeder
             'disability_id'=>2
 
         ]);
+
+        CategoryCompany::factory()->create([
+            'company_id'=> 1,
+            'category_id'=>2
+        ]);
+
+        CategoryCompany::factory()->create([
+            'company_id'=> 2,
+            'category_id'=>2
+        ]);
+
+        CategoryCompany::factory()->create([
+            'company_id'=> 3,
+            'category_id'=>1
+        ]);
+
+        CategoryCompany::factory()->create([
+            'company_id'=> 4,
+            'category_id'=>1
+        ]);
+
+        CategoryCompany::factory()->create([
+            'company_id'=> 5,
+            'category_id'=>1
+        ]);
+
+        CategoryCompany::factory()->create([
+            'company_id'=> 5,
+            'category_id'=>2
+        ]);
+
         Job::factory()->create([
             'company_id'=>1,
             'name'=>'Bartender Gion',
