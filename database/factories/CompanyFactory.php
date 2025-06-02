@@ -18,6 +18,8 @@ class CompanyFactory extends Factory
     {
         return [
             //
+            'path_banner'=>'company\BannerCompany.jpg',
+            'path_logo'=>'company\logoCompany.jpg'
         ];
     }
 }

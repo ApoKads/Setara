@@ -20,7 +20,10 @@ class Company extends Model
     protected $fillable = [
         'name',
         'description',
-        'user_id'
+        'user_id',
+        'path_banner',
+        'path_logo',
+        'location'
     ];
     
     public function user(): BelongsTo{

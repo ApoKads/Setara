@@ -102,28 +102,28 @@ class DatabaseSeeder extends Seeder
             'user_id'=>3,
             'name'=>'PT JAYA ABADI',
             'location'=>'Jakarta Barat',
-            'description'=>'lorem ipsum et dolor sit amet'
+            'description'=>'lorem ipsum et dolor sit amet',
         ]);
 
         Company::factory()->create([
             'user_id'=>4,
             'name'=>'PT PEMIMPIN ASIA',
             'location'=>'Balikpapan',
-            'description'=>'Datang tak diundang, pulang harus di bom'
+            'description'=>'Datang tak diundang, pulang harus di bom',
         ]);
 
         Company::factory()->create([
             'user_id'=>5,
             'name'=>'PT CAHAYA YEDIJA',
             'location'=>'Depok',
-            'description'=>'Anak Perusahaan dari perusahaan BG Corp dengan Alias Winion'
+            'description'=>'Anak Perusahaan dari perusahaan BG Corp dengan Alias Winion',
         ]);
 
         Company::factory()->create([
             'user_id'=>6,
             'name'=>'PT UNDRA SUKSES',
             'location'=>'Surabaya',
-            'description'=>'Tim Sukses PPTI 18'
+            'description'=>'Tim Sukses PPTI 18',
 
         ]);
 
@@ -131,7 +131,7 @@ class DatabaseSeeder extends Seeder
             'user_id'=>7,
             'name'=>'PT UNDRA SUKSES 2',
             'location'=>'Surabaya',
-            'description'=>'Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur corporis nihil illo dolorem totam aliquid, quisquam commodi officiis dolores exercitationem, odio unde necessitatibus expedita itaque rerum, cum laudantium impedit minima eius. Assumenda architecto sequi sunt, quos, numquam, molestiae facere consequatur molestias perferendis aliquam alias laboriosam consequuntur quis porro harum saepe!'
+            'description'=>'Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur corporis nihil illo dolorem totam aliquid, quisquam commodi officiis dolores exercitationem, odio unde necessitatibus expedita itaque rerum, cum laudantium impedit minima eius. Assumenda architecto sequi sunt, quos, numquam, molestiae facere consequatur molestias perferendis aliquam alias laboriosam consequuntur quis porro harum saepe!',
 
         ]);
 

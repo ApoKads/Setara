@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('location');
             $table->text('description');
+            $table->string('path_banner')->nullable();
+            $table->string('path_logo')->nullable();
             $table->timestamps();
         });
     }

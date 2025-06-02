@@ -12,19 +12,19 @@
     
 
     {{-- SEARCH BAR --}}
-    <div class="bg-white w-[80%] px-8 py-6  rounded-2xl shadow-inner drop-shadow-xl border-gray-50 z-10">
+    <div class="bg-white w-[80%] px-8 py-5  rounded-2xl shadow-inner drop-shadow-xl border-gray-50 z-10">
         <form action="" method="GET" class="flex items-center space-x-4 h-full">
             <div class="flex-grow border-black border-[1px] rounded-lg">
                 <input type="text"
                     name="query"
                     placeholder="Cari Pekerjaan Impianmu ..."
-                    class="w-full px-4 py-3 border text-xl border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    class="w-full px-4 py-3 border text-base border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                     value="{{ request('query') }}">
             </div>
 
             <div class="relative min-w-[200px] border-black border-[1px] rounded-lg">
                 <select name="industry"
-                        class="block appearance-none w-full text-xl bg-white border border-gray-300 text-gray-700 py-3 px-4 pr-8 rounded-lg leading-tight focus:outline-none focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-500 hover:cursor-pointer">
+                        class="block appearance-none w-full text-base bg-white border border-gray-300 text-gray-700 py-3 px-4 pr-8 rounded-lg leading-tight focus:outline-none focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-500 hover:cursor-pointer">
                     <option value="">Jenis Industri</option>
                     <option value="tech">Teknologi</option>
                     <option value="finance">Keuangan</option>
