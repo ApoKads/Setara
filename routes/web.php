@@ -52,5 +52,9 @@ Route::middleware(['auth', UserMiddleware::class])->group(function () {
             'profile' => Auth::user()->profile()->first()
         ]);
     });
+
+    Route::get('/company',function(){
+        return view('listcompany');
+    });
     
 });
