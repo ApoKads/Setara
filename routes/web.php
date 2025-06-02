@@ -57,6 +57,8 @@ Route::middleware(['auth', UserMiddleware::class])->group(function () {
 
     Route::controller(CompanyListPageController::class)->group(function(){
         Route::get('/company','index');
+        // routes/web.php
+        Route::get('/company/{company:slug}','show')->name('companies.show');
     });
     
 });

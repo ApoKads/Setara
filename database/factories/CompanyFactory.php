@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,7 +20,8 @@ class CompanyFactory extends Factory
         return [
             //
             'path_banner'=>'company\BannerCompany.jpg',
-            'path_logo'=>'company\logoCompany.jpg'
+            'path_logo'=>'company\logoCompany.png',
+            'slug'=>Str::slug(fake()->sentence())
         ];
     }
 }

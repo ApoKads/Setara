@@ -16,10 +16,10 @@
         <form action="" method="GET" class="flex items-center space-x-4 h-full">
             <div class="flex-grow border-black border-[1px] rounded-lg">
                 <input type="text"
-                    name="query"
+                    name="search"
                     placeholder="Cari Pekerjaan Impianmu ..."
                     class="w-full px-4 py-3 border text-base border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    value="{{ request('query') }}">
+                    value="{{ request('search') }}">
             </div>
 
             <div class="relative min-w-[200px] border-black border-[1px] rounded-lg">

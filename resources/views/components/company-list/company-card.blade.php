@@ -1,6 +1,7 @@
 @props(['card'])
+<a href="{{ route('companies.show', $card->slug) }}" class="block">
 
-<div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 h-[27rem]">
+    <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 h-[27rem]">
                 {{-- Gambar logo BCA --}}
                 <div class="h-48 flex items-center justify-center bg-red object-cover">
                     @if ($card->path_banner)
@@ -38,4 +39,5 @@
                     </p>
 
                 </div>
-</div>
+    </div>
+</a>
