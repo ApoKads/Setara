@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,8 +17,21 @@ class UserProfileFactory extends Factory
      */
     public function definition(): array
     {
+        // Schema::create('user_profiles', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->string('name');
+        //     $table->foreignId('user_id')->constrained('users','id')->cascadeOnDelete();
+        //     $table->integer('age');
+        //     $table->text('about');
+        //     $table->timestamps();
+        // });
         return [
             //
+            'name' => fake()->name(),
+            'user_id' => User::factory(),
+            'age' => fake()->numberBetween(18, 65),
+            'about'=> fake()->paragraph(rand(10,40))
+
         ];
     }
 }

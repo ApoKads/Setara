@@ -41,13 +41,20 @@ class Company extends Model
 
     public function scopeFilter(Builder $query, array $filters):void{
         $query->when($filters['search'] ?? false,function($query,$search){
-            $query->where('name','like','%' . request('search') . '%');
+            $query->where('name','like','%' . $search . '%');
+        });
+
+        $query->when($filters['category'] ?? false, function($query, $categoryId) {
+        $query->whereHas('categories', function($q) use ($categoryId) {
+            $q->where('categories.id', $categoryId); // Filter berdasarkan ID category
+            });
         });
 
         // $query->when(
         //     $filters['category'] ?? false, function($query,$category){
-        //         $query->whereHas('category',fn($query)=> $query->where('slug',$category)) ;
+        //         $query->whereHas('categories',fn($query)=> $query->where('categories.id',$category));
         //     }
         // );
+
     }
 }

@@ -23,13 +23,14 @@
             </div>
 
             <div class="relative min-w-[200px] border-black border-[1px] rounded-lg">
-                <select name="industry"
+                <select name="category"
                         class="block appearance-none w-full text-base bg-white border border-gray-300 text-gray-700 py-3 px-4 pr-8 rounded-lg leading-tight focus:outline-none focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-500 hover:cursor-pointer">
                     <option value="">Jenis Industri</option>
-                    <option value="tech">Teknologi</option>
-                    <option value="finance">Keuangan</option>
-                    <option value="healthcare">Kesehatan</option>
-                    <option value="education">Pendidikan</option>
+                    @foreach ( $categories as $category)
+                        <option value="{{ $category->id }}" {{ request('category') == $category->id ? 'selected' : '' }}>
+                            {{ $category->name }}
+                        </option>
+                    @endforeach
                 </select>
                 <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                     <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -51,14 +52,16 @@
   </div>
 
   <div class="w-full flex justify-center">
-        <div class="w-[90%] mb-10">
-            <div class="grid grid-cols-3 w-full gap-12 mt-10">
+        <div class="w-[90%] mb-10 flex flex-col justify-center">
+            <div class="grid grid-cols-3 w-full gap-12 mt-10 ">
                 @forelse ($companyCard as $card)
                     <x-company-list.company-card :card="$card" ></x-company-list.company-card>
                 @empty
                     <p>There isn't a company available...</p>
                 @endforelse
-        
+            </div>
+            <div class="flex flex-col justify-center items-center mt-4">
+                {{ $companyCard->links() }}
             </div>
         </div>
   </div>

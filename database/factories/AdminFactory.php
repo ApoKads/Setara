@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -18,6 +19,9 @@ class AdminFactory extends Factory
     {
         return [
             //
+            'user_id'=>User::factory()->state([
+                'role' => 'admin' // Pastikan role di-set sebagai company
+            ]),
         ];
     }
 }

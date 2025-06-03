@@ -14,8 +14,11 @@ use App\Models\Disability;
 use App\Models\UserProfile;
 use App\Models\CategoryCompany;
 use Illuminate\Database\Seeder;
+use Database\Seeders\AdminSeeder;
+use Database\Seeders\CompanySeeder;
 use Illuminate\Support\Facades\Hash;
 use App\Models\DisabilityUserProfile;
+use Database\Seeders\UserProfileSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -43,97 +46,10 @@ class DatabaseSeeder extends Seeder
 
         // User::factory(10)->create();
 
-        User::factory()->create([
-            'email' => 'testUser@example.com',
-            'email_verified_at' => now(),
-            
-            'password' => Hash::make('password'),
-            'role' => 'user'
-        ]);
-        User::factory()->create([
-            'email' => 'testUser2@example.com',
-            'email_verified_at' => now(),
-            'password' => Hash::make('password'),
-            'role' => 'admin'
-        ]);
-        User::factory()->create([
-            'email' => 'testUser3@example.com',
-            'email_verified_at' => now(),
-            'password' => Hash::make('password'),
-            'role' => 'company'
-        ]);
-        User::factory()->create([
-            'email' => 'testUser4@example.com',
-            'email_verified_at' => now(),
-            'password' => Hash::make('password'),
-            'role' => 'company'
-        ]);
-        User::factory()->create([
-            'email' => 'testUser5@example.com',
-            'email_verified_at' => now(),
-            'password' => Hash::make('password'),
-            'role' => 'company'
-        ]);
-        User::factory()->create([
-            'email' => 'testUser6@example.com',
-            'email_verified_at' => now(),
-            'password' => Hash::make('password'),
-            'role' => 'company'
-        ]);
-        User::factory()->create([
-            'email' => 'testUser7@example.com',
-            'email_verified_at' => now(),
-            'password' => Hash::make('password'),
-            'role' => 'company'
-        ]);
-
-        UserProfile::factory()->create([
-            'name' => 'Test User',
-            'user_id' => 1,
-            'age' => 17,
-            'about' => 'saya seorang entusias woi'
-        ]);
         
-        Admin::factory()->create([
-            'user_id'=>2
-        ]);
+        $this->call([UserProfileSeeder::class,AdminSeeder::class,CompanySeeder::class]);
+        
 
-        Company::factory()->create([
-            'user_id'=>3,
-            'name'=>'PT JAYA ABADI',
-            'location'=>'Jakarta Barat',
-            'description'=>'lorem ipsum et dolor sit amet',
-        ]);
-
-        Company::factory()->create([
-            'user_id'=>4,
-            'name'=>'PT PEMIMPIN ASIA',
-            'location'=>'Balikpapan',
-            'description'=>'Datang tak diundang, pulang harus di bom',
-        ]);
-
-        Company::factory()->create([
-            'user_id'=>5,
-            'name'=>'PT CAHAYA YEDIJA',
-            'location'=>'Depok',
-            'description'=>'Anak Perusahaan dari perusahaan BG Corp dengan Alias Winion',
-        ]);
-
-        Company::factory()->create([
-            'user_id'=>6,
-            'name'=>'PT UNDRA SUKSES',
-            'location'=>'Surabaya',
-            'description'=>'Tim Sukses PPTI 18',
-
-        ]);
-
-        Company::factory()->create([
-            'user_id'=>7,
-            'name'=>'PT UNDRA SUKSES 2',
-            'location'=>'Surabaya',
-            'description'=>'Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur corporis nihil illo dolorem totam aliquid, quisquam commodi officiis dolores exercitationem, odio unde necessitatibus expedita itaque rerum, cum laudantium impedit minima eius. Assumenda architecto sequi sunt, quos, numquam, molestiae facere consequatur molestias perferendis aliquam alias laboriosam consequuntur quis porro harum saepe!',
-
-        ]);
 
 
         DisabilityUserProfile::factory()->create([
