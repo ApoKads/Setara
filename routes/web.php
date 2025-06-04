@@ -55,17 +55,16 @@ Route::middleware(['auth', UserMiddleware::class])->group(function () {
         ]);
     });
 
-
+    // CompanyListPage
     Route::controller(CompanyListPageController::class)->group(function(){
         Route::get('/company','index');
-        // routes/web.php
         Route::get('/company/{company:slug}','show')->name('companies.show');
     });
     
+    // JobListPage
     Route::controller(JobListPageController::class)->group(function(){
         Route::get('/job','index');
         Route::get('/job/{job:slug}','show')->name('job.show');
-        // Route::get('/company/{company:slug}','show')->name('companies.show');
     });
     
 });

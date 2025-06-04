@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Job;
+use App\Models\JobType;
 use App\Models\Disability;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,8 @@ class JobListPageController extends Controller
     public function index(){
         return view('ListJob.listjob',[
             'disabilities'=>Disability::orderBy('name', 'asc')->get(),
-            'card'=>Job::first(), 
+            'jobCard'=> Job::filter(request(['search','disability','tag']))->latest()->paginate(9)->withQueryString(), 
+            'JobType'=> JobType::orderBy('name','asc')->get()
         ]);
     }
 

@@ -11,7 +11,10 @@ class CompanyListPageController extends Controller
     //
 
     public function index(){
-        return view('ListCompany.listcompany',['companyCard' => Company::filter(request(['search','category']))->latest()->paginate(9)->withQueryString(),'categories' => Category::orderBy('name', 'asc')->get()]);
+        return view('ListCompany.listcompany',[
+        'companyCard' => Company::filter(request(['search','category']))->latest()->paginate(9)->withQueryString(),
+        'categories' => Category::orderBy('name', 'asc')->get()
+    ]);
     }
 
     public function show(Company $company){
