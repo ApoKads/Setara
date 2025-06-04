@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\UserProfile;
 use Illuminate\Database\Seeder;
+use Database\Seeders\DisabilityUserProfileSeeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class UserProfileSeeder extends Seeder
@@ -15,5 +16,6 @@ class UserProfileSeeder extends Seeder
     {
         //
         UserProfile::factory()->create();
+        $this->call([DisabilityUserProfileSeeder::class]);
     }
 }
