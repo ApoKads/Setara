@@ -7,6 +7,7 @@ use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\GuestMiddleware;
 use App\Http\Controllers\LoginController;
 use App\Http\Middleware\CompanyMiddleware;
+use App\Http\Controllers\JobListPageController;
 use App\Http\Controllers\CompanyListPageController;
 
 Route::controller(LoginController::class)->group(function () {
@@ -23,7 +24,7 @@ Route::get('/',function(){
 // Admin Route
 Route::middleware(['auth', AdminMiddleware::class])->prefix('admin')->group(function () {
     Route::get('/dashboard', function () {
-        return view('admin');
+        return view('AdminSide.admin');
     });
     
 });
@@ -32,13 +33,13 @@ Route::middleware(['auth', AdminMiddleware::class])->prefix('admin')->group(func
 // Company Route
 Route::middleware(['auth', CompanyMiddleware::class])->prefix('company')->group(function () {
     Route::get('/dashboard', function () {
-        return view('company', [
+        return view('CompanySide.company', [
             'company' => Auth::user()->company()->first()
         ]);
     });
     
     Route::get('/dashboard/profile', function () {
-        return view('companyProfile', [
+        return view('CompanySide.companyProfile', [
             'company' => Auth::user()->company()->first()
         ]);
     });
@@ -59,6 +60,11 @@ Route::middleware(['auth', UserMiddleware::class])->group(function () {
         Route::get('/company','index');
         // routes/web.php
         Route::get('/company/{company:slug}','show')->name('companies.show');
+    });
+    
+    Route::controller(JobListPageController::class)->group(function(){
+        Route::get('/job','index');
+        // Route::get('/company/{company:slug}','show')->name('companies.show');
     });
     
 });

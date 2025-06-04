@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Company;
+use App\Models\JobType;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -14,6 +15,7 @@ class Job extends Model
     use HasFactory;
     protected $fillable = [
     'user_profile_id',
+    'job_type_id',
     'slug',
     'company_id',  // foreign key
     'name',        // string
@@ -29,6 +31,10 @@ class Job extends Model
 
     public function applicant():HasOne{
         return $this->hasOne(Applicant::class,'job_id');
+    }
+
+    public function JobType():BelongsTo{
+        return $this->belongsTo(JobType::class,'job_type_id');
     }
 
 }
