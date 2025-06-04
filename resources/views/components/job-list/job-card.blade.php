@@ -1,7 +1,7 @@
 @props(['card'])
-<a href="" class="block">
+{{-- <a href="" class="block"> --}}
 
-    <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 h-[32rem] w-[26rem]">
+    <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 h-[33rem] w-[26rem] text-[#192F56]">
                 {{-- Gambar logo BCA --}}
                 <div class="h-48 flex items-center justify-center bg-red object-cover bg-blue-200">
                     <img src="{{ asset('storage/job/BannerJob.jpeg') }}" alt="Banner Image" class="h-full w-full object-cover">
@@ -30,21 +30,31 @@
 
                     {{-- Kategori / Tags --}}
                     <div class="flex flex-col gap-2 ml-2 mt-4">
-                        <div class=" flex flex-wrap gap-2 max-h-[5rem] overflow-hidden relative mb-4">
+                        <div class=" flex flex-wrap gap-2 max-h-[5rem] overflow-hidden relative mb-2">
                             <!-- Tag-tag Anda -->
-                            <span class="bg-[#C4DDF6] text-[#132442] text-sm font-semibold rounded-sm flex px-2.5 py-2">{{ $card->JobType->name }}</span>
-                            <span class="bg-[#C4DDF6] text-[#132442] text-sm font-semibold rounded-sm flex px-2.5 py-2">{{ $card->EducationLevel->name }}</span>
-                            <span class="bg-[#C4DDF6] text-[#132442] text-sm font-semibold rounded-sm flex px-2.5 py-2">Onsite</span>
+                            <span class="bg-[#C4DDF6] text-[#132442] text-[14px] font-medium rounded-sm flex px-2 py-1.5">{{ $card->JobType->name }}</span>
+                            <span class="bg-[#C4DDF6] text-[#132442] text-[14px] font-medium rounded-sm flex px-2 py-1.5">{{ $card->EducationLevel->name }}</span>
+                            <span class="bg-[#C4DDF6] text-[#132442] text-[14px] font-medium rounded-sm flex px-2 py-1.5">Onsite</span>
                         </div>
-                        <h1>
-                            Jenis Disabilitas : 
+                        <h1 class="">
+                            Jenis Disabilitas : {{ $card->disability->name }}
                         </h1>
-                        <h1>
-                            Batas Pendaftaran :
+                        <h1 class="-mt-1">
+                            Batas Pendaftaran : 20 September 2024
                         </h1>
                     </div>
-
-
                 </div>
+            
+                <div class="px-5 -mt-1.5 flex flex-col gap-2">
+                    <hr class=" bg-[#A5A5A5] border-[0.5px] border-[#A5A5A5]">
+                    <div class="ml-2 flex justify-between items-center h-10 ">
+                        <div class="flex gap-2 justify-start items-center h-full ">
+                            <img src="{{ asset('images/ListJobPage/WageIcon.png') }}" class="w-8" alt="WageIcon">
+                            <h1 class="font-semibold">Rp.12.000.000</h1>
+                        </div>
+                        <a href="{{ route('job.show', $card->slug) }}" class="px-2.5 py-1.5 bg-[#3551A4] text-white rounded-lg">Selengkapnya</a>
+                    </div>
+                </div>
+        
     </div>
-</a>
+{{-- </a> --}}

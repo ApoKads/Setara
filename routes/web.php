@@ -64,6 +64,7 @@ Route::middleware(['auth', UserMiddleware::class])->group(function () {
     
     Route::controller(JobListPageController::class)->group(function(){
         Route::get('/job','index');
+        Route::get('/job/{job:slug}','show')->name('job.show');
         // Route::get('/company/{company:slug}','show')->name('companies.show');
     });
     

@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Models\Company;
 use App\Models\JobType;
 use App\Models\Location;
+use App\Models\Disability;
 use Illuminate\Support\Str;
 use App\Models\EducationLevel;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -36,6 +37,7 @@ class JobFactory extends Factory
             'job_type_id'=>JobType::factory(),
             'location_id'=>Location::factory(),
             'education_level_id'=>EducationLevel::factory(),
+            'disability_id'=>Disability::factory(),
             'name'=>fake()->name(),
             'description'=>fake()->paragraph(rand(10,40)),
             'wage'=>fake()->randomFloat(2,1000,10000),

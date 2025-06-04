@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Company;
 use App\Models\JobType;
 use App\Models\Location;
+use App\Models\Disability;
 use App\Models\EducationLevel;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -25,7 +26,9 @@ class Job extends Model
     'name',        // string
     'description', // string
     'wage',       // float
-    'location'    // string
+    'location',
+    'disability_id'
+        // string
 
     ];
 
@@ -45,5 +48,8 @@ class Job extends Model
     }
     public function EducationLevel():BelongsTo{
         return $this->belongsTo(EducationLevel::class,'education_level_id');
+    }
+    public function disability():BelongsTo{
+        return $this->belongsTo(Disability::class,'disability_id');
     }
 }
