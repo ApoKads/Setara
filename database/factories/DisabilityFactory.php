@@ -18,6 +18,7 @@ class DisabilityFactory extends Factory
     {
         return [
             'name' => fake()->name(),
+            'color'=> 'red'
         ];
     }
 }

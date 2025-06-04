@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Company;
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -18,6 +20,8 @@ class CategoryCompanyFactory extends Factory
     {
         return [
             //
+            'company_id'=>Company::factory(),
+            'category_id'=>Category::factory()
         ];
     }
 }

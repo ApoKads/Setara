@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\User;
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -28,6 +29,7 @@ class UserProfileFactory extends Factory
         return [
             //
             'name' => fake()->name(),
+            'slug'=>Str::slug(fake()->sentence()),
             'user_id' => User::factory(),
             'age' => fake()->numberBetween(18, 65),
             'about'=> fake()->paragraph(rand(10,40))

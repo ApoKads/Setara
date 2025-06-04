@@ -14,11 +14,13 @@ class Job extends Model
     use HasFactory;
     protected $fillable = [
     'user_profile_id',
+    'slug',
     'company_id',  // foreign key
     'name',        // string
     'description', // string
     'wage',       // float
     'location'    // string
+
     ];
 
     public function company():BelongsTo{

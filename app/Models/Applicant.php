@@ -15,7 +15,8 @@ class Applicant extends Model
     protected $fillable = [
         'user_profile_id',
         'job_id',
-        'note'
+        'note',
+        'slug'
     ];
 
     public function job(): BelongsTo{

@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Company;
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,8 +18,22 @@ class JobFactory extends Factory
      */
     public function definition(): array
     {
+        // $table->id();
+        //     $table->string('slug')->unique();
+        //     $table->foreignId('company_id')->constrained('companies','id')->cascadeOnDelete();
+        //     $table->string('name');
+        //     $table->string('description');
+        //     $table->float('wage');
+        //     $table->string('location');
+        //     $table->timestamps();
         return [
             //
+            'slug'=>Str::slug(fake()->sentence()),
+            'company_id'=>Company::factory(),
+            'name'=>fake()->name(),
+            'description'=>fake()->paragraph(rand(10,40)),
+            'wage'=>fake()->randomFloat(2,1000,10000),
+            'location'=>fake()->city()
         ];
     }
 }

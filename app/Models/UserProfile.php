@@ -19,7 +19,8 @@ class UserProfile extends Model
         'name',
         'age',
         'about',
-        'user_id'
+        'user_id',
+        'slug',
     ];
 
     public function user(): BelongsTo{

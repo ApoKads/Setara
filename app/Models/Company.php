@@ -23,6 +23,7 @@ class Company extends Model
         'description',
         'user_id',
         'path_banner',
+        'slug',
         'path_logo',
         'location'
     ];
