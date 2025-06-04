@@ -5,6 +5,8 @@ namespace Database\Seeders;
 use App\Models\Job;
 use App\Models\Company;
 use App\Models\JobType;
+use App\Models\Location;
+use App\Models\EducationLevel;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
@@ -20,6 +22,8 @@ class JobSeeder extends Seeder
         Job::factory(100)->recycle([
             JobType::all(),
             Company::all(),
+            Location::all(),
+            EducationLevel::all()
         ])->create();
     }
 }

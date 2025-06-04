@@ -16,9 +16,11 @@ use App\Models\CategoryCompany;
 use Illuminate\Database\Seeder;
 use Database\Seeders\AdminSeeder;
 use Database\Seeders\CompanySeeder;
+use Database\Seeders\LocationSeeder;
 use Illuminate\Support\Facades\Hash;
 use App\Models\DisabilityUserProfile;
 use Database\Seeders\UserProfileSeeder;
+use Database\Seeders\EducationLevelSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -46,6 +48,8 @@ class DatabaseSeeder extends Seeder
 
         // User::factory(10)->create();
 
+        $this->call([LocationSeeder::class]);
+        $this->call([EducationLevelSeeder::class]);
         
         $this->call([UserProfileSeeder::class,AdminSeeder::class,CompanySeeder::class]);
         

@@ -4,6 +4,8 @@ namespace App\Models;
 
 use App\Models\Company;
 use App\Models\JobType;
+use App\Models\Location;
+use App\Models\EducationLevel;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -16,6 +18,8 @@ class Job extends Model
     protected $fillable = [
     'user_profile_id',
     'job_type_id',
+    'location_id',
+    'education_level_id',
     'slug',
     'company_id',  // foreign key
     'name',        // string
@@ -36,5 +40,10 @@ class Job extends Model
     public function JobType():BelongsTo{
         return $this->belongsTo(JobType::class,'job_type_id');
     }
-
+    public function location():BelongsTo{
+        return $this->belongsTo(Location::class,'location_id');
+    }
+    public function EducationLevel():BelongsTo{
+        return $this->belongsTo(EducationLevel::class,'education_level_id');
+    }
 }

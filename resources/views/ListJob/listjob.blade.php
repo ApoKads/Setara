@@ -11,7 +11,7 @@
         <div class="w-[90%] mb-10 flex flex-col justify-center">
             <div class="grid grid-cols-3 w-full gap-12 mt-10 ">
                 {{-- @forelse ($companyCard as $card) --}}
-                    <x-job-list.job-card  ></x-job-list.job-card>
+                    <x-job-list.job-card :card="$card" ></x-job-list.job-card>
                 {{-- @empty --}}
                     {{-- <p>There isn't a company available...</p> --}}
                 {{-- @endforelse --}}
