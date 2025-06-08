@@ -4,7 +4,6 @@ namespace App\Models;
 
 use App\Models\User;
 use App\Models\Disability;
-use App\Models\UserProfile;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -23,16 +22,19 @@ class UserProfile extends Model
         'slug',
     ];
 
-    public function user(): BelongsTo{
+    public function user(): BelongsTo
+    {
         return $this->belongsTo(User::class);
     }
 
-    public function disabilities():BelongsToMany{
-        return $this->belongsToMany(Disability::class,'disability_user_profile','user_profile_id','disability_id');
+    public function disabilities(): BelongsToMany
+    {
+        return $this->belongsToMany(Disability::class, 'disability_user_profile', 'user_profile_id', 'disability_id');
     }
 
-    public function applicants():HasMany{
-        return $this->hasMany(Applicant::class,'user_profile_id');
+    public function applicants(): HasMany
+    {
+        return $this->hasMany(Applicant::class, 'user_profile_id');
     }
-    
+
 }

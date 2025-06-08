@@ -9,17 +9,19 @@ use Illuminate\Support\Facades\Auth;
 class LoginController extends Controller
 {
     //
-    public function showLoginForm(){
-        return view('home');
+    public function showLoginForm()
+    {
+        return view('auth.login');
     }
 
-    public function login(Request $request){
+    public function login(Request $request)
+    {
         $credentials = $request->validate([
-            'email'=>'required|email',
-            'password'=>'required'
+            'email' => 'required|email',
+            'password' => 'required'
         ]);
 
-        if(Auth::attempt($credentials)){
+        if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
             return $this->authenticatedRedirect(Auth::user());
@@ -41,7 +43,7 @@ class LoginController extends Controller
 
     protected function authenticatedRedirect($user)
     {
-        return match($user->role) {
+        return match ($user->role) {
             'admin' => redirect()->intended('/admin/dashboard'),
             'company' => redirect()->intended('/company/dashboard'),
             'user' => redirect()->intended('/home'),

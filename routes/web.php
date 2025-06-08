@@ -6,6 +6,7 @@ use App\Http\Middleware\UserMiddleware;
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\GuestMiddleware;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\SignupController;
 use App\Http\Middleware\CompanyMiddleware;
 use App\Http\Controllers\JobListPageController;
 use App\Http\Controllers\CompanyListPageController;
@@ -15,9 +16,16 @@ Route::controller(LoginController::class)->group(function () {
     Route::post('/login', 'login');
     Route::post('/logout', 'logout')->name('logout');
 });
+;
 
-Route::get('/',function(){
-    return view('login');
+// Route untuk signup
+Route::controller(SignupController::class)->group(function () {
+    Route::get('/signup', 'showSignupForm')->name('signup.form');
+    Route::post('/signup', 'signup')->name('signup');
+});
+
+Route::get('/', function () {
+    return view('auth/login');
 })->middleware(GuestMiddleware::class);
 
 
@@ -26,7 +34,7 @@ Route::middleware(['auth', AdminMiddleware::class])->prefix('admin')->group(func
     Route::get('/dashboard', function () {
         return view('AdminSide.admin');
     });
-    
+
 });
 
 
@@ -37,13 +45,13 @@ Route::middleware(['auth', CompanyMiddleware::class])->prefix('company')->group(
             'company' => Auth::user()->company()->first()
         ]);
     });
-    
+
     Route::get('/dashboard/profile', function () {
         return view('CompanySide.companyProfile', [
             'company' => Auth::user()->company()->first()
         ]);
     });
-    
+
 });
 
 
@@ -56,15 +64,15 @@ Route::middleware(['auth', UserMiddleware::class])->group(function () {
     });
 
     // CompanyListPage
-    Route::controller(CompanyListPageController::class)->group(function(){
-        Route::get('/company','index');
-        Route::get('/company/{company:slug}','show')->name('companies.show');
+    Route::controller(CompanyListPageController::class)->group(function () {
+        Route::get('/company', 'index');
+        Route::get('/company/{company:slug}', 'show')->name('companies.show');
     });
-    
+
     // JobListPage
-    Route::controller(JobListPageController::class)->group(function(){
-        Route::get('/job','index');
-        Route::get('/job/{job:slug}','show')->name('job.show');
+    Route::controller(JobListPageController::class)->group(function () {
+        Route::get('/job', 'index');
+        Route::get('/job/{job:slug}', 'show')->name('job.show');
     });
-    
+
 });
