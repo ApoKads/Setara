@@ -38,7 +38,7 @@
                     </div>
                 </div>
 
-                {{-- Jenis Pekerjaan --}}
+            {{-- Jenis Pekerjaan --}}
                 {{-- <div class="relative w-[30%] border-black border-[1px] rounded-lg">
                     <select name="tag"
                             class="block appearance-none w-full text-base bg-white border border-gray-300 text-gray-700 py-3 px-4 pr-8 rounded-lg leading-tight focus:outline-none focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-500 hover:cursor-pointer">
@@ -56,7 +56,9 @@
                     </div>
                 </div> --}}
                 {{-- @livewire('job-type-search') --}}
-                <livewire:job-type-dropdown />
+                <div class="relative w-[20%] border-black border-[1px] rounded-lg ">
+                    <livewire:job-type-dropdown />
+                </div>
 
                 <div>
                     <button type="submit"

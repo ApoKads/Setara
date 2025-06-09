@@ -2,7 +2,7 @@
     {{-- Trigger Dropdown --}}
     <input type="hidden" name='job_type' value="{{ $selectedJobType['id'] ?? '' }}">
     <div
-        class="border border-gray-300 p-2 rounded-md cursor-pointer flex justify-between items-center bg-white"
+        class=" border-gray-300 border-[1px] py-2.5 px-3 rounded-md cursor-pointer flex justify-between items-center bg-white"
         wire:click="toggleDropdown"
     >
         <span class="text-gray-700">
