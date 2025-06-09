@@ -71,7 +71,7 @@ class Job extends Model
             $query->where('disability_id', $disabilityId);
         });
 
-        $query->when($filters['tag'] ?? false, function($query, $jobTypeId) {
+        $query->when($filters['job_type'] ?? false, function($query, $jobTypeId) {
             $query->where('job_type_id', $jobTypeId);
         });
         // $query->when(

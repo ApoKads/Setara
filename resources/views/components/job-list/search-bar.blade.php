@@ -39,7 +39,7 @@
                 </div>
 
                 {{-- Jenis Pekerjaan --}}
-                <div class="relative w-[30%] border-black border-[1px] rounded-lg">
+                {{-- <div class="relative w-[30%] border-black border-[1px] rounded-lg">
                     <select name="tag"
                             class="block appearance-none w-full text-base bg-white border border-gray-300 text-gray-700 py-3 px-4 pr-8 rounded-lg leading-tight focus:outline-none focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-500 hover:cursor-pointer">
                         <option value="">Kategori Pekerjaan</option>
@@ -54,7 +54,9 @@
                             <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 6.757 7.586 5.343 9z"/>
                         </svg>
                     </div>
-                </div>
+                </div> --}}
+                {{-- @livewire('job-type-search') --}}
+                <livewire:job-type-dropdown />
 
                 <div>
                     <button type="submit"

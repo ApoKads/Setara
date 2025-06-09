@@ -75,4 +75,8 @@ Route::middleware(['auth', UserMiddleware::class])->group(function () {
         Route::get('/job/{job:slug}', 'show')->name('job.show');
     });
 
+    Route::get('/test',function(){
+        return view('test-livewire');
+    });
+
 });
