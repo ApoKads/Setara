@@ -44,8 +44,17 @@
 
             {{-- Location List --}}
             <div class="max-h-60 overflow-y-auto">
+                {{-- Default option to clear the filter, only visible when search is empty --}}
+                @if (empty($search))
+                    <div
+                        class="p-2 cursor-pointer hover:bg-blue-100 {{ empty($selectedLocation['id']) ? 'bg-blue-500 text-white' : '' }}"
+                        onclick="Livewire.dispatch('selectLocationFromJs', { id: '', city: 'Pilih Lokasi' })"
+                    >
+                        Pilih Lokasi (Semua)
+                    </div>
+                @endif
+
                 @forelse ($locations as $location)
-                    {{-- Change here: Using onclick and Livewire.dispatch --}}
                     <div
                         class="p-2 cursor-pointer hover:bg-blue-100 {{ ($selectedLocation['id'] ?? null) == $location->id ? 'bg-blue-500 text-white' : '' }}"
                         onclick="Livewire.dispatch('selectLocationFromJs', { id: {{ $location->id }}, city: '{{ $location->city }}' })"
@@ -53,7 +62,13 @@
                         {{ $location->city }}
                     </div>
                 @empty
-                    <div class="p-2 text-gray-500">Tidak ada Lokasi ditemukan.</div>
+                    {{-- Show this message only if NO locations are found AND search is not empty --}}
+                    @if (!empty($search))
+                        <div class="p-2 text-gray-500">Tidak ada Lokasi ditemukan untuk "{{ $search }}".</div>
+                    @else
+                        {{-- Show this if no locations are present at all (even without search) --}}
+                        <div class="p-2 text-gray-500">Tidak ada Lokasi yang tersedia.</div>
+                    @endif
                 @endforelse
             </div>
         </div>

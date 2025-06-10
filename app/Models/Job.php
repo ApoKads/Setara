@@ -109,6 +109,13 @@ class Job extends Model
             // which effectively shows all work modes (Onsite, Remote, and Onsite & Remote).
         });
 
+        $query->when($filters['location'] ?? false, function ($query, $locationId) {
+            $query->where('location_id', $locationId);
+        });
+        
+        $query->when($filters['education_level'] ?? false, function ($query, $educationId) {
+            $query->where('education_level_id', $educationId);
+        });
         // $query->when(
         //     $filters['category'] ?? false, function($query,$category){
         //         $query->whereHas('categories',fn($query)=> $query->where('categories.id',$category));

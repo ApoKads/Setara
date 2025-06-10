@@ -44,6 +44,16 @@
 
             {{-- Education Level List --}}
             <div class="max-h-60 overflow-y-auto">
+                {{-- Opsi default untuk mengosongkan filter, hanya terlihat saat search kosong --}}
+                @if (empty($search))
+                    <div
+                        class="p-2 cursor-pointer hover:bg-blue-100 {{ empty($selectedEducationLevel['id']) ? 'bg-blue-500 text-white' : '' }}"
+                        onclick="Livewire.dispatch('selectEducationLevelFromJs', { id: '', name: 'Pilih Jenjang Pendidikan' })"
+                    >
+                        Pilih Jenjang Pendidikan (Semua)
+                    </div>
+                @endif
+
                 @forelse ($educationLevels as $educationLevel)
                     <div
                         class="p-2 cursor-pointer hover:bg-blue-100 {{ ($selectedEducationLevel['id'] ?? null) == $educationLevel->id ? 'bg-blue-500 text-white' : '' }}"
@@ -52,9 +62,15 @@
                         {{ $educationLevel->name }}
                     </div>
                 @empty
-                    <div class="p-2 text-gray-500">Tidak ada Jenjang Pendidikan ditemukan.</div>
+                    {{-- Pesan kosong lebih kontekstual --}}
+                    @if (!empty($search))
+                        <div class="p-2 text-gray-500">Tidak ada Jenjang Pendidikan ditemukan untuk "{{ $search }}".</div>
+                    @else
+                        <div class="p-2 text-gray-500">Tidak ada Jenjang Pendidikan yang tersedia.</div>
+                    @endif
                 @endforelse
             </div>
+            
         </div>
     @endif
 </div>

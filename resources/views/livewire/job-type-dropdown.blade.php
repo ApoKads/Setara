@@ -6,7 +6,7 @@
         wire:click="toggleDropdown"
     >
         <span class="text-gray-700">
-            {{ $selectedJobType['name'] ?? 'Pilih Job Type' }}
+            {{ $selectedJobType['name'] ?? 'Pilih Tipe Pekerjaan' }}
         </span>
         <svg
             class="w-4 h-4 text-gray-500"
@@ -42,8 +42,17 @@
 
             {{-- Job Type List --}}
             <div class="max-h-60 overflow-y-auto">
+                {{-- Opsi default untuk mengosongkan filter, hanya terlihat saat search kosong --}}
+                @if (empty($search))
+                    <div
+                        class="p-2 cursor-pointer hover:bg-blue-100 {{ empty($selectedJobType['id']) ? 'bg-blue-500 text-white' : '' }}"
+                        onclick="Livewire.dispatch('selectJobTypeFromJs', { id: '', name: 'Pilih Tipe Pekerjaan' })"
+                    >
+                        Pilih Tipe Pekerjaan (Semua)
+                    </div>
+                @endif
+
                 @forelse ($jobTypes as $jobType)
-                    {{-- Perubahan di sini: Menggunakan onclick dan Livewire.dispatch --}}
                     <div
                         class="p-2 cursor-pointer hover:bg-blue-100 {{ ($selectedJobType['id'] ?? null) == $jobType->id ? 'bg-blue-500 text-white' : '' }}"
                         onclick="Livewire.dispatch('selectJobTypeFromJs', { id: {{ $jobType->id }}, name: '{{ $jobType->name }}' })"
@@ -51,9 +60,15 @@
                         {{ $jobType->name }}
                     </div>
                 @empty
-                    <div class="p-2 text-gray-500">Tidak ada Job Type ditemukan.</div>
+                    {{-- Pesan kosong lebih kontekstual --}}
+                    @if (!empty($search))
+                        <div class="p-2 text-gray-500">Tidak ada Tipe Pekerjaan ditemukan untuk "{{ $search }}".</div>
+                    @else
+                        <div class="p-2 text-gray-500">Tidak ada Tipe Pekerjaan yang tersedia.</div>
+                    @endif
                 @endforelse
             </div>
+
         </div>
     @endif
 </div>
