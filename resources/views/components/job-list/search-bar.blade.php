@@ -1,6 +1,6 @@
 @props(['disabilities','JobType'])
 
-<div class="bg-[#169CF0] w-full h-52 flex justify-center items-center relative">
+<div class="bg-[#169CF0] w-full h-[212px] flex justify-center items-center relative">
     <div class="flex h-full w-full absolute overflow-hidden justify-between">
         <img src="{{ asset('images/Bubble blue.png') }}" alt="Bubble Blue" class="h-[450px] -mt-[154px]">
         <img src="{{ asset('images/Bubble blue.png') }}" alt="Bubble Blue" class="h-[450px] -mt-[154px]">
@@ -9,7 +9,7 @@
 
     {{-- SEARCH BAR --}}
     <form action="" method="GET" class="w-[80%] h-full flex flex-col justify-center items-center gap-2">
-        <div class="bg-white w-full px-8 py-5  rounded-2xl shadow-inner drop-shadow-xl border-gray-50 z-10">
+        <div class="bg-white w-full px-8 py-5  rounded-2xl shadow-inner drop-shadow-xl border-gray-50 z-20 mt-1.5">
             <div  class="flex items-center space-x-4 h-full">
                 <div class="w-[50%] border-black border-[1px] rounded-lg">
                     <input type="text"
@@ -74,6 +74,93 @@
         <div class="w-full flex justify-start items-center text-white font-bold text-xl z-10">
             Advanced Filters:
         </div>
+
+        {{-- Location --}}
+        <div class="w-full flex justify-start items-center  h-14 z-10 text-black gap-4">
+            <div class="flex w-[20%]">
+                <livewire:location-dropdown />
+            </div>
+
+
+            {{-- Onsite / Remote --}}
+            <div class="flex w-[20%]">
+                <div class="relative w-full border-black border-[1px] rounded-lg">
+                    <select name="work_mode"
+                            class="block appearance-none w-full text-base h-12 bg-white text-gray-700 py-3 px-4 pr-8 rounded-lg leading-tight focus:outline-none focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-500 hover:cursor-pointer">
+                        {{-- Default option --}}
+                        <option value="" {{ request('work_mode') == '' ? 'selected' : '' }}>Onsite & Remote</option>
+
+                        {{-- Onsite option --}}
+                        <option value="Onsite" {{ request('work_mode') == 'Onsite' ? 'selected' : '' }}>Onsite</option>
+
+                        {{-- Remote option --}}
+                        <option value="Remote" {{ request('work_mode') == 'Remote' ? 'selected' : '' }}>Remote</option>
+                    </select>
+                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                        <svg
+                            class="w-4 h-4 text-gray-500"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M19 9l-7 7-7-7"
+                            ></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+
+            {{--  --}}
+
+
+            {{-- Salary Range --}}
+            <div class="flex w-[20%]">
+                <div class="relative w-full border-black border-[1px] rounded-lg">
+                    <select name="salary"
+                            class="block appearance-none w-full text-base h-12 bg-white text-gray-700 py-3 px-4 pr-8 rounded-lg leading-tight focus:outline-none focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-500 hover:cursor-pointer">
+                        {{-- Default option --}}
+                        <option value="" class="{{ request('salary') == '' ? 'text-gray-400' : 'text-gray-700' }}">Rentang Gaji</option>
+
+                        {{-- Salary range options --}}
+                        <option value="1" {{ request('salary') == '1' ? 'selected' : '' }}>Rp 0 - Rp 5 Juta</option>
+                        <option value="5000001" {{ request('salary') == '5000001' ? 'selected' : '' }}>Rp 5 Juta - Rp 10 Juta</option>
+                        <option value="10000001" {{ request('salary') == '10000001' ? 'selected' : '' }}>Rp 10 Juta - Rp 20 Juta</option>
+                        <option value="20000001" {{ request('salary') == '20000001' ? 'selected' : '' }}>Diatas Rp 20 Juta</option>
+                        {{-- Add more ranges as needed --}}
+                    </select>
+                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                        <svg
+                            class="w-4 h-4 text-gray-500"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M19 9l-7 7-7-7"
+                            ></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex w-[20%]">
+                <livewire:education-level-dropdown />
+            </div>
+
+
+        </div>
+
+
 
     </form action="" method="GET">
   </div>

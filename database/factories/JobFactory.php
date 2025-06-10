@@ -30,6 +30,17 @@ class JobFactory extends Factory
         //     $table->float('wage');
         //     $table->string('location');
         //     $table->timestamps();
+
+        $minWage = 1000000; // 1 Juta
+        $maxWage = 50000000; // 50 Juta
+        $increment = 500000; // 500 Ribu
+
+        $numberOfIncrements = ($maxWage - $minWage) / $increment;
+        $randomIncrements = fake()->numberBetween(0, $numberOfIncrements);
+        $wage = $minWage + ($randomIncrements * $increment);
+
+        $workModes = ['Onsite', 'Remote', 'Onsite & Remote'];
+
         return [
             //
             'slug'=>Str::slug(fake()->sentence()),
@@ -40,7 +51,8 @@ class JobFactory extends Factory
             'disability_id'=>Disability::factory(),
             'name'=>fake()->name(),
             'description'=>fake()->paragraph(rand(10,40)),
-            'wage'=>fake()->randomFloat(2,1000,10000),
+            'wage'=>$wage,
+            'work_mode' => fake()->randomElement($workModes),
         ];
     }
 }

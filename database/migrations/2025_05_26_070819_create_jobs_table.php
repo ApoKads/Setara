@@ -21,6 +21,7 @@ return new class extends Migration
             $table->foreignId('disability_id')->constrained('disabilities','id')->cascadeOnDelete();
             $table->string('name');
             $table->string('description');
+            $table->string('work_mode');
             $table->enum('work_location_type', ['onsite', 'remote', 'hybrid'])->default('onsite');
             $table->float('wage');
             $table->timestamps();
