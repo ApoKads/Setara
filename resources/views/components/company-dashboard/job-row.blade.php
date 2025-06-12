@@ -26,6 +26,7 @@
             <i class="fa-solid fa-pen text-[#132442]"></i>
         </div>
         <div
+            onclick="openDeleteModal({{ $job->id }})"
             class="flex justify-center items-center bg-[#ffd0d0] h-10 w-10 rounded-full hover:brightness-95 hover:cursor-pointer transition duration-200">
             <i class="fa-solid fa-trash text-[#FF0000]"></i>
         </div>

@@ -98,4 +98,73 @@
 
         </div>
     </div>
+    <div id="deleteModal" class="fixed inset-0 z-50 hidden items-center justify-center h-full w-full">
+        <div class="flex w-full h-full absolute bg-black opacity-30">
+
+        </div>
+        <div class="bg-white rounded-lg p-6 w-[400px] relative z-10">
+            <div class="flex flex-col gap-4">
+                <h2 class="text-xl font-bold text-[#132442]">Konfirmasi Penghapusan</h2>
+                <p class="text-gray-600">Apakah Anda yakin ingin menghapus lowongan ini?</p>
+                <div class="flex justify-end gap-4 mt-4">
+                    <button 
+                        onclick="closeDeleteModal()" 
+                        class="px-4 py-2 bg-gray-300 rounded-lg hover:cursor-pointer hover:brightness-95 transition duration-200"
+                    >
+                        Batal
+                    </button>
+                    <button 
+                        id="confirmDeleteBtn" 
+                        class="px-4 py-2 bg-red-500 text-white rounded-lg hover:cursor-pointer hover:brightness-95 transition duration-200"
+                    >
+                        Hapus
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script untuk Modal -->
+    <script>
+        let currentJobId = null;
+
+        function openDeleteModal(jobId) {
+            currentJobId = jobId;
+            document.getElementById('deleteModal').classList.remove('hidden');
+            document.getElementById('deleteModal').classList.add('flex');
+            document.body.classList.add('overflow-hidden');
+        }
+
+        function closeDeleteModal() {
+            document.getElementById('deleteModal').classList.remove('flex');
+            document.getElementById('deleteModal').classList.add('hidden');
+            document.body.classList.remove('overflow-hidden');
+            currentJobId = null;
+        }
+
+        // Handle konfirmasi hapus
+        document.getElementById('confirmDeleteBtn').addEventListener('click', function() {
+            if (currentJobId) {
+                // Kirim request hapus ke server (gunakan fetch atau form submission)
+                fetch(`/company/jobs/${currentJobId}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        'Content-Type': 'application/json',
+                    },
+                })
+                .then(response => {
+                    if (response.ok) {
+                        window.location.reload(); // Refresh halaman setelah hapus
+                    } else {
+                        alert('Gagal menghapus lowongan');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+            }
+            closeDeleteModal();
+        });
+    </script>
 </x-layout-company>
