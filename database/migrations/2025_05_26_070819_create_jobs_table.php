@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('description');
             $table->string('work_mode');
+            $table->integer('slot');
             $table->enum('work_location_type', ['onsite', 'remote', 'hybrid'])->default('onsite');
             $table->float('wage');
             $table->timestamps();

@@ -10,6 +10,7 @@ use App\Http\Controllers\SignupController;
 use App\Http\Middleware\CompanyMiddleware;
 use App\Http\Controllers\JobListPageController;
 use App\Http\Controllers\CompanyListPageController;
+use App\Http\Controllers\CompanyDashboardController;
 
 Route::controller(LoginController::class)->group(function () {
     Route::get('/login', 'showLoginForm')->name('login');
@@ -40,11 +41,12 @@ Route::middleware(['auth', AdminMiddleware::class])->prefix('admin')->group(func
 
 // Company Route
 Route::middleware(['auth', CompanyMiddleware::class])->prefix('company')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('CompanySide.company', [
-            'company' => Auth::user()->company()->first()
-        ]);
+    Route::controller(CompanyDashboardController::class)->group(function(){
+        Route::get('/dashboard','index');
+        Route::get('/dashboard/{job:id}','show')->name('companyJob.show');
     });
+
+
 
     Route::get('/dashboard/profile', function () {
         return view('CompanySide.companyProfile', [
