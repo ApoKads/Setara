@@ -7,6 +7,7 @@ use App\Models\JobType;
 use App\Models\Disability;
 use Illuminate\Http\Request;
 
+
 class JobListPageController extends Controller
 {
     //

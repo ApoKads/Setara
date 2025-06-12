@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\JobController;
 use App\Http\Middleware\UserMiddleware;
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\GuestMiddleware;
@@ -46,7 +47,9 @@ Route::middleware(['auth', CompanyMiddleware::class])->prefix('company')->group(
         Route::get('/dashboard/{job:id}','show')->name('companyJob.show');
     });
 
-
+    Route::controller(JobController::class)->group(function(){
+        route::delete('/dashboard/{job:id}','destroy');
+    });
 
     Route::get('/dashboard/profile', function () {
         return view('CompanySide.companyProfile', [
@@ -77,8 +80,7 @@ Route::middleware(['auth', UserMiddleware::class])->group(function () {
         Route::get('/job/{job:slug}', 'show')->name('job.show');
     });
 
-    Route::get('/test',function(){
-        return view('test-livewire');
-    });
+
+
 
 });
