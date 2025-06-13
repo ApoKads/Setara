@@ -20,6 +20,9 @@ class UserProfile extends Model
         'about',
         'user_id',
         'slug',
+        'job_status',
+        'profile_image',
+        'quote',
     ];
 
     public function user(): BelongsTo

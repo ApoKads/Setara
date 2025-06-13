@@ -12,6 +12,7 @@ use App\Http\Middleware\CompanyMiddleware;
 use App\Http\Controllers\JobListPageController;
 use App\Http\Controllers\CompanyListPageController;
 use App\Http\Controllers\CompanyDashboardController;
+use App\Http\Controllers\ProfileController;
 
 Route::controller(LoginController::class)->group(function () {
     Route::get('/login', 'showLoginForm')->name('login');
@@ -42,13 +43,13 @@ Route::middleware(['auth', AdminMiddleware::class])->prefix('admin')->group(func
 
 // Company Route
 Route::middleware(['auth', CompanyMiddleware::class])->prefix('company')->group(function () {
-    Route::controller(CompanyDashboardController::class)->group(function(){
-        Route::get('/dashboard','index');
-        Route::get('/dashboard/{job:id}','show')->name('companyJob.show');
+    Route::controller(CompanyDashboardController::class)->group(function () {
+        Route::get('/dashboard', 'index');
+        Route::get('/dashboard/{job:id}', 'show')->name('companyJob.show');
     });
 
-    Route::controller(JobController::class)->group(function(){
-        route::delete('/dashboard/{job:id}','destroy');
+    Route::controller(JobController::class)->group(function () {
+        route::delete('/dashboard/{job:id}', 'destroy');
     });
 
     Route::get('/dashboard/profile', function () {
@@ -62,6 +63,10 @@ Route::middleware(['auth', CompanyMiddleware::class])->prefix('company')->group(
 
 // User Route
 Route::middleware(['auth', UserMiddleware::class])->group(function () {
+    // Route untuk halaman profil (menggunakan controller)
+    Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
+
+    // Home Route
     Route::get('/home', function () {
         return view('home', [
             'profile' => Auth::user()->profile()->first()
@@ -79,8 +84,4 @@ Route::middleware(['auth', UserMiddleware::class])->group(function () {
         Route::get('/job', 'index');
         Route::get('/job/{job:slug}', 'show')->name('job.show');
     });
-
-
-
-
 });
