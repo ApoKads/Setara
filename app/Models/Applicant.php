@@ -34,4 +34,8 @@ class Applicant extends Model
         return $this->belongsToMany(Skill::class, 'applicant_skills');
     }
 
+    public function careerHistories()
+    {
+        return $this->hasMany(CareerHistory::class);
+    }
 }
