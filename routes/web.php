@@ -71,17 +71,17 @@ Route::middleware(['auth', UserMiddleware::class])->group(function () {
         return view('home', [
             'profile' => Auth::user()->profile()->first()
         ]);
-    });
+    })->name('home');
 
     // CompanyListPage
     Route::controller(CompanyListPageController::class)->group(function () {
-        Route::get('/company', 'index');
+        Route::get('/company', 'index')->name('companies');
         Route::get('/company/{company:slug}', 'show')->name('companies.show');
     });
 
     // JobListPage
     Route::controller(JobListPageController::class)->group(function () {
-        Route::get('/job', 'index');
+        Route::get('/job', 'index')->name('jobs');
         Route::get('/job/{job:slug}', 'show')->name('job.show');
     });
 });

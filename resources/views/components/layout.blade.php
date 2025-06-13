@@ -13,6 +13,7 @@
 <body class="h-full">
 
 <div class="min-h-full">
+  @include('components.navbar')
   {{-- <x-navbar></x-navbar>  <!-- This truly disables the component --> --}}
   
   {{-- <x-header>{{$title}}</x-header> --}}

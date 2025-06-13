@@ -1,6 +1,5 @@
 <x-layout>
   <x-slot:title>{{"List Job"}}</x-slot>
-  <h3 class="text-xl">Job</h3>
 
 
 {{-- SEARCH BAR Section --}}
