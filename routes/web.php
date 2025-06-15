@@ -35,6 +35,12 @@ Route::middleware(['auth', AdminMiddleware::class])->prefix('admin')->group(func
         return view('AdminSide.admin');
     });
 
+    Route::get('/companyform', function () {
+        return view('AdminSide.companyform');
+    });
+
+    Route::post('/companyform', [CompanyController::class, 'store'])->name('company.store');
+
 });
 
 
