@@ -1,0 +1,105 @@
+/* Warna dasar dan font */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #fdfdfd;
+    color: #1a1a1a;
+}
+
+h2, h5 {
+    color: #0d1b3d;
+}
+
+hr {
+    border-top: 2px solid #0d1b3d;
+    opacity: 0.3;
+}
+
+/* Label dan form */
+.form-label {
+    font-weight: 500;
+    margin-bottom: 6px;
+}
+
+input.form-control,
+select.form-select {
+    border-radius: 20px;
+    border: 1px solid #cce0f5;
+    padding: 12px 20px;
+    font-size: 14px;
+    background-color: #f9fcff;
+}
+
+input.form-control::placeholder {
+    color: #b0c4d8;
+}
+
+/* Button submit */
+button[type="submit"] {
+    background-color: #0d1b3d;
+    color: white;
+    border: none;
+    transition: 0.3s;
+    font-weight: 600;
+}
+
+button[type="submit"]:hover {
+    background-color: #0b1633;
+    transform: scale(1.02);
+}
+
+/* File upload box style */
+input[type="file"] {
+    background-color: #f3f6fb;
+    border-radius: 16px;
+    padding: 20px;
+    border: 1px dashed #aabdd4;
+    color: #3b4b5e;
+}
+
+/* Small note */
+small.text-muted {
+    font-size: 12px;
+    display: block;
+    margin-top: 10px;
+    color: #777;
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+    h2 {
+        font-size: 24px;
+    }
+    button[type="submit"] {
+        width: 100%;
+    }
+}
+
+/* Background image yang ikut scroll */
+.form-page-bg {
+    background: url('/images/AdminPage/Blue-bg-dots.png') no-repeat top right;
+    background-size: contain;
+    background-attachment: scroll; /* default, boleh dihapus */
+    min-height: 100vh;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Container semi transparan */
+.form-container {
+    background: rgba(255, 255, 255, 0.80);
+    /* border-radius: 20px; */
+    padding: 40px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .form-page-bg {
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+
+    .form-container {
+        padding: 20px;
+    }
+}
