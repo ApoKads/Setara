@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\UserProfile;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str; // Pastikan Str digunakan untuk membuat slug
 
 class SignupController extends Controller
 {
@@ -22,24 +24,38 @@ class SignupController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|min:6|confirmed', // Konfirmasi password harus ada di form
-            'role' => 'required|in:user,company,admin', // Tentukan role yang valid
+            'password' => 'required|min:6|confirmed',
+            'role' => 'required|in:user,company,admin',
         ]);
 
+        // dd($validatedData['name']);
+
         // Membuat user baru
-        $user = User::create([
-            'name' => $validatedData['name'],
+        $user = new User([
             'email' => $validatedData['email'],
             'password' => Hash::make($validatedData['password']),
             'role' => $validatedData['role'],
         ]);
+        $user->save();
 
-        // Login setelah registrasi berhasil
+
+        // dd($user->name);
+
+        // Membuat user profile secara otomatis
+        $user->profile()->create([
+            'name' => $validatedData['name'],
+            'job_status' => 'dan siap untuk bekerja!',
+            'profile_image' => 'default.jpg',
+            'quote' => 'This is a default quote',
+            'slug' => Str::slug($validatedData['name'], '-') ?: 'default-slug'
+        ]);
+        $user->save();
+
         Auth::login($user);
 
-        // Redirect sesuai role pengguna
         return $this->authenticatedRedirect($user);
     }
+
 
     // Redirect setelah login atau signup
     protected function authenticatedRedirect($user)

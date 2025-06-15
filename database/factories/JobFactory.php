@@ -52,6 +52,7 @@ class JobFactory extends Factory
             'name'=>fake()->name(),
             'description'=>fake()->paragraph(rand(10,40)),
             'wage'=>$wage,
+            'slot'=>fake()->numberBetween(0,10),
             'work_mode' => fake()->randomElement($workModes),
         ];
     }

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\JobController;
 use App\Http\Middleware\UserMiddleware;
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\GuestMiddleware;
@@ -10,6 +11,8 @@ use App\Http\Controllers\SignupController;
 use App\Http\Middleware\CompanyMiddleware;
 use App\Http\Controllers\JobListPageController;
 use App\Http\Controllers\CompanyListPageController;
+use App\Http\Controllers\CompanyDashboardController;
+use App\Http\Controllers\ProfileController;
 
 Route::controller(LoginController::class)->group(function () {
     Route::get('/login', 'showLoginForm')->name('login');
@@ -46,10 +49,13 @@ Route::middleware(['auth', AdminMiddleware::class])->prefix('admin')->group(func
 
 // Company Route
 Route::middleware(['auth', CompanyMiddleware::class])->prefix('company')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('CompanySide.company', [
-            'company' => Auth::user()->company()->first()
-        ]);
+    Route::controller(CompanyDashboardController::class)->group(function () {
+        Route::get('/dashboard', 'index');
+        Route::get('/dashboard/{job:id}', 'show')->name('companyJob.show');
+    });
+
+    Route::controller(JobController::class)->group(function () {
+        route::delete('/dashboard/{job:id}', 'destroy');
     });
 
     Route::get('/dashboard/profile', function () {
@@ -63,26 +69,25 @@ Route::middleware(['auth', CompanyMiddleware::class])->prefix('company')->group(
 
 // User Route
 Route::middleware(['auth', UserMiddleware::class])->group(function () {
+    // Route untuk halaman profil (menggunakan controller)
+    Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
+
+    // Home Route
     Route::get('/home', function () {
         return view('home', [
             'profile' => Auth::user()->profile()->first()
         ]);
-    });
+    })->name('home');
 
     // CompanyListPage
     Route::controller(CompanyListPageController::class)->group(function () {
-        Route::get('/company', 'index');
+        Route::get('/company', 'index')->name('companies');
         Route::get('/company/{company:slug}', 'show')->name('companies.show');
     });
 
     // JobListPage
     Route::controller(JobListPageController::class)->group(function () {
-        Route::get('/job', 'index');
+        Route::get('/job', 'index')->name('jobs');
         Route::get('/job/{job:slug}', 'show')->name('job.show');
     });
-
-    Route::get('/test',function(){
-        return view('test-livewire');
-    });
-
 });

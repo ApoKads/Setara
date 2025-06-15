@@ -19,12 +19,23 @@ class Applicant extends Model
         'slug'
     ];
 
-    public function job(): BelongsTo{
-        return $this->belongsTo(Job::class,'job_id');
+    public function job(): BelongsTo
+    {
+        return $this->belongsTo(Job::class, 'job_id');
     }
 
-    public function profile(): BelongsTo{
-        return $this->belongsTo(UserProfile::class,'user_profile_id');
+    public function profile(): BelongsTo
+    {
+        return $this->belongsTo(UserProfile::class, 'user_profile_id');
     }
 
+    public function skills()
+    {
+        return $this->belongsToMany(Skill::class, 'applicant_skills');
+    }
+
+    public function careerHistories()
+    {
+        return $this->hasMany(CareerHistory::class);
+    }
 }

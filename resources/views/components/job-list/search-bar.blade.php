@@ -1,6 +1,6 @@
 @props(['disabilities','JobType'])
 
-<div class="bg-[#169CF0] w-full h-[212px] flex justify-center items-center relative">
+<div class="bg-[#169CF0] w-full h-[212px] flex justify-center items-center relative shadow-[inset_0_10px_20px_rgba(0,0,0,0.3)]">
     <div class="flex h-full w-full absolute overflow-hidden justify-between">
         <img src="{{ asset('images/Bubble blue.png') }}" alt="Bubble Blue" class="h-[450px] -mt-[154px]">
         <img src="{{ asset('images/Bubble blue.png') }}" alt="Bubble Blue" class="h-[450px] -mt-[154px]">

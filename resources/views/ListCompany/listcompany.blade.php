@@ -1,10 +1,10 @@
 <x-layout>
   <x-slot:title>{{"List Company"}}</x-slot>
-  <h3 class="text-xl">Company</h3>
 
 
 {{-- SEARCH BAR Section --}}
-  <div class="bg-[#169CF0] w-full h-44 flex justify-center items-center relative">
+<!-- SHADOW DISINI -->
+  <div class="bg-[#169CF0] w-full h-44 flex justify-center items-center relative shadow-[inset_0_10px_20px_rgba(0,0,0,0.3)]">
     <div class="flex h-full w-full absolute overflow-hidden justify-between">
         <img src="{{ asset('images/Bubble blue.png') }}" alt="Bubble Blue" class="h-[450px] -mt-[154px]">
         <img src="{{ asset('images/Bubble blue.png') }}" alt="Bubble Blue" class="h-[450px] -mt-[154px]">
