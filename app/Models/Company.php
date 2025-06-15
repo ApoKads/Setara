@@ -25,7 +25,19 @@ class Company extends Model
         'path_banner',
         'slug',
         'path_logo',
-        'location'
+        'location',
+        'email',
+        'telepon',
+        'website',
+        'provinsi',
+        'kota',
+        'kode_pos',
+        'nib',
+        'npwp',
+        'akta',
+        'tdp',
+        'nama_hrd',
+        'telepon_hrd'
     ];
     
     public function user(): BelongsTo{
