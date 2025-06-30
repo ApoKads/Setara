@@ -33,15 +33,17 @@ class ProfileController extends Controller
 
         // Proses update gambar jika ada file baru yang diunggah
         if ($request->hasFile('profile_image')) {
-            // Hapus gambar lama jika ada, untuk menghemat space
+            // Hapus gambar lama jika ada
             if ($profile->profile_image) {
                 Storage::delete('public/profile_images/' . $profile->profile_image);
             }
 
-            // Simpan gambar baru
+            // Simpan gambar baru dan dapatkan path-nya
             $imageName = time() . '.' . $request->profile_image->extension();
-            $request->profile_image->storeAs('public/profile_images', $imageName);
-            $profile->profile_image = $imageName; // Simpan nama file baru ke database
+            $request->profile_image->storeAs('profile_images', $imageName, 'public');
+
+            // Simpan nama file baru ke properti model
+            $profile->profile_image = $imageName;
         }
 
         // Update data teks dari request ke model Profile
