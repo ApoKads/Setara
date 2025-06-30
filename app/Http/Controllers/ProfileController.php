@@ -24,7 +24,6 @@ class ProfileController extends Controller
         ]);
 
         $user = Auth::user();  // Mengambil pengguna yang sedang login
-        $profile = $user->profile;  // Mengambil profil pengguna terkait
 
         // Mengecek jika ada file gambar yang diunggah
         if ($request->hasFile('profile_image')) {
@@ -34,12 +33,13 @@ class ProfileController extends Controller
             // Menyimpan gambar di direktori 'public/profile_images'
             $request->profile_image->storeAs('public/profile_images', $imageName);
 
-            // Menyimpan nama gambar di profil
-            $profile->profile_image = $imageName;
+            // Mengupdate gambar profil di tabel user_profiles
+            $user->profile->profile_image = $imageName;
+            $user->profile->save();
         }
 
-        // Simpan perubahan di tabel user_profiles
-        $profile->save();
+        // Simpan perubahan di tabel users
+        $user->save();
 
         // Mengarahkan kembali ke halaman profil dengan pesan sukses
         return redirect()->route('profile.show')->with('success', 'Profile updated successfully!');
