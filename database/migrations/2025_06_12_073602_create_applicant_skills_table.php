@@ -10,7 +10,7 @@ return new class extends Migration {
      */
     public function up()
     {
-        Schema::create('career_histories', function (Blueprint $table) {
+        Schema::create('applicant_skills', function (Blueprint $table) {
             $table->id();
             $table->foreignId('applicant_id')->constrained()->onDelete('cascade');
             $table->string('job_title');

@@ -46,7 +46,6 @@ class DatabaseSeeder extends Seeder
             'color'=>'red'
         ]);
 
-        // User::factory(10)->create();
 
         $this->call([LocationSeeder::class]);
         $this->call([EducationLevelSeeder::class]);
