@@ -14,69 +14,75 @@ class ApplicantSeeder extends Seeder
 {
     public function run(): void
     {
-        // Clear the table first
-        DB::table('applicants')->truncate();
-
-        // Get all jobs and user profiles
-        $jobs = Job::all();
-        $userProfiles = UserProfile::all();
-
-        // Check if we have enough data
-        if ($jobs->isEmpty() || $userProfiles->isEmpty()) {
-            $this->command->error('No jobs or user profiles found! Please seed them first.');
-            return;
-        }
-
-        $totalPossiblePairs = $jobs->count() * $userProfiles->count();
-        $desiredCount = 100;
-
-        // Adjust desired count if there aren't enough unique pairs
-        if ($totalPossiblePairs < $desiredCount) {
-            $this->command->warn("Only $totalPossiblePairs unique pairs possible. Adjusting count...");
-            $desiredCount = $totalPossiblePairs;
-        }
-
-        $created = 0;
-        $attempts = 0;
-        $maxAttempts = $desiredCount * 2; // Prevent infinite loops
-        $existingPairs = [];
-
-        $this->command->info("Creating $desiredCount unique job-user profile relationships...");
-
-        while ($created < $desiredCount && $attempts < $maxAttempts) {
-            $job = $jobs->random();
-            $userProfile = $userProfiles->random();
+        Applicant::factory(10)->recycle([
+            UserProfile::all(),
+            Job::first()
             
-            $pairKey = $job->id . '_' . $userProfile->id;
+        ])->create();
+
+        // // Clear the table first
+        // DB::table('applicants')->truncate();
+
+        // // Get all jobs and user profiles
+        // $jobs = Job::all();
+        // $userProfiles = UserProfile::all();
+
+        // // Check if we have enough data
+        // if ($jobs->isEmpty() || $userProfiles->isEmpty()) {
+        //     $this->command->error('No jobs or user profiles found! Please seed them first.');
+        //     return;
+        // }
+
+        // $totalPossiblePairs = $jobs->count() * $userProfiles->count();
+        // $desiredCount = 100;
+
+        // // Adjust desired count if there aren't enough unique pairs
+        // if ($totalPossiblePairs < $desiredCount) {
+        //     $this->command->warn("Only $totalPossiblePairs unique pairs possible. Adjusting count...");
+        //     $desiredCount = $totalPossiblePairs;
+        // }
+
+        // $created = 0;
+        // $attempts = 0;
+        // $maxAttempts = $desiredCount * 2; // Prevent infinite loops
+        // $existingPairs = [];
+
+        // $this->command->info("Creating $desiredCount unique job-user profile relationships...");
+
+        // while ($created < $desiredCount && $attempts < $maxAttempts) {
+        //     $job = $jobs->random();
+        //     $userProfile = $userProfiles->random();
             
-            if (!isset($existingPairs[$pairKey])) {
-                Applicant::create([
-                    'name'=>fake()->name(),
-                    'slug'=>Str::slug(fake()->sentence()),
-                    'job_id' => $job->id,
-                    'user_profile_id' => $userProfile->id,
-                    'note'=>fake()->paragraph(rand(10,40)),
-                    // Add any additional applicant fields here
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                ]);
+        //     $pairKey = $job->id . '_' . $userProfile->id;
+            
+        //     if (!isset($existingPairs[$pairKey])) {
+        //         Applicant::create([
+        //             'name'=>fake()->name(),
+        //             'slug'=>Str::slug(fake()->sentence()),
+        //             'job_id' => $job->id,
+        //             'user_profile_id' => $userProfile->id,
+        //             'note'=>fake()->paragraph(rand(10,40)),
+        //             // Add any additional applicant fields here
+        //             'created_at' => now(),
+        //             'updated_at' => now(),
+        //         ]);
                 
-                $existingPairs[$pairKey] = true;
-                $created++;
+        //         $existingPairs[$pairKey] = true;
+        //         $created++;
                 
-                // Progress feedback
-                if ($created % 10 === 0) {
-                    $this->command->info("Created $created applicants...");
-                }
-            }
+        //         // Progress feedback
+        //         if ($created % 10 === 0) {
+        //             $this->command->info("Created $created applicants...");
+        //         }
+        //     }
             
-            $attempts++;
-        }
+        //     $attempts++;
+        // }
 
-        $this->command->info("Successfully created $created unique applicants!");
+        // $this->command->info("Successfully created $created unique applicants!");
         
-        if ($created < $desiredCount) {
-            $this->command->warn("Only created $created unique applicants out of requested $desiredCount.");
-        }
+        // if ($created < $desiredCount) {
+        //     $this->command->warn("Only created $created unique applicants out of requested $desiredCount.");
+        // }
     }
 }

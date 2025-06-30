@@ -8,6 +8,7 @@
     @vite('resources/css/app.css')
 </head>
 <body>
+    <x-navbar></x-navbar>
     <h1 class="">
         Hello, {{ $profile['name'] }}
     </h1>
