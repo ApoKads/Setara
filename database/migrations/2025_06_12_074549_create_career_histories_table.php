@@ -9,16 +9,18 @@ return new class extends Migration {
     {
         Schema::create('career_histories', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('applicant_id');
+
+            // Kolom penghubung ke tabel user_profiles
+            $table->foreignId('user_profile_id')->constrained()->onDelete('cascade');
+
+            // Kolom-kolom untuk data riwayat karir
             $table->string('job_title');
             $table->string('company');
-            $table->date('start_date');
-            $table->date('end_date')->nullable(); // boleh kosong kalau masih kerja
             $table->text('job_description')->nullable();
-            $table->timestamps();
+            $table->date('start_date');
+            $table->date('end_date')->nullable(); // Boleh kosong jika masih bekerja di sana
 
-            // Foreign key (opsional, jika relasi antar tabel kamu atur)
-            $table->foreign('applicant_id')->references('id')->on('applicants')->onDelete('cascade');
+            $table->timestamps(); // Kolom created_at dan updated_at
         });
     }
 

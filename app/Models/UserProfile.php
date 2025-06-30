@@ -40,4 +40,8 @@ class UserProfile extends Model
         return $this->hasMany(Applicant::class, 'user_profile_id');
     }
 
+    public function careerHistories(): HasMany
+    {
+        return $this->hasMany(CareerHistory::class);
+    }
 }
