@@ -1,9 +1,7 @@
 <x-layout title="Sign Up">
-    {{-- PERUBAHAN: Mengganti font-sans menjadi font-poppins --}}
     <section class="font-poppins">
         <div class="container py-8 mx-auto flex flex-wrap items-center min-h-screen">
 
-            {{-- Kolom Kiri: Form Registrasi dengan UI Baru --}}
             <div class="lg:w-5/9 md:w-1/2 w-full mx-auto">
                 <div class="bg-white rounded-2xl shadow-lg p-6 sm:p-8">
 
@@ -15,7 +13,6 @@
                         </h1>
                         <p class="text-sm font-light text-gray-500 mt-2">
                             Are you a Company?
-                            {{-- PERUBAHAN: Mengubah warna teks link --}}
                             <a href="#" class="font-medium text-[#88BBD8] hover:underline">Sign Up
                                 Here!</a>
                         </p>
@@ -24,12 +21,10 @@
                     {{-- Form --}}
                     <form class="space-y-4" action="{{ route('signup') }}" method="POST">
                         @csrf
-
+                        <input type="hidden" name="role" value="user">
                         {{-- Full Name --}}
                         <div>
-                            {{-- PERUBAHAN: Mengubah warna teks label --}}
                             <label for="name" class="block mb-2 text-sm font-medium text-[#444B59]">Full Name</label>
-                            {{-- PERUBAHAN: Mengubah warna focus ring dan border --}}
                             <input type="text" name="name" id="name" value="{{ old('name') }}"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-xl focus:ring-[#88BBD8] focus:border-[#88BBD8] block w-full p-3"
                                 placeholder="Your Full Name" required>
@@ -40,9 +35,7 @@
 
                         {{-- Email --}}
                         <div>
-                            {{-- PERUBAHAN: Mengubah warna teks label --}}
                             <label for="email" class="block mb-2 text-sm font-medium text-[#444B59]">Email</label>
-                            {{-- PERUBAHAN: Mengubah warna focus ring dan border --}}
                             <input type="email" name="email" id="email" value="{{ old('email') }}"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-xl focus:ring-[#88BBD8] focus:border-[#88BBD8] block w-full p-3"
                                 placeholder="YourEmail@mail.com" required>
@@ -53,9 +46,7 @@
 
                         {{-- Password --}}
                         <div class="relative">
-                            {{-- PERUBAHAN: Mengubah warna teks label --}}
                             <label for="password" class="block mb-2 text-sm font-medium text-[#444B59]">Password</label>
-                            {{-- PERUBAHAN: Mengubah warna focus ring dan border --}}
                             <input type="password" name="password" id="password"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-xl focus:ring-[#88BBD8] focus:border-[#88BBD8] block w-full p-3"
                                 placeholder="••••••••" required>
@@ -75,10 +66,8 @@
 
                         {{-- Confirm Password --}}
                         <div class="relative">
-                            {{-- PERUBAHAN: Mengubah warna teks label --}}
                             <label for="password_confirmation"
                                 class="block mb-2 text-sm font-medium text-[#444B59]">Confirm Password</label>
-                            {{-- PERUBAHAN: Mengubah warna focus ring dan border --}}
                             <input type="password" name="password_confirmation" id="password_confirmation"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-xl focus:ring-[#88BBD8] focus:border-[#88BBD8] block w-full p-3"
                                 placeholder="••••••••" required>
@@ -94,7 +83,6 @@
                             </button>
                         </div>
 
-                        {{-- PERUBAHAN: Mengubah warna tombol dan focus ring-nya --}}
                         <button type="submit"
                             class="w-full text-white bg-[#132442] hover:bg-opacity-90 focus:ring-4 focus:outline-none focus:ring-[#88BBD8]/50 font-medium rounded-xl text-sm px-5 py-3 text-center">
                             Sign Up
@@ -103,7 +91,6 @@
                 </div>
             </div>
 
-            {{-- Kolom Kanan: Gambar Ilustrasi --}}
             <div class="lg:w-4/9 md:w-1/2 hidden lg:flex items-center justify-center pl-10">
                 <img src="{{ asset('images/login_setara.png') }}" alt="Ilustrasi Halaman Pendaftaran Setara"
                     class="w-full h-auto max-w-lg">
@@ -112,7 +99,6 @@
         </div>
     </section>
 
-    {{-- Script untuk Show/Hide Password (TIDAK ADA PERUBAHAN FUNGSIONALITAS) --}}
     <script>
         function togglePassword(id) {
             const input = document.getElementById(id);
