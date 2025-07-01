@@ -69,11 +69,12 @@ Route::middleware(['auth', CompanyMiddleware::class])->prefix('company')->group(
 
 // User Route
 Route::middleware(['auth', UserMiddleware::class])->group(function () {
+
     // Route untuk halaman profil (menggunakan controller)
     Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
 
     // Route untuk update profil
-    Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update'); // Menambahkan route update profile
+    Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
 
 
     // Home Route
