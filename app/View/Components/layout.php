@@ -1,25 +1,36 @@
 <?php
 
-namespace App\View\Components;
+namespace App\View;
 
-use Closure;
-use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class layout extends Component
+class Layout extends Component
 {
     /**
-     * Create a new component instance.
+     * Judul halaman.
+     *
+     * @var string
      */
-    public function __construct()
+    public string $title; // untuk layout.blade.php menerima $title
+
+    /**
+     * Buat instance komponen baru.
+     *
+     * @return void
+     */
+    // 2. Terima variabel $title di constructor
+    public function __construct(string $title = 'Setara')
     {
-        //
+        // 3. Set nilai properti dari variabel yang diterima
+        $this->title = $title;
     }
 
     /**
-     * Get the view / contents that represent the component.
+     * Dapatkan view / konten yang merepresentasikan komponen.
+     *
+     * @return \Illuminate\Contracts\View\View|\Closure|string
      */
-    public function render(): View|Closure|string
+    public function render()
     {
         return view('components.layout');
     }
