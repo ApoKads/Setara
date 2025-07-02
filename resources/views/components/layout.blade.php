@@ -14,15 +14,13 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Overpass:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap"
     rel="stylesheet">
-  <!-- @livewireStyles -->
+    @livewireStyles
 </head>
 
 <body class="h-full">
 
   <div class="min-h-full">
-    <!-- Navbar -->
     @include('components.navbar')
-    {{-- <x-header>{{$title}}</x-header> --}}
 
     <main>
       <div class="w-full">
@@ -33,7 +31,7 @@
 
   <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
   @include('components.footer')
-  <!-- @livewireScripts -->
+  @livewireScripts
 </body>
 
 </html>

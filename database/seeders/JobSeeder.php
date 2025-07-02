@@ -20,7 +20,7 @@ class JobSeeder extends Seeder
     {
         //
         JobType::factory(10)->create();
-        Job::factory(100)->recycle([
+        Job::factory(20)->recycle([
             JobType::all(),
             Company::all(),
             Location::all(),
