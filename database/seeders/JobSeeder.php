@@ -7,6 +7,7 @@ use App\Models\Company;
 use App\Models\JobType;
 use App\Models\Location;
 use App\Models\Disability;
+use App\Models\Seniority;
 use App\Models\EducationLevel;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -25,7 +26,8 @@ class JobSeeder extends Seeder
             Company::all(),
             Location::all(),
             EducationLevel::all(),
-            Disability::all()
+            Disability::all(),
+            Seniority::all()
         ])->create();
     }
 }

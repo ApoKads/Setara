@@ -6,6 +6,7 @@ use App\Models\Company;
 use App\Models\JobType;
 use App\Models\Location;
 use App\Models\Disability;
+use App\Models\Seniority;
 use App\Models\EducationLevel;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -23,17 +24,21 @@ class Job extends Model
     'job_type_id',
     'location_id',
     'education_level_id',
+    'seniority_id',
     'slug',
     'company_id',  // foreign key
     'name',        // string
     'description', // string
     'wage',       // float
     'location',
-    'disability_id'
+    'disability_id',
+    'slot',
+    'work_mode',
+    'work_location_type'
         // string
 
     ];
-    protected $with = ['company','JobType','location','EducationLevel','disability'];
+    protected $with = ['company','JobType','location','EducationLevel','disability','seniority'];
 
 
     public function company():BelongsTo{
@@ -55,6 +60,10 @@ class Job extends Model
     }
     public function disability():BelongsTo{
         return $this->belongsTo(Disability::class,'disability_id');
+    }
+    
+    public function seniority():BelongsTo{
+        return $this->belongsTo(Seniority::class,'seniority_id');
     }
 
     public function scopeFilter(Builder $query, array $filters):void{
@@ -116,6 +125,10 @@ class Job extends Model
         
         $query->when($filters['education_level'] ?? false, function ($query, $educationId) {
             $query->where('education_level_id', $educationId);
+        });
+        
+        $query->when($filters['seniority'] ?? false, function ($query, $seniorityId) {
+            $query->where('seniority_id', $seniorityId);
         });
         // $query->when(
         //     $filters['category'] ?? false, function($query,$category){

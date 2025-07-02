@@ -49,6 +49,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call([LocationSeeder::class]);
         $this->call([EducationLevelSeeder::class]);
+        $this->call([SenioritySeeder::class]);
         
         $this->call([UserProfileSeeder::class,AdminSeeder::class,CompanySeeder::class]);
         
