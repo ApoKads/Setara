@@ -9,11 +9,11 @@
                     <div class="text-center mb-6">
                         <h1
                             class="text-2xl leading-tight tracking-tight font-bold text-gray-900 md:text-3xl [font-family:var(--font-overpass)]">
-                            WELCOME TO SETARA!
+                            Together, Let’s make accessibility a priority!
                         </h1>
                         <p class="text-sm font-light text-gray-500 mt-2">
-                            Are you a Company?
-                            <a href="#" class="font-medium text-[#88BBD8] hover:underline">Sign Up
+                            Are you an applicant?
+                            <a href="/signup" class="font-medium text-[#88BBD8] hover:underline">Sign Up
                                 Here!</a>
                         </p>
                     </div>
@@ -21,10 +21,10 @@
                     {{-- Form --}}
                     <form class="space-y-4" action="{{ route('signup') }}" method="POST">
                         @csrf
-                        <input type="hidden" name="role" value="user">
+                        <input type="hidden" name="role" value="company">
                         {{-- Full Name --}}
                         <div>
-                            <label for="name" class="block mb-2 text-sm font-medium text-[#444B59]">Full Name</label>
+                            <label for="name" class="block mb-2 text-sm font-medium text-[#444B59]">Company Name</label>
                             <input type="text" name="name" id="name" value="{{ old('name') }}"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-xl focus:ring-[#88BBD8] focus:border-[#88BBD8] block w-full p-3"
                                 placeholder="Your Full Name" required>

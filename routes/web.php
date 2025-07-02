@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\JobController;
@@ -23,7 +22,8 @@ Route::controller(LoginController::class)->group(function () {
 
 // Route untuk signup
 Route::controller(SignupController::class)->group(function () {
-    Route::get('/signup', 'showSignupForm')->name('signup.form');
+    Route::get('/signup', 'showUserSignupForm')->name('signup.user.form');
+    Route::get('/signup/company', 'showCompanySignupForm')->name('signup.company.form');
     Route::post('/signup', 'signup')->name('signup');
 });
 

@@ -13,7 +13,7 @@
                         </h1>
                         <p class="text-sm font-light text-gray-500 mt-2">
                             Are you a Company?
-                            <a href="#" class="font-medium text-[#88BBD8] hover:underline">Sign Up
+                            <a href="/signup/company" class="font-medium text-[#88BBD8] hover:underline">Sign Up
                                 Here!</a>
                         </p>
                     </div>

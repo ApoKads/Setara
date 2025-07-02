@@ -18,6 +18,7 @@ class UserProfile extends Model
         'name',
         'age',
         'about',
+        'description',
         'user_id',
         'slug',
         'job_status',

@@ -11,10 +11,15 @@ use Illuminate\Support\Str;
 
 class SignupController extends Controller
 {
-    // Menampilkan halaman signup
-    public function showSignupForm()
+    public function showUserSignupForm()
     {
-        return view('auth.signup');
+        return view('auth.signup'); // Menampilkan signup.blade.php
+    }
+
+    // Method untuk menampilkan form company
+    public function showCompanySignupForm()
+    {
+        return view('auth.signup-company'); // Menampilkan signup-company.blade.php
     }
 
     // Proses signup

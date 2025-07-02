@@ -29,6 +29,7 @@ class ProfileController extends Controller
             'about' => 'nullable|string',
             'age' => 'nullable|integer|min:16',
             'profile_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'description' => 'nullable|string'
         ]);
 
         // Proses update gambar jika ada file baru yang diunggah
@@ -52,6 +53,7 @@ class ProfileController extends Controller
         $profile->quote = $request->input('quote');
         $profile->about = $request->input('about');
         $profile->age = $request->input('age');
+        $profile->description = $request->input('description');
 
         // Simpan semua perubahan pada model Profile
         $profile->save();
