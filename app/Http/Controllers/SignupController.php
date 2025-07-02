@@ -7,7 +7,7 @@ use App\Models\UserProfile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Str; // Pastikan Str digunakan untuk membuat slug
+use Illuminate\Support\Str;
 
 class SignupController extends Controller
 {
@@ -27,8 +27,6 @@ class SignupController extends Controller
             'password' => 'required|min:6|confirmed',
             'role' => 'required|in:user,company,admin',
         ]);
-
-        // dd($validatedData['name']);
 
         // Membuat user baru
         $user = new User([

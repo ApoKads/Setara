@@ -14,9 +14,9 @@ class ApplicantSeeder extends Seeder
 {
     public function run(): void
     {
-        Applicant::factory(10)->recycle([
+        Applicant::factory(100)->recycle([
             UserProfile::all(),
-            Job::first()
+            Job::all()
             
         ])->create();
 

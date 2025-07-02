@@ -52,20 +52,7 @@ class DatabaseSeeder extends Seeder
         $this->call([SenioritySeeder::class]);
         
         $this->call([UserProfileSeeder::class,AdminSeeder::class,CompanySeeder::class]);
-        
-
-
-
-        // DisabilityUserProfile::factory()->create([
-        //     'user_profile_id'=>1,
-        //     'disability_id'=>1
-
-        // ]);
-        // DisabilityUserProfile::factory()->create([
-        //     'user_profile_id'=>1,
-        //     'disability_id'=>2
-
-        // ]);
+    
 
 
         $this->call([JobSeeder::class,ApplicantSeeder::class]);

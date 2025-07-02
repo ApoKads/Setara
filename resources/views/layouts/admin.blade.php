@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
 
 </head>
+
 <body>
     <main>
         @yield('content')

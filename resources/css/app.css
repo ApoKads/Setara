@@ -1,4 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+/* Impor kedua font (Poppins & Overpass) dalam satu panggilan. */
+@import url('https://fonts.googleapis.com/css2?family=Overpass:wght@300;400;500;600;700&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
 @import 'tailwindcss';
 @source "../views";
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
@@ -9,6 +11,8 @@
 
 @theme {
     --font-pop: 'Poppins', ui-sans-serif, system-ui, sans-serif;
+    --font-overpass: 'Overpass', ui-sans-serif, system-ui, sans-serif;
 }
-
-
+body {
+    font-family: var(--font-pop);
+}

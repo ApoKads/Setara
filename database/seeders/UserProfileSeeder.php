@@ -15,7 +15,7 @@ class UserProfileSeeder extends Seeder
     public function run(): void
     {
         //
-        UserProfile::factory()->create();
+        UserProfile::factory(5)->create();
         $this->call([DisabilityUserProfileSeeder::class]);
     }
 }

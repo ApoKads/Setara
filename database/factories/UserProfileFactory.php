@@ -32,7 +32,8 @@ class UserProfileFactory extends Factory
             'slug'=>Str::slug(fake()->sentence()),
             'user_id' => User::factory(),
             'age' => fake()->numberBetween(18, 65),
-            'about'=> fake()->paragraph(rand(10,40))
+            'about'=> fake()->paragraph(rand(10,40)),
+            'profile_image'=>'storage/applicant/undra.jpg'
 
         ];
     }
