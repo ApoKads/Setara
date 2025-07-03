@@ -1,6 +1,6 @@
 <x-layout-company>
     <x-slot:title>{{ 'Dashboard Company' }}</x-slot>
-    <div class="w-full px-28">
+    <div class="w-full px-28 text-[#132442]">
 
         <div class=" w-full bg-red flex flex-col gap-4 justify-center items-center py-10">
             <h1 class="font-pop font-medium text-xl">Pembukaan Lowongan Kerja</h1>
@@ -30,7 +30,7 @@
                 <div class="mb-6">
                     <label for="name" class="block text-gray-700 text-lg font-medium mb-2">Posisi Pekerjaan</label>
                     <input type="text" id="name" name="name" placeholder="Masukkan Posisi Pekerjaan"
-                        class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-lg @error('name') border-red-500 @enderror"
+                        class="placeholder-[#96b8da] shadow appearance-none border-2 border-[#88BBD8] rounded w-full py-4 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-lg @error('name') border-red-500 @enderror"
                         value="{{ old('name') }}">
                     @error('name')
                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>

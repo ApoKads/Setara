@@ -1,4 +1,6 @@
 <x-layout title="Sign Up">
+    <x-slot:title>{{ 'Sign Up' }}</x-slot>
+
     <section class="font-poppins">
         <div class="container py-8 mx-auto flex flex-wrap items-center min-h-screen">
 
