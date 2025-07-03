@@ -81,6 +81,69 @@ class JobController extends Controller
         return redirect()->route('companyJob.index')->with('success', 'Lowongan kerja berhasil diupload!');
     }
 
+    public function edit(Job $job)
+    {
+        // Pastikan Anda juga melewatkan data yang dibutuhkan Livewire dropdowns
+        return view('CompanySide.edit-form', [
+            'job' => $job,
+            'disabilities' => Disability::latest()->get(),
+            'seniorities' => Seniority::latest()->get(),
+            'company' => Auth::user()->company, // Asumsi company terkait dengan user yang login
+        ]);
+    }
+
+    public function update(Request $request, Job $job)
+    {
+        // Validasi input
+        $validatedData = $request->validate([
+            'name'              => 'required|string|max:255',
+            'job_type'          => 'required|string|max:255|exists:job_types,id',
+            'education_level'   => 'required|string|max:255|exists:education_levels,id',
+            'location'          => 'required|string|max:255|exists:locations,id',
+            'work_mode'         => 'required',
+            'slot'              => 'required|integer|min:1',
+            'description'       => 'required|string',
+            'responsibilities'  => 'required|string',
+            'wage'              => 'required|numeric|min:0',
+            'disability'        => 'required|exists:disabilities,id',
+            'seniority'         => 'required|exists:seniorities,id',
+            'banner_image'      => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        // Update field sesuai data validasi
+        $job->name                 = $validatedData['name'];
+        $job->job_type_id          = $validatedData['job_type'];
+        $job->education_level_id   = $validatedData['education_level'];
+        $job->location_id          = $validatedData['location'];
+        $job->work_mode            = $validatedData['work_mode'];
+        $job->slot                 = $validatedData['slot'];
+        $job->description          = $validatedData['description'];
+        $job->responsibilities     = $validatedData['responsibilities'];
+        $job->wage                 = $validatedData['wage'];
+        $job->disability_id        = $validatedData['disability'];
+        $job->seniority_id         = $validatedData['seniority'];
+        $job->slug                 = $validatedData['name']; // optional, unless slug is meant to be unique & SEO-friendly
+
+        // Jika ada gambar baru, ganti yang lama
+        if ($request->hasFile('banner_image')) {
+            $image = $request->file('banner_image');
+            $imageName = time() . '_' . $image->getClientOriginalName();
+            $imagePath = $image->storeAs('job', $imageName);
+
+            // Jika ada gambar lama dan ingin dihapus, tambahkan ini (opsional)
+            // Storage::delete('job/' . basename($job->banner_image_path));
+
+            $job->banner_image_path = 'storage/job/' . $imageName;
+        }
+
+        $job->updated_at = now();
+        $job->save();
+
+        return redirect()->route('companyJob.index')->with('success', 'Lowongan kerja berhasil diperbarui!');
+    }
+
+    
+
     public function destroy(Job $job)
     {
         // Hapus job dari database

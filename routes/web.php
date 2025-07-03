@@ -52,6 +52,8 @@ Route::middleware(['auth', CompanyMiddleware::class])->prefix('company')->group(
     Route::controller(JobController::class)->group(function () {
         Route::get('/dashboard/create', 'create')->name('job.create');
         Route::post('/dashboard/store', 'store')->name('job.store');
+        Route::get('/dashboard/edit/{job:id}', 'edit')->name('job.edit');
+        Route::put('/dashboard/edit/{job:id}','update')->name('job.update');
         route::delete('/dashboard/{job:id}', 'destroy');
     });
 
