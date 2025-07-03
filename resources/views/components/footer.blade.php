@@ -20,5 +20,5 @@
         </div>
     </div>
     <div class="col-start-1 row-start-2 bg-[#150043] rounded-tr-full"></div>
-    <div class="col-start-3 row-start-2 bg-[#150043] rounded-tl-full"></di
+    <div class="col-start-3 row-start-2 bg-[#150043] rounded-tl-full"></div>
 </footer>

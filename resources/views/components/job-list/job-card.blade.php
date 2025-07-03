@@ -36,6 +36,7 @@
                                 <span class="bg-[#C4DDF6] text-[#132442] text-[14px] font-medium rounded-sm flex px-2 py-1.5">{{ $card->JobType->name }}</span>
                                 <span class="bg-[#C4DDF6] text-[#132442] text-[14px] font-medium rounded-sm flex px-2 py-1.5">{{ $card->EducationLevel->name }}</span>
                                 <span class="bg-[#C4DDF6] text-[#132442] text-[14px] font-medium rounded-sm flex px-2 py-1.5">{{ $card->work_mode }}</span>
+                                <span class="bg-[#C4DDF6] text-[#132442] text-[14px] font-medium rounded-sm flex px-2 py-1.5">{{ $card->seniority->name }}</span>
                             </div>
                             <h1 class="">
                                 Jenis Disabilitas : {{ $card->disability->name }}
