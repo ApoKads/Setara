@@ -14,8 +14,12 @@
               <div class="flex-1 px-6 pb-6">
                 <div class="h-16 overflow-visible">
                   <div class="w-32 h-32 bg-[#F2F6FF] rounded-full flex justify-center items-center relative -top-16 left-0">
-                    <div class="w-30 h-30 bg-blue-900 rounded-full flex items-center justify-center">
-                      <img src="{{ asset('images/ListJobPage/company_placeholder.png') }}" alt="">
+                    <div class="w-30 h-30 bg-blue-900 rounded-full flex items-center justify-center overflow-hidden">
+                      @if($detail->company->path_logo)
+                        <img src="{{ asset('storage/' . $detail->company->path_logo) }}" alt="{{ $detail->company->name }}" class="w-full h-full object-cover">
+                      @else
+                        <img src="{{ asset('images/ListJobPage/company_placeholder.png') }}" alt="{{ $detail->company->name }}">
+                      @endif
                     </div>
                   </div>
                 </div>
@@ -97,20 +101,9 @@
           <!-- Job Responsibilities Section -->
           <div class="p-6">
             <h2 class="text-xl font-bold text-gray-800 mb-4">Tanggung Jawab</h2>
-            <ul class="space-y-3 text-gray-600">
-              <li class="flex items-start">
-                <span class="w-2 h-2 bg-blue-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                Partner with hiring managers to understand staffing needs, job requirements, and team goals.
-              </li>
-              <li class="flex items-start">
-                <span class="w-2 h-2 bg-blue-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                Develop and implement creative sourcing strategies to identify qualified candidates through job boards, social media, networking, employee referrals, and other platforms.
-              </li>
-              <li class="flex items-start">
-                <span class="w-2 h-2 bg-blue-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                Manage the full-cycle recruitment process including posting jobs, screening resumes, conducting interviews, scheduling, and extending offers.
-              </li>
-            </ul>
+            <div class="text-gray-600 leading-relaxed">
+              {{ $detail->responsibilities }}
+            </div>
           </div>
 
           <!-- Categories Section -->
@@ -136,8 +129,12 @@
             @foreach ($jobCard as $card)
             <div class="flex items-center gap-3 p-3 bg-white rounded-lg transition-colors mb-4">
               <!-- Company Logo -->
-              <div class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center flex-shrink-0">
-                <span class="text-white font-bold text-sm">J</span>
+              <div class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center flex-shrink-0 overflow-hidden">
+                @if($card->company->path_logo)
+                  <img src="{{ asset('storage/' . $card->company->path_logo) }}" alt="{{ $card->company->name }}" class="w-full h-full object-cover">
+                @else
+                  <img src="{{ asset('images/ListJobPage/company_placeholder.png') }}" alt="{{ $card->company->name }}">
+                @endif
               </div>
               
               <!-- Job Info -->
