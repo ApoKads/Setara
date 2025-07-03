@@ -54,7 +54,7 @@ class CompanyLocationDropdown extends Component
             $query->where('city', 'like', '%' . $searchQuery . '%');
         })->get();
 
-        return view('livewire.location-dropdown', [
+        return view('livewire.company-location-dropdown', [
             'locations' => $locations,
         ]);
     }

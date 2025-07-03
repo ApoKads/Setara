@@ -2,14 +2,14 @@
     {{-- Trigger Dropdown --}}
     <input type="hidden" name='education_level' value="{{ $selectedEducationLevel['id'] ?? '' }}">
     <div
-        class="border-black border-[1px] h-12 px-4 rounded-lg cursor-pointer flex justify-between items-center bg-white"
+        class="text-lg text-[#96b8da] border-[#88BBD8] border-2 h-15 px-4 rounded-2xl cursor-pointer flex justify-between items-center bg-white"
         wire:click="toggleDropdown"
     >
-        <span class="text-gray-700">
+        <span class="{{ isset($selectedEducationLevel['id']) && $selectedEducationLevel['id'] !== '' ? 'text-[#132442]' : 'text-[#96b8da]' }}">
             {{ $selectedEducationLevel['name'] ?? 'Pilih Jenjang Pendidikan' }}
         </span>
         <svg
-            class="w-4 h-4 text-gray-500"
+            class="h-4 w-4 text-[#88BBD8]"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"

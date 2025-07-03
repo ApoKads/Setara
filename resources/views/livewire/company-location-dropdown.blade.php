@@ -1,16 +1,15 @@
 <div class="relative w-full">
     {{-- Trigger Dropdown --}}
-    {{-- Pastikan nilai hidden input selalu mencerminkan selectedId --}}
-    <input type="hidden" name='location' value="{{ $selectedId ?? '' }}">
+    <input type="hidden" name='location' value="{{ $selectedLocation['id'] ?? '' }}">
     <div
-        class="border-black border-[1px] h-12 px-4 rounded-lg cursor-pointer flex justify-between items-center bg-white"
+        class="text-lg text-[#96b8da] border-[#88BBD8] border-2 h-15 px-4 rounded-2xl cursor-pointer flex justify-between items-center bg-white"
         wire:click="toggleDropdown"
     >
-        <span class="text-gray-700">
+        <span class="{{ !empty($selectedLocation['city']) ? 'text-[#132442]' : 'text-[#96b8da]' }}">
             {{ $selectedLocation['city'] ?? 'Pilih Lokasi' }}
         </span>
         <svg
-            class="w-4 h-4 text-gray-500"
+            class="h-4 w-4 text-[#88BBD8]"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -49,25 +48,25 @@
                 @if (empty($search))
                     <div
                         class="p-2 cursor-pointer hover:bg-blue-100 {{ empty($selectedLocation['id']) ? 'bg-blue-500 text-white' : '' }}"
-                        {{-- Mengirim id dan city sebagai parameter terpisah --}}
-                        onclick="Livewire.dispatch('selectLocationFromJs', '', 'Pilih Lokasi')"
+                        onclick="Livewire.dispatch('selectLocationFromJs', { id: '', city: 'Pilih Lokasi' })"
                     >
-                        Pilih Lokasi (Semua)
+                        Pilih Lokasi (Semua) punya Company
                     </div>
                 @endif
 
                 @forelse ($locations as $location)
                     <div
                         class="p-2 cursor-pointer hover:bg-blue-100 {{ ($selectedLocation['id'] ?? null) == $location->id ? 'bg-blue-500 text-white' : '' }}"
-                        {{-- Mengirim id dan city sebagai parameter terpisah --}}
-                        onclick="Livewire.dispatch('selectLocationFromJs', {{ $location->id }}, '{{ $location->city }}')"
+                        onclick="Livewire.dispatch('selectLocationFromJs', { id: {{ $location->id }}, city: '{{ $location->city }}' })"
                     >
                         {{ $location->city }}
                     </div>
                 @empty
+                    {{-- Show this message only if NO locations are found AND search is not empty --}}
                     @if (!empty($search))
                         <div class="p-2 text-gray-500">Tidak ada Lokasi ditemukan untuk "{{ $search }}".</div>
                     @else
+                        {{-- Show this if no locations are present at all (even without search) --}}
                         <div class="p-2 text-gray-500">Tidak ada Lokasi yang tersedia.</div>
                     @endif
                 @endforelse
