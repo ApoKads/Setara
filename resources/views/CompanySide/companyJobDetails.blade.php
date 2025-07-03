@@ -31,9 +31,9 @@
                   <span class="text-sm">Hingga 11 September 2021</span>
                 </div>
                 <div class="mt-4">
-                  <button class="bg-blue-700 hover:bg-blue-800 text-white px-6 py-2 rounded-lg font-medium transition-colors cursor-pointer">
-                    Lamar
-                  </button>
+                  <a href="/company/dashboard/details/{{ $detail->id }}" class="bg-blue-700 hover:bg-blue-800 text-white px-6 py-2 rounded-lg font-medium transition-colors cursor-pointer">
+                    Lihat Pelamar
+                  </a>
                 </div>
               </div>
             </div>
@@ -78,7 +78,7 @@
               </div>
               
               <div class="text-left">
-                <div class="text-sm text-gray-500 mb-1">Pendidikan Minimal</div>
+                <div class="text-sm text-gray-500 mb-1">Pendidikan Terakhir</div>
                 <div class="text-xl font-semibold text-gray-800">
                   {{ $detail->EducationLevel->name }}
                 </div>
@@ -114,7 +114,7 @@
           </div>
 
           <!-- Categories Section -->
-          <!-- <div class="p-6">
+          <div class="p-6">
             <h2 class="text-xl font-bold text-gray-800 mb-4">Kategori</h2>
             <div class="flex flex-wrap gap-2">
               <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">Kontraktor</span>
@@ -123,37 +123,38 @@
               <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">New</span>
               <span class="bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-sm font-medium">Insert Here</span>
             </div>
-          </div> -->
+          </div>
           
         </div>
 
         <!-- Sidebar (Right Side) - Job Recommendations -->
         <div class="lg:col-span-1">
-          <div class="py-2 px-6 sticky top-8">
-            <h2 class="text-2xl font-bold text-gray-800 mb-6">Lowongan Lain</h2>
+          <div class="bg-white rounded-lg shadow-sm p-6 sticky top-8">
+            <h2 class="text-xl font-bold text-gray-800 mb-6">Lowongan Lain</h2>
             
             <!-- Job Recommendation Items -->
-            @foreach ($jobCard as $card)
-            <div class="flex items-center gap-3 p-3 bg-white rounded-lg transition-colors mb-4">
+            @for($i = 0; $i < 6; $i++)
+            <div class="flex items-center gap-3 p-3 hover:bg-gray-50 rounded-lg transition-colors mb-4">
               <!-- Company Logo -->
               <div class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center flex-shrink-0">
-                <span class="text-white font-bold text-sm">J</span>
+                <span class="text-white font-bold text-sm">M</span>
               </div>
               
               <!-- Job Info -->
               <div class="flex-1 min-w-0">
-                <h3 class="font-semibold text-gray-800 text-sm truncate">{{ $card->name }}</h3>
-                <p class="text-gray-500 text-[0.6rem] truncate">{{ $card->location->city }} · {{ $card->company->name }}</p>
+                <h3 class="font-semibold text-gray-800 text-sm truncate">Marketing Manager</h3>
+                <p class="text-gray-500 text-xs">CompanyName</p>
+                <div class="flex items-center gap-1 mt-1">
+                  <span class="bg-blue-100 text-blue-800 text-xs px-2 py-0.5 rounded">2 hari yang lalu</span>
+                </div>
               </div>
               
               <!-- View Details Button -->
-               <a href="{{ route('job.show', $card->slug) }}">
-                 <div class="text-blue-600 hover:text-white text-xs font-medium whitespace-nowrap bg-white hover:bg-blue-800 rounded-lg shadow-sm p-2 cursor-pointer">
-                   Lihat Detail
-                 </div>
-               </a>
+              <button class="text-blue-600 hover:text-blue-800 text-xs font-medium whitespace-nowrap">
+                Lihat Detail
+              </button>
             </div>
-            @endforeach
+            @endfor
             
           </div>
         </div>

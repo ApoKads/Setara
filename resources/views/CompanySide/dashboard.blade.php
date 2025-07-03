@@ -55,7 +55,7 @@
                             name="search"
                             placeholder="Cari Pekerjaan Impianmu ..."
                             class="w-full border text-base h-full bg-white px-4 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            value="">
+                            value="{{ request('search') }}">
                     </div>
                 </form>
 
@@ -67,7 +67,7 @@
                             <h1>Lowongan</h1>
                         </div>
                         <div class="flex justify-center  items-center w-full">
-                            <h1>Tanggal Pendaftaran</h1>
+                            <h1 class="text-[15px]">Tanggal Pendaftaran</h1>
                         </div>
                         <div>
                                 {{-- div kosong buat space antara tanggal dan slot--}}
@@ -86,7 +86,7 @@
                     {{-- content --}}
 
                     <div class="w-full flex flex-col gap-4">
-                        @foreach ($company->jobs as $job)
+                        @forelse ($jobs as $job)
                             <x-company-dashboard.job-row :job="$job"></x-company-dashboard.job-row>
                              <div id="deleteModal" class="fixed inset-0 z-50 hidden items-center justify-center h-full w-full">
                                 <div class="flex w-full h-full absolute bg-black opacity-30">
@@ -117,9 +117,15 @@
                                     </div>
                                 </div>
                             </div>
-                        @endforeach                    
+                            @empty
+                                <p class="w-full text-center p-4">
+                                    No jobs available ...
+                                </p>
+                        @endforelse                  
                     </div>
-                     
+                     <a href={{ route('job.create') }} class="bg-white w-10 h-10 flex justify-center items-center rounded-full mb-10 hover:scale-105 hover:brightness-95 hover:cursor-pointer transition duration-200">
+                        <p class="font-semibold font-pop text-xl">+</p>
+                     </a>
                 </div>
 
             </div>

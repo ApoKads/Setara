@@ -49,14 +49,19 @@ Route::middleware(['auth', AdminMiddleware::class])->prefix('admin')->group(func
 
 // Company Route
 Route::middleware(['auth', CompanyMiddleware::class])->prefix('company')->group(function () {
-    Route::controller(CompanyDashboardController::class)->group(function () {
-        Route::get('/dashboard', 'index');
-        Route::get('/dashboard/{job:id}', 'show')->name('companyJob.show');
-    });
-
     Route::controller(JobController::class)->group(function () {
+        Route::get('/dashboard/create', 'create')->name('job.create');
+        Route::post('/dashboard/store', 'store')->name('job.store');
         route::delete('/dashboard/{job:id}', 'destroy');
     });
+
+    Route::controller(CompanyDashboardController::class)->group(function () {
+        Route::get('/dashboard', 'index')->name('companyJob.index');
+        Route::get('/dashboard/{job:id}', 'show')->name('companyJob.show');
+        Route::get('/dashboard/details/{job:id}', 'applicant')->name('company.applicant');
+    });
+
+   
 
     Route::get('/dashboard/profile', function () {
         return view('CompanySide.companyProfile', [
