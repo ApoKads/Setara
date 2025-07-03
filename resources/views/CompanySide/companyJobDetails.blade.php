@@ -31,9 +31,9 @@
                   <span class="text-sm">Hingga 11 September 2021</span>
                 </div>
                 <div class="mt-4">
-                  <button class="bg-blue-700 hover:bg-blue-800 text-white px-6 py-2 rounded-lg font-medium transition-colors cursor-pointer">
-                    Lamar
-                  </button>
+                  <a href="/company/dashboard/details/{{ $detail->id }}" class="bg-blue-700 hover:bg-blue-800 text-white px-6 py-2 rounded-lg font-medium transition-colors cursor-pointer">
+                    Lihat Pelamar
+                  </a>
                 </div>
               </div>
             </div>
@@ -78,7 +78,7 @@
               </div>
               
               <div class="text-left">
-                <div class="text-sm text-gray-500 mb-1">Pendidikan Minimal</div>
+                <div class="text-sm text-gray-500 mb-1">Pendidikan Terakhir</div>
                 <div class="text-xl font-semibold text-gray-800">
                   {{ $detail->EducationLevel->name }}
                 </div>

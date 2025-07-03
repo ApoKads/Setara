@@ -19,8 +19,11 @@ return new class extends Migration
             $table->foreignId('location_id')->constrained('locations','id')->cascadeOnDelete();
             $table->foreignId('education_level_id')->constrained('education_levels','id')->cascadeOnDelete();
             $table->foreignId('disability_id')->constrained('disabilities','id')->cascadeOnDelete();
+            $table->foreignId('seniority_id')->constrained('seniorities','id')->cascadeOnDelete();
             $table->string('name');
-            $table->string('description');
+            $table->string('banner_image_path');
+            $table->text('description');
+            $table->text('responsibilities');
             $table->string('work_mode');
             $table->integer('slot');
             $table->enum('work_location_type', ['onsite', 'remote', 'hybrid'])->default('onsite');
