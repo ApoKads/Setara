@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreignId('location_id')->constrained('locations','id')->cascadeOnDelete();
             $table->foreignId('education_level_id')->constrained('education_levels','id')->cascadeOnDelete();
             $table->foreignId('disability_id')->constrained('disabilities','id')->cascadeOnDelete();
+            $table->foreignId('seniority_id')->constrained('seniorities','id')->cascadeOnDelete();
             $table->string('name');
             $table->string('description');
             $table->string('work_mode');
