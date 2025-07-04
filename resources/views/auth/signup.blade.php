@@ -4,7 +4,7 @@
         <section>
             <div class="container py-8 mx-auto flex flex-wrap items-center min-h-screen">
 
-                <div class="lg:w-4/9 w-full mx-auto">
+                <div class="lg:w-4/9 lg:pl-20 w-full mx-auto">
                     <div class="bg-white rounded-2xl shadow-lg p-6 sm:p-8">
 
                         {{-- Header --}}
@@ -24,7 +24,6 @@
                         <form class="space-y-4" action="{{ route('signup') }}" method="POST">
                             @csrf
                             <input type="hidden" name="role" value="user">
-                            {{-- Full Name --}}
                             <div>
                                 <label for="name" class="block mb-2 text-sm font-medium text-[#444B59]">Full
                                     Name</label>
@@ -36,7 +35,6 @@
                                 @enderror
                             </div>
 
-                            {{-- Email --}}
                             <div>
                                 <label for="email" class="block mb-2 text-sm font-medium text-[#444B59]">Email</label>
                                 <input type="email" name="email" id="email" value="{{ old('email') }}"
@@ -47,7 +45,6 @@
                                 @enderror
                             </div>
 
-                            {{-- Password --}}
                             <div class="relative">
                                 <label for="password"
                                     class="block mb-2 text-sm font-medium text-[#444B59]">Password</label>
@@ -68,7 +65,6 @@
                                 @enderror
                             </div>
 
-                            {{-- Confirm Password --}}
                             <div class="relative">
                                 <label for="password_confirmation"
                                     class="block mb-2 text-sm font-medium text-[#444B59]">Confirm Password</label>

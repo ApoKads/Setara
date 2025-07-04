@@ -12,7 +12,6 @@
     <div class="container mx-auto flex flex-wrap items-center min-h-screen">
         <div class="lg:w-4/9 lg:pl-20 w-full mx-auto">
             <div class="bg-white rounded-2xl shadow-lg p-6 sm:p-8">
-                {{-- Header --}}
                 <div class="text-center mb-6">
                     <h1
                         class="text-2xl leading-tight tracking-tight font-bold text-gray-900 md:text-3xl [font-family:var(--font-overpass)]">
@@ -27,7 +26,6 @@
                 <form method="POST" action="{{ route('login') }}" class="space-y-6">
                     @csrf
 
-                    <!-- Email Input -->
                     <div>
                         <label for="email" class="block mb-2 text-sm font-medium text-[#444B59]">Email</label>
                         <input type="email" name="email" id="email" value="{{ old('email') }}"
@@ -38,7 +36,6 @@
                         @enderror
                     </div>
 
-                    <!-- Password Input -->
                     <div class="relative">
                         <label for="password" class="block mb-2 text-sm font-medium text-[#444B59]">Password</label>
                         <input type="password" name="password" id="password"
@@ -58,14 +55,10 @@
                         @enderror
                     </div>
 
-
-                    <!-- Submit Button -->
-                    <div>
-                        <button type="submit"
-                            class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-xl transition duration-200">
-                            Login
-                        </button>
-                    </div>
+                    <button type="submit"
+                        class="w-full hover:scale-[102%] transition-transform  text-white bg-[#132442] hover:bg-opacity-90 focus:ring-4 focus:outline-none focus:ring-[#88BBD8]/50 font-medium rounded-xl text-sm px-5 py-3 text-center cursor-pointer">
+                        Sign In
+                    </button>
                 </form>
             </div>
         </div>
