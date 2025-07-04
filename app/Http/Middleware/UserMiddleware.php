@@ -15,16 +15,16 @@ class UserMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(auth()->check() && auth()->user()->role === 'user'){
+        if (auth()->check() && auth()->user()->role === 'user') {
             return $next($request);
         }
-        if(!auth()->check()){
+        if (!auth()->check()) {
             return redirect('/');
         }
-        if(auth()->user()->role==='admin'){
+        if (auth()->user()->role === 'admin') {
             return redirect('/admin/dashboard');
         }
-        if(auth()->user()->role==='company'){
+        if (auth()->user()->role === 'company') {
             return redirect('/company/dashboard');
         }
     }

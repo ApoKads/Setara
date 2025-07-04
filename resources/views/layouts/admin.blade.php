@@ -14,6 +14,7 @@
         }
     </style>
 </head>
+
 <body>
     <main>
         @yield('content')

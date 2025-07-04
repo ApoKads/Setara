@@ -5,7 +5,7 @@
                 {{-- Gambar logo BCA --}}
                 <div>
                     <div class="h-48 flex items-center justify-center bg-red object-cover bg-blue-200">
-                        <img src="{{ asset('storage/job/BannerJob.jpeg') }}" alt="Banner Image" class="h-full w-full object-cover">
+                        <img src="{{ asset($card->banner_image_path) }}" alt="Banner Image" class="h-full w-full object-cover">
 
                         {{-- @if ($card->path_banner)
                             <img src="{{ asset('storage/' . $card->path_banner) }}" alt="BCA Logo" class="h-full w-full object-cover">
@@ -36,6 +36,7 @@
                                 <span class="bg-[#C4DDF6] text-[#132442] text-[14px] font-medium rounded-sm flex px-2 py-1.5">{{ $card->JobType->name }}</span>
                                 <span class="bg-[#C4DDF6] text-[#132442] text-[14px] font-medium rounded-sm flex px-2 py-1.5">{{ $card->EducationLevel->name }}</span>
                                 <span class="bg-[#C4DDF6] text-[#132442] text-[14px] font-medium rounded-sm flex px-2 py-1.5">{{ $card->work_mode }}</span>
+                                <span class="bg-[#C4DDF6] text-[#132442] text-[14px] font-medium rounded-sm flex px-2 py-1.5">{{ $card->seniority->name }}</span>
                             </div>
                             <h1 class="">
                                 Jenis Disabilitas : {{ $card->disability->name }}

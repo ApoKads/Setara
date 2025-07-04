@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\JobController;
@@ -25,7 +24,8 @@ Route::controller(LoginController::class)->group(function () {
 
 // Route untuk signup
 Route::controller(SignupController::class)->group(function () {
-    Route::get('/signup', 'showSignupForm')->name('signup.form');
+    Route::get('/signup', 'showUserSignupForm')->name('signup.user.form');
+    Route::get('/signup/company', 'showCompanySignupForm')->name('signup.company.form');
     Route::post('/signup', 'signup')->name('signup');
 });
 
@@ -56,14 +56,21 @@ Route::middleware(['auth', AdminMiddleware::class])->prefix('admin')->group(func
 
 // Company Route
 Route::middleware(['auth', CompanyMiddleware::class])->prefix('company')->group(function () {
-    Route::controller(CompanyDashboardController::class)->group(function () {
-        Route::get('/dashboard', 'index');
-        Route::get('/dashboard/{job:id}', 'show')->name('companyJob.show');
-    });
-
     Route::controller(JobController::class)->group(function () {
+        Route::get('/dashboard/create', 'create')->name('job.create');
+        Route::post('/dashboard/store', 'store')->name('job.store');
+        Route::get('/dashboard/edit/{job:id}', 'edit')->name('job.edit');
+        Route::put('/dashboard/edit/{job:id}','update')->name('job.update');
         route::delete('/dashboard/{job:id}', 'destroy');
     });
+
+    Route::controller(CompanyDashboardController::class)->group(function () {
+        Route::get('/dashboard', 'index')->name('companyJob.index');
+        Route::get('/dashboard/{job:id}', 'show')->name('companyJob.show');
+        Route::get('/dashboard/details/{job:id}', 'applicant')->name('company.applicant');
+    });
+
+   
 
     Route::get('/dashboard/profile', function () {
         return view('CompanySide.companyProfile', [
@@ -76,8 +83,13 @@ Route::middleware(['auth', CompanyMiddleware::class])->prefix('company')->group(
 
 // User Route
 Route::middleware(['auth', UserMiddleware::class])->group(function () {
+
     // Route untuk halaman profil (menggunakan controller)
     Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
+
+    // Route untuk update profil
+    Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
+
 
     // Home Route
     Route::get('/home', function () {

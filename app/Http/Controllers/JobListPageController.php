@@ -20,6 +20,10 @@ class JobListPageController extends Controller
     }
 
     public function show(Job $job){
-        return view('ListJob.jobdetail',['detail'=>$job]);
+
+        return view('ListJob.jobdetail', [
+            'detail' => $job,
+            'jobCard' => Job::where('id', '!=', $job->id)->latest()->take(6)->get()
+        ]);
     }
 }

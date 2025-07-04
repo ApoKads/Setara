@@ -17,6 +17,7 @@ return new class extends Migration {
             $table->foreignId('user_id')->constrained('users', 'id')->cascadeOnDelete();
             $table->integer('age')->nullable();
             $table->text('about')->nullable();
+            $table->text('description')->nullable();
             $table->string('job_status')->default('dan siap untuk bekerja!');
             $table->string('profile_image')->nullable(); // Untuk menyimpan nama file gambar profil
             $table->string('quote')->nullable(); // Menyimpan kutipan atau motto

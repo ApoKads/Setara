@@ -18,6 +18,7 @@ class UserProfile extends Model
         'name',
         'age',
         'about',
+        'description',
         'user_id',
         'slug',
         'job_status',
@@ -40,4 +41,8 @@ class UserProfile extends Model
         return $this->hasMany(Applicant::class, 'user_profile_id');
     }
 
+    public function careerHistories(): HasMany
+    {
+        return $this->hasMany(CareerHistory::class);
+    }
 }

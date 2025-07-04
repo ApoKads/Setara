@@ -21,10 +21,10 @@
     </div>
     <div class="flex justify-start items-center w-full gap-4">
         {{-- <h1>Icon</h1> --}}
-        <div
+        <a href="{{ route('job.edit', $job->id) }}"
             class="flex justify-center items-center bg-[#EFEFFE] h-10 w-10 rounded-full hover:brightness-95 hover:cursor-pointer transition duration-200">
             <i class="fa-solid fa-pen text-[#132442]"></i>
-        </div>
+        </a>
         <div
             onclick="openDeleteModal({{ $job->id }})"
             class="flex justify-center items-center bg-[#ffd0d0] h-10 w-10 rounded-full hover:brightness-95 hover:cursor-pointer transition duration-200">

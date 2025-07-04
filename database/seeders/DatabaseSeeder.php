@@ -46,26 +46,13 @@ class DatabaseSeeder extends Seeder
             'color'=>'red'
         ]);
 
-        // User::factory(10)->create();
 
         $this->call([LocationSeeder::class]);
         $this->call([EducationLevelSeeder::class]);
+        $this->call([SenioritySeeder::class]);
         
         $this->call([UserProfileSeeder::class,AdminSeeder::class,CompanySeeder::class]);
-        
-
-
-
-        // DisabilityUserProfile::factory()->create([
-        //     'user_profile_id'=>1,
-        //     'disability_id'=>1
-
-        // ]);
-        // DisabilityUserProfile::factory()->create([
-        //     'user_profile_id'=>1,
-        //     'disability_id'=>2
-
-        // ]);
+    
 
 
         $this->call([JobSeeder::class,ApplicantSeeder::class]);

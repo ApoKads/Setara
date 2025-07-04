@@ -6,6 +6,7 @@ use App\Models\Company;
 use App\Models\JobType;
 use App\Models\Location;
 use App\Models\Disability;
+use App\Models\Seniority;
 use Illuminate\Support\Str;
 use App\Models\EducationLevel;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -49,8 +50,11 @@ class JobFactory extends Factory
             'location_id'=>Location::factory(),
             'education_level_id'=>EducationLevel::factory(),
             'disability_id'=>Disability::factory(),
+            'seniority_id'=>Seniority::factory(),
+            'banner_image_path'=>'storage/job/BannerJob.jpeg',
             'name'=>fake()->name(),
             'description'=>fake()->paragraph(rand(10,40)),
+            'responsibilities'=>fake()->paragraph(rand(10,40)),
             'wage'=>$wage,
             'slot'=>fake()->numberBetween(0,10),
             'work_mode' => fake()->randomElement($workModes),
