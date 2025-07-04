@@ -1,7 +1,9 @@
 <?php
 
+namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Company;
+use App\Models\Location;
 
 class CompanyController extends Controller
 {
@@ -46,4 +48,30 @@ class CompanyController extends Controller
 
         return redirect()->back()->with('success', 'Data perusahaan berhasil disimpan.');
     }
+
+    public function index() {
+        $companies = Company::withCount('jobTypes')->get();
+        return view('AdminSide.admin', compact('companies'));
+    }
+
+    public function show($id)
+{
+    $company = Company::findOrFail($id);
+    return view('AdminSide.companyshow', compact('company'));
+}
+
+public function edit($id)
+{
+    $company = Company::findOrFail($id);
+    return view('AdminSide.companyedit', compact('company'));
+}
+
+public function destroy($id)
+{
+    $company = Company::findOrFail($id);
+    $company->delete();
+    return redirect()->route('admin.dashboard')->with('success', 'Perusahaan berhasil dihapus.');
+}
+
+
 }

@@ -52,6 +52,11 @@ class Company extends Model
         return $this->belongsToMany(Category::class,'category_company','company_id','category_id');
     }
 
+    public function jobTypes()
+    {
+        return $this->hasMany(Job::class);
+    }
+
     public function scopeFilter(Builder $query, array $filters):void{
         $query->when($filters['search'] ?? false,function($query,$search){
             $query->where('name','like','%' . $search . '%');

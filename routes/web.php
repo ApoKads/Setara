@@ -13,6 +13,8 @@ use App\Http\Controllers\JobListPageController;
 use App\Http\Controllers\CompanyListPageController;
 use App\Http\Controllers\CompanyDashboardController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CompanyController;
 
 Route::controller(LoginController::class)->group(function () {
     Route::get('/login', 'showLoginForm')->name('login');
@@ -38,12 +40,17 @@ Route::middleware(['auth', AdminMiddleware::class])->prefix('admin')->group(func
         return view('AdminSide.admin');
     });
 
+    Route::get('/dashboard', [CompanyController::class, 'index'])->name('admin.dashboard');
+
     Route::get('/companyform', function () {
         return view('AdminSide.companyform');
     });
 
     Route::post('/companyform', [CompanyController::class, 'store'])->name('company.store');
 
+    Route::get('/company/{id}', [CompanyController::class, 'show'])->name('company.show');
+    Route::get('/company/{id}/edit', [CompanyController::class, 'edit'])->name('company.edit');
+    Route::delete('/company/{id}', [CompanyController::class, 'destroy'])->name('company.destroy');
 });
 
 
