@@ -6,11 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Skill extends Model
 {
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'score'];
 
-    // Relasi dengan pengguna atau applicant
-    public function applicants()
+    public function userProfiles()
     {
-        return $this->belongsToMany(Applicant::class, 'applicant_skills');
+        return $this->belongsToMany(UserProfile::class, 'skill_user_profile')
+            ->withPivot('score')
+            ->withTimestamps();
     }
 }

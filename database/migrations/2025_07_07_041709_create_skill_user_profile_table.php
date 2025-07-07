@@ -5,22 +5,22 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
+    /**
+     * Run the migrations.
+     */
     public function up(): void
     {
-        Schema::create('career_histories', function (Blueprint $table) {
+        Schema::create('skill_user_profile', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_profile_id')->constrained('user_profiles')->cascadeOnDelete();
-            $table->string('job_title');
-            $table->string('company_name');
-            $table->text('description')->nullable();
-            $table->date('start_date');
-            $table->date('end_date')->nullable(); // Bisa null jika masih bekerja
+            $table->foreignId('skill_id')->constrained('skills')->cascadeOnDelete();
+            $table->unsignedTinyInteger('score');
             $table->timestamps();
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('career_histories');
+        Schema::dropIfExists('skill_user_profile');
     }
 };
