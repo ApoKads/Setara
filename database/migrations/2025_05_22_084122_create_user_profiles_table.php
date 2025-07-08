@@ -5,9 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
-    /**
-     * Run the migrations.
-     */
+
     public function up(): void
     {
         Schema::create('user_profiles', function (Blueprint $table) {
@@ -19,15 +17,12 @@ return new class extends Migration {
             $table->text('about')->nullable();
             $table->text('description')->nullable();
             $table->string('job_status')->default('dan siap untuk bekerja!');
-            $table->string('profile_image')->nullable(); // Untuk menyimpan nama file gambar profil
-            $table->string('quote')->nullable(); // Menyimpan kutipan atau motto
+            $table->string('profile_image')->nullable();
+            $table->string('quote')->nullable();
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('user_profiles');

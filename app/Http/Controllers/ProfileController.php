@@ -2,45 +2,47 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Skill; // <-- TAMBAHKAN IMPORT INI
+use App\Models\Skill;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
-    // Menampilkan profil pengguna (FUNGSI ANDA, TIDAK BERUBAH)
     public function show()
     {
-        // Eager load semua relasi yang dibutuhkan untuk halaman tampilan profil
         $user = Auth::user()->load('profile.careerHistories', 'profile.skills');
-        return view('UserSide.userProfile', compact('user'));
+
+        // Ambil riwayat karier terakhir (jika ada)
+        // Asumsi 'careerHistories' adalah koleksi dan Anda ingin yang paling baru
+        // Anda mungkin perlu menyesuaikan berdasarkan cara data careerHistories Anda diurutkan
+        $lastCareer = $user->profile->careerHistories->sortByDesc('end_date')->first();
+        $lastCareerString = $lastCareer ? $lastCareer->company_name : 'Belum ada riwayat karier';
+        // Atau jika Anda ingin nama posisi: $lastCareer->position_name
+
+        return view('UserSide.userProfile', compact('user', 'lastCareerString'));
     }
 
-    // FUNGSI BARU: Menampilkan halaman form untuk mengedit profil
     public function edit()
     {
-        // Ambil data user yang sedang login beserta relasinya
         $user = Auth::user()->load('profile.careerHistories', 'profile.skills');
 
-        // Ambil semua skill dari database untuk ditampilkan di dropdown
-        $allSkills = Skill::orderBy('name')->get();
+        // Ambil riwayat karier terakhir (jika ada) untuk halaman edit juga
+        $lastCareer = $user->profile->careerHistories->sortByDesc('end_date')->first();
+        $lastCareerString = $lastCareer ? $lastCareer->company_name : 'Belum ada riwayat karier';
 
-        // Tampilkan view 'profile.edit' dan kirim data yang dibutuhkan
         return view('UserSide.editSkillsCareers', [
             'user' => $user,
-            'allSkills' => $allSkills,
+            'lastCareerString' => $lastCareerString, // Teruskan juga ke view edit
         ]);
     }
 
-    // Mengupdate profil pengguna (FUNGSI ANDA, TIDAK BERUBAH)
     public function update(Request $request)
     {
         $user = Auth::user();
         $profile = $user->profile;
 
-        // Validasi semua input yang bisa diubah
-        $request->validate([
+        $validated = $request->validate([
             'name' => 'required|string|max:255',
             'job_status' => 'required|string|max:255',
             'quote' => 'nullable|string|max:255',
@@ -50,24 +52,16 @@ class ProfileController extends Controller
             'description' => 'nullable|string'
         ]);
 
-        // Proses update gambar jika ada file baru yang diunggah
         if ($request->hasFile('profile_image')) {
             if ($profile->profile_image && $profile->profile_image !== 'default.jpg') {
-                Storage::delete('public/profile_images/' . $profile->profile_image);
+                Storage::disk('public')->delete('profile_images/' . $profile->profile_image);
             }
             $imageName = time() . '.' . $request->profile_image->extension();
             $request->profile_image->storeAs('profile_images', $imageName, 'public');
-            $profile->profile_image = $imageName;
+            $validated['profile_image'] = $imageName;
         }
 
-        // Update data teks
-        $profile->name = $request->input('name');
-        $profile->job_status = $request->input('job_status');
-        $profile->quote = $request->input('quote');
-        $profile->about = $request->input('about');
-        $profile->age = $request->input('age');
-        $profile->description = $request->input('description');
-        $profile->save();
+        $profile->update($validated);
 
         return redirect()->route('profile.show')->with('success', 'Profile updated successfully!');
     }

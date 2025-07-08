@@ -36,7 +36,8 @@ Route::get('/', function () {
 Route::middleware(['auth', AdminMiddleware::class])->prefix('admin')->group(function () {
     Route::get('/dashboard', [CompanyController::class, 'index'])->name('admin.dashboard');
     Route::get('/companyform', function () {
-        return view('AdminSide.companyform'); });
+        return view('AdminSide.companyform');
+    });
     Route::post('/companyform', [CompanyController::class, 'store'])->name('company.store');
     Route::get('/company/{id}', [CompanyController::class, 'show'])->name('company.show');
     Route::get('/company/{id}/edit', [CompanyController::class, 'edit'])->name('company.edit');
@@ -65,15 +66,14 @@ Route::middleware(['auth', CompanyMiddleware::class])->prefix('company')->group(
 
 Route::middleware(['auth', UserMiddleware::class])->group(function () {
     Route::get('/home', function () {
-        return view('home', ['profile' => Auth::user()->profile()->first()]);
+        return view('UserSide/home', ['profile' => Auth::user()->profile()->first()]);
     })->name('home');
 
     Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
     Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
 
-    Route::resource('career-histories', CareerHistoryController::class)->except(['index', 'show', 'create', 'edit']);
-
+    Route::resource('career-histories', CareerHistoryController::class)->only(['store', 'update', 'destroy']);
     Route::post('profile/skills', [ProfileSkillController::class, 'store'])->name('profile.skills.store');
     Route::delete('profile/skills/{skill}', [ProfileSkillController::class, 'destroy'])->name('profile.skills.destroy');
 
