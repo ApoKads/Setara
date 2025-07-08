@@ -20,55 +20,61 @@ class Job extends Model
     /** @use HasFactory<\Database\Factories\JobFactory> */
     use HasFactory;
     protected $fillable = [
-    'user_profile_id',
-    'job_type_id',
-    'location_id',
-    'education_level_id',
-    'seniority_id',
-    'slug',
-    'company_id',  // foreign key
-    'name',        // string
-    'description', // string
-    'wage',       // float
-    'location',
-    'disability_id',
-    'slot',
-    'work_mode',
-    'work_location_type'
-        // string
-
+        'user_profile_id',
+        'job_type_id',
+        'location_id',
+        'education_level_id',
+        'seniority_id',
+        'slug',
+        'company_id',
+        'name',
+        'description',
+        'wage',
+        'location',
+        'disability_id',
+        'slot',
+        'work_mode',
+        'work_location_type'
     ];
-    protected $with = ['company','JobType','location','EducationLevel','disability','seniority'];
+    protected $with = ['company', 'JobType', 'location', 'EducationLevel', 'disability', 'seniority'];
 
 
-    public function company():BelongsTo{
-        return $this->belongsTo(Company::class,'company_id');
+    public function company(): BelongsTo
+    {
+        return $this->belongsTo(Company::class, 'company_id');
     }
 
-    public function applicant():HasMany{
-        return $this->hasMany(Applicant::class,'job_id');
+    public function applicant(): HasMany
+    {
+        return $this->hasMany(Applicant::class, 'job_id');
     }
 
-    public function JobType():BelongsTo{
-        return $this->belongsTo(JobType::class,'job_type_id');
+    public function JobType(): BelongsTo
+    {
+        return $this->belongsTo(JobType::class, 'job_type_id');
     }
-    public function location():BelongsTo{
-        return $this->belongsTo(Location::class,'location_id');
+    public function location(): BelongsTo
+    {
+        return $this->belongsTo(Location::class, 'location_id');
     }
-    public function EducationLevel():BelongsTo{
-        return $this->belongsTo(EducationLevel::class,'education_level_id');
+    public function EducationLevel(): BelongsTo
+    {
+        return $this->belongsTo(EducationLevel::class, 'education_level_id');
     }
-    public function disability():BelongsTo{
-        return $this->belongsTo(Disability::class,'disability_id');
-    }
-    
-    public function seniority():BelongsTo{
-        return $this->belongsTo(Seniority::class,'seniority_id');
+    public function disability(): BelongsTo
+    {
+        return $this->belongsTo(Disability::class, 'disability_id');
     }
 
-    public function scopeFilter(Builder $query, array $filters):void{
-        $query->when($filters['search'] ?? false,function($query,$search){
-            $query->where('name','like','%' . $search . '%');
+    public function seniority(): BelongsTo
+    {
+        return $this->belongsTo(Seniority::class, 'seniority_id');
+    }
+
+    public function scopeFilter(Builder $query, array $filters): void
+    {
+        $query->when($filters['search'] ?? false, function ($query, $search) {
+            $query->where('name', 'like', '%' . $search . '%');
         });
 
         // $query->when($filters['category'] ?? false, function($query, $categoryId) {
@@ -77,11 +83,11 @@ class Job extends Model
         //     });
         // });
 
-        $query->when($filters['disability'] ?? false, function($query, $disabilityId) {
+        $query->when($filters['disability'] ?? false, function ($query, $disabilityId) {
             $query->where('disability_id', $disabilityId);
         });
 
-        $query->when($filters['job_type'] ?? false, function($query, $jobTypeId) {
+        $query->when($filters['job_type'] ?? false, function ($query, $jobTypeId) {
             $query->where('job_type_id', $jobTypeId);
         });
 
@@ -105,13 +111,13 @@ class Job extends Model
                 // If 'Onsite' is selected, show 'Onsite' jobs AND 'Onsite & Remote' jobs
                 $query->where(function ($q) {
                     $q->where('work_mode', 'Onsite')
-                    ->orWhere('work_mode', 'Onsite & Remote');
+                        ->orWhere('work_mode', 'Onsite & Remote');
                 });
             } elseif ($workMode === 'Remote') {
                 // If 'Remote' is selected, show 'Remote' jobs AND 'Onsite & Remote' jobs
                 $query->where(function ($q) {
                     $q->where('work_mode', 'Remote')
-                    ->orWhere('work_mode', 'Onsite & Remote');
+                        ->orWhere('work_mode', 'Onsite & Remote');
                 });
             }
             // If $workMode is empty (default option 'Onsite & Remote'),
@@ -122,11 +128,11 @@ class Job extends Model
         $query->when($filters['location'] ?? false, function ($query, $locationId) {
             $query->where('location_id', $locationId);
         });
-        
+
         $query->when($filters['education_level'] ?? false, function ($query, $educationId) {
             $query->where('education_level_id', $educationId);
         });
-        
+
         $query->when($filters['seniority'] ?? false, function ($query, $seniorityId) {
             $query->where('seniority_id', $seniorityId);
         });

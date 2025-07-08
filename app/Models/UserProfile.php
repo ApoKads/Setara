@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Support\Facades\Storage;
 
 class UserProfile extends Model
 {
@@ -51,5 +52,15 @@ class UserProfile extends Model
         return $this->belongsToMany(Skill::class, 'skill_user_profile')
             ->withPivot('score')
             ->withTimestamps();
+    }
+
+    // Periksa apakah ada file gambar di database
+    public function getImageUrlAttribute(): string
+    {
+
+        if ($this->profile_image && Storage::disk('public')->exists('profile_images/' . $this->profile_image)) {
+            return asset('storage/profile_images/' . $this->profile_image);
+        }
+        return asset('images/defaultProfile.jpg');
     }
 }
