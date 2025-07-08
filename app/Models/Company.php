@@ -29,6 +29,7 @@ class Company extends Model
         'email',
         'telepon',
         'website',
+        'jalan',
         'provinsi',
         'kota',
         'kode_pos',
