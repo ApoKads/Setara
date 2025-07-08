@@ -2,7 +2,7 @@
 {{-- <a href="" class="block"> --}}
 
     <div
-        class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 h-[28rem] w-[22rem] text-[#192F56] flex flex-col justify-between">
+        class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 h-[33rem] w-[23rem] text-[#192F56] flex flex-col justify-between">
         {{-- Gambar logo BCA --}}
         <div>
             <div class="h-40 flex items-center justify-center bg-red object-cover bg-blue-200">
@@ -53,7 +53,7 @@
                     <h1 class="">
                         Jenis Disabilitas : {{ $card->disability->name }}
                     </h1>
-                    <h1 class="mt-1">
+                    <h1 class="-mt-1">
                         Batas Pendaftaran : 20 September 2024
                     </h1>
                 </div>
