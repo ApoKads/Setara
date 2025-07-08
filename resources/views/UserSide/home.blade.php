@@ -150,11 +150,36 @@
                 </div>
             </div>
 
-            {{-- Kolom Kanan: Gambar Ilustrasi --}}
             <div class="w-full md:w-1/3 flex justify-center md:justify-end mt-12 md:mt-18">
                 <img src="{{ asset('images/Homepage/statistik_kanan.png') }}" alt="Ilustrasi Statistika"
                     class="w-full max-w-sm h-auto rounded-lg shadow-xl">
             </div>
         </div>
     </section>
+
+    {{-- Bagian Peluang Kerja Terbaru --}}
+    <section class="py-20 bg-white">
+        <div class="mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl lg:text-5xl font-bold text-[#132442] text-center mb-16">
+                Peluang Kerja Terbaru
+            </h2>
+
+            @if($featuredJobs->count() > 0)
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
+                    @foreach($featuredJobs as $job)
+                        <x-job-list.job-card :card="$job" />
+                    @endforeach
+                </div>
+                <div class="text-center mt-12">
+                    <a href="{{ route('jobs') }}"
+                        class="bg-[#132442] text-white font-bold py-3 px-8 rounded-full hover:bg-[#0B182E] transition duration-300 shadow-md">
+                        Lihat Semua Lowongan
+                    </a>
+                </div>
+            @else
+                <p class="text-center text-gray-600 text-lg">Belum ada lowongan pekerjaan terbaru saat ini.</p>
+            @endif
+        </div>
+    </section>
+
 </x-layout>

@@ -16,6 +16,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\CareerHistoryController;
 use App\Http\Controllers\ProfileSkillController;
+use App\Models\Job;
 
 Route::controller(LoginController::class)->group(function () {
     Route::get('/login', 'showLoginForm')->name('login');
@@ -66,7 +67,9 @@ Route::middleware(['auth', CompanyMiddleware::class])->prefix('company')->group(
 
 Route::middleware(['auth', UserMiddleware::class])->group(function () {
     Route::get('/home', function () {
-        return view('UserSide/home', ['profile' => Auth::user()->profile()->first()]);
+        $profile = Auth::user()->profile()->first();
+        $featuredJobs = Job::latest()->take(6)->get();
+        return view('UserSide/home', compact('profile', 'featuredJobs'));
     })->name('home');
 
     Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
