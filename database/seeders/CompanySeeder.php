@@ -18,7 +18,7 @@ class CompanySeeder extends Seeder
     {
         //
 
-        Company::factory()->count(3)->create();
+        Company::factory()->count(6)->create();
 
         $this->call([CategoryCompanySeeder::class]);
 

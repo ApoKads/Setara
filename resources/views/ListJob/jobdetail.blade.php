@@ -1,20 +1,20 @@
 <x-layout>
   <x-slot:title>{{ $detail->name }} - {{ $detail->company->name }}</x-slot>
   
-  <div class="min-h-screen bg-[#F2F6FF]">
+  <div class="min-h-screen bg-[#F2F6FF] shadow-[inset_0_5px_5px_rgba(0,0,0,0.2)]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
         
         <div class="lg:col-span-2">
           <div class="mb-6">
 
-            <div class="bg-gradient-to-r from-blue-600 to-blue-800 rounded-lg text-white h-32">
+            <div class="bg-gradient-to-r from-blue-500 to-blue-800 rounded-lg text-white h-36">
             </div>
             <div class="flex items-start gap-6">
               <div class="flex-1 px-6 pb-6">
-                <div class="h-16 overflow-visible">
-                  <div class="w-32 h-32 bg-[#F2F6FF] rounded-full flex justify-center items-center relative -top-16 left-0">
-                    <div class="w-30 h-30 bg-blue-900 rounded-full flex items-center justify-center overflow-hidden">
+                <div class="h-18 overflow-visible">
+                  <div class="w-36 h-36 bg-[#F2F6FF] rounded-full flex justify-center items-center relative -top-18 left-0">
+                    <div class="w-34 h-34 bg-blue-900 rounded-full flex items-center justify-center overflow-hidden">
                       @if($detail->company->path_logo)
                         <img src="{{ asset('storage/' . $detail->company->path_logo) }}" alt="{{ $detail->company->name }}" class="w-full h-full object-cover">
                       @else
