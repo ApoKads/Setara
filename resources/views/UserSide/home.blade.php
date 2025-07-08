@@ -4,15 +4,14 @@
     </x-slot:title>
 
     <section class="bg-[#F2F6FF] shadow-md pt-16">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between">
+        <div class="max-w-10xl mx-auto px-4 sm:px-6 lg:pl-16 flex flex-col md:flex-row items-end justify-between">
             {{-- Konten Kiri (Teks) --}}
             <div class="w-full md:w-2/5 text-center md:text-left mb-12 md:mb-0">
                 <h1 class="text-4xl lg:text-6xl text-[#132442] mb-6 leading-tight">
                     Find Your
                     <span class="inline-flex items-center font-bold text-[#132442]">
                         DREAM JOB
-                    </span>
-                    Here
+                    </span> Here
                 </h1>
                 <p class="text-lg text-gray-600 mb-8 leading-relaxed">
                     Break the Limitations, Find Your Perfect Job, and Unlock
@@ -36,5 +35,4 @@
             </div>
         </div>
     </section>
-
 </x-layout>
