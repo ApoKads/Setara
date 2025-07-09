@@ -17,6 +17,7 @@ use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\CareerHistoryController;
 use App\Http\Controllers\ProfileSkillController;
 use App\Models\Job;
+use App\Models\Company;
 
 Route::controller(LoginController::class)->group(function () {
     Route::get('/login', 'showLoginForm')->name('login');
@@ -36,13 +37,19 @@ Route::get('/', function () {
 
 Route::middleware(['auth', AdminMiddleware::class])->prefix('admin')->group(function () {
     Route::get('/dashboard', [CompanyController::class, 'index'])->name('admin.dashboard');
-    Route::get('/companyform', function () {
-        return view('AdminSide.companyform');
-    });
+
+    Route::get('/companyform', [CompanyController::class, 'create'])->name('company.create');
     Route::post('/companyform', [CompanyController::class, 'store'])->name('company.store');
+    
     Route::get('/company/{id}', [CompanyController::class, 'show'])->name('company.show');
     Route::get('/company/{id}/edit', [CompanyController::class, 'edit'])->name('company.edit');
+    Route::put('/company/{id}', [CompanyController::class, 'update'])->name('company.update');
     Route::delete('/company/{id}', [CompanyController::class, 'destroy'])->name('company.destroy');
+
+    Route::get('/admin/company/{id}', function ($id) {
+        $company = Company::findOrFail($id);
+        return view('companyProfile', compact('company'));
+    })->name('company.show');
 });
 
 Route::middleware(['auth', CompanyMiddleware::class])->prefix('company')->group(function () {

@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-<!-- Background Parallax -->
+
 <div class="position-absolute w-100 h-100 top-0 start-0 overflow-hidden z-n1">
   <img src="{{ asset('images/CompanyDashboard/ParallaxAtas.png') }}" alt="Parallax Atas" class="position-fixed" style="top: -200px; right: -200px;">
   <img src="{{ asset('images/CompanyDashboard/ParallaxBawah.png') }}" alt="Parallax Bawah" class="position-fixed" style="bottom: -100px; left: -200px;">
@@ -32,71 +32,56 @@
   <div class="table-responsive">
     <table class="table border-0 align-middle" style="border-collapse: separate; border-spacing: 0 15px;">
       <thead class="text-muted">
-        <tr class="border-0">
-          <th class="ps-4">Nama Perusahaan</th>
-          <th>Tanggal Bergabung</th>
-          <th>Lokasi</th>
-          <th>Jenis Lowongan</th>
-          <th>Kontrol</th>
-        </tr>
-      </thead>
-      <tbody>
-        @foreach ($companies as $company)
-        <tr class="bg-white shadow-sm rounded-4">
-          <td class="ps-4 fw-medium">{{ $company->name }}</td>
-          <td>{{ $company->created_at->format('d-m-Y') }}</td>
-          <td>{{ $company->location }}</td>
-          <td>{{ $company->job_types_count }}</td>
-          <td>
-            <div class="d-flex align-items-center gap-2">
-              <td>
-  <div class="d-flex align-items-center gap-2">
-
+  <tr class="border-0">
+    <th class="ps-4">Nama Perusahaan</th>
+    <th>Tanggal Bergabung</th>
+    <th>Lokasi</th>
+    <th>Jenis Lowongan</th>
+    <th>Kontrol</th>
+  </tr>
+</thead>
+<tbody>
+  @foreach ($companies as $company)
+  <tr class="bg-white shadow-sm rounded-4">
+    <td class="ps-4 fw-medium">{{ $company->name }}</td>
+    <td>{{ $company->created_at->format('d-m-Y') }}</td>
+    <td>{{ $company->location }}</td>
+    <td>{{ $company->job_types_count }}</td>
     <td>
-  <div class="d-flex align-items-center gap-2">
-    
-    <!-- See Profile -->
-    <a href="{{ route('company.show', $company->id) }}" 
-       class="btn rounded-pill px-3 py-1 fw-medium see-profile-btn" 
-       style="background-color: #ffffff; color: #3551A4; border: 1.5px solid #d5e3ff; box-shadow: 0 2px 4px rgba(0, 76, 255, 0.1);">
-      See Profile
-    </a>
+      <div class="d-flex align-items-center gap-2">
 
-    <!-- Edit Icon -->
-    <a href="{{ route('company.edit', $company->id) }}"
-       class="d-flex justify-content-center align-items-center rounded-circle"
-       style="width: 38px; height: 38px; background-color: #f0f4ff; color: #3551A4;">
-      <i class="bi bi-pencil-fill"></i>
-    </a>
+        <!-- See Profile -->
+        <a href="{{ route('company.show', $company->id) }}" 
+           class="btn rounded-pill px-3 py-1 fw-medium see-profile-btn" 
+           style="background-color: #ffffff; color: #3551A4; border: 1.5px solid #d5e3ff; box-shadow: 0 2px 4px rgba(0, 76, 255, 0.1);">
+          See Profile
+        </a>
 
-    <!-- Delete Icon -->
-    <form action="{{ route('company.destroy', $company->id) }}" method="POST" 
-          onsubmit="return confirm('Yakin ingin menghapus Company ini?')"
-          class="m-0 p-0">
-      @csrf
-      @method('DELETE')
-      <button type="submit"
-        class="d-flex justify-content-center align-items-center rounded-circle border-0"
-        style="width: 38px; height: 38px; background-color: #ffecec; color: #F04438;">
-        <i class="bi bi-trash-fill"></i>
-      </button>
-    </form>
+        <!-- Edit Icon -->
+        <a href="{{ route('company.edit', $company->id) }}"
+           class="d-flex justify-content-center align-items-center rounded-circle"
+           style="width: 38px; height: 38px; background-color: #f0f4ff; color: #3551A4;">
+          <i class="bi bi-pencil-fill"></i>
+        </a>
 
-  </div>
-</td>
+        <!-- Delete Icon -->
+        <form action="{{ route('company.destroy', $company->id) }}" method="POST" 
+              onsubmit="return confirm('Yakin ingin menghapus Company ini?')"
+              class="m-0 p-0">
+          @csrf
+          @method('DELETE')
+          <button type="submit"
+            class="d-flex justify-content-center align-items-center rounded-circle border-0"
+            style="width: 38px; height: 38px; background-color: #ffecec; color: #F04438;">
+            <i class="bi bi-trash-fill"></i>
+          </button>
+        </form>
 
-    </form>
-
-  </div>
-</td>
-
-                </button>
-              </form>
-            </div>
-          </td>
-        </tr>
-        @endforeach
-      </tbody>
+      </div>
+    </td>
+  </tr>
+  @endforeach
+</tbody>
     </table>
   </div>
 </div>

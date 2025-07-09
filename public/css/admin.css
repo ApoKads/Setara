@@ -21,6 +21,7 @@ hr {
 }
 
 input.form-control,
+textarea.form-control,
 select.form-select {
     border-radius: 20px;
     border: 1px solid #cce0f5;
@@ -29,6 +30,7 @@ select.form-select {
     background-color: #f9fcff;
 }
 
+textarea.form-control::placeholder,
 input.form-control::placeholder {
     color: #b0c4d8;
 }
