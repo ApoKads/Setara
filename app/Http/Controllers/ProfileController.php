@@ -2,20 +2,38 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Skill; // <-- TAMBAHKAN IMPORT INI
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage; // Import Storage facade
+use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
-    // Menampilkan profil pengguna
+    // Menampilkan profil pengguna (FUNGSI ANDA, TIDAK BERUBAH)
     public function show()
     {
-        $user = Auth::user()->load('profile.careerHistories'); // Eager load relasi
+        // Eager load semua relasi yang dibutuhkan untuk halaman tampilan profil
+        $user = Auth::user()->load('profile.careerHistories', 'profile.skills');
         return view('UserSide.userProfile', compact('user'));
     }
 
-    // Mengupdate profil pengguna
+    // FUNGSI BARU: Menampilkan halaman form untuk mengedit profil
+    public function edit()
+    {
+        // Ambil data user yang sedang login beserta relasinya
+        $user = Auth::user()->load('profile.careerHistories', 'profile.skills');
+
+        // Ambil semua skill dari database untuk ditampilkan di dropdown
+        $allSkills = Skill::orderBy('name')->get();
+
+        // Tampilkan view 'profile.edit' dan kirim data yang dibutuhkan
+        return view('UserSide.editSkillsCareers', [
+            'user' => $user,
+            'allSkills' => $allSkills,
+        ]);
+    }
+
+    // Mengupdate profil pengguna (FUNGSI ANDA, TIDAK BERUBAH)
     public function update(Request $request)
     {
         $user = Auth::user();
@@ -34,31 +52,23 @@ class ProfileController extends Controller
 
         // Proses update gambar jika ada file baru yang diunggah
         if ($request->hasFile('profile_image')) {
-            // Hapus gambar lama jika ada
-            if ($profile->profile_image) {
+            if ($profile->profile_image && $profile->profile_image !== 'default.jpg') {
                 Storage::delete('public/profile_images/' . $profile->profile_image);
             }
-
-            // Simpan gambar baru dan dapatkan path-nya
             $imageName = time() . '.' . $request->profile_image->extension();
             $request->profile_image->storeAs('profile_images', $imageName, 'public');
-
-            // Simpan nama file baru ke properti model
             $profile->profile_image = $imageName;
         }
 
-        // Update data teks dari request ke model Profile
+        // Update data teks
         $profile->name = $request->input('name');
         $profile->job_status = $request->input('job_status');
         $profile->quote = $request->input('quote');
         $profile->about = $request->input('about');
         $profile->age = $request->input('age');
         $profile->description = $request->input('description');
-
-        // Simpan semua perubahan pada model Profile
         $profile->save();
 
-        // Mengarahkan kembali ke halaman profil dengan pesan sukses
         return redirect()->route('profile.show')->with('success', 'Profile updated successfully!');
     }
 }

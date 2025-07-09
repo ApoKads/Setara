@@ -15,9 +15,9 @@ class CareerHistory extends Model
         'job_description'
     ];
 
-    // Relasi dengan Applicant
-    public function applicant()
+    public function userProfile()
     {
-        return $this->belongsTo(Applicant::class);
+        return $this->belongsTo(UserProfile::class);
     }
+
 }

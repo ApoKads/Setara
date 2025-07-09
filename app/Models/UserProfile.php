@@ -41,8 +41,15 @@ class UserProfile extends Model
         return $this->hasMany(Applicant::class, 'user_profile_id');
     }
 
-    public function careerHistories(): HasMany
+    public function careerHistories()
     {
         return $this->hasMany(CareerHistory::class);
+    }
+
+    public function skills()
+    {
+        return $this->belongsToMany(Skill::class, 'skill_user_profile')
+            ->withPivot('score')
+            ->withTimestamps();
     }
 }
