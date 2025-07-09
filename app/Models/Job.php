@@ -142,5 +142,14 @@ class Job extends Model
         //     }
         // );
 
+        $query->when($filters['sort'] ?? false, function ($query, $sort) {
+        if ($sort === 'newest') {
+            $query->orderBy('created_at', 'desc');
+        } elseif ($sort === 'oldest') {
+            $query->orderBy('created_at', 'asc');
+        }
+    });
+
+
     }
 }

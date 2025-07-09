@@ -23,12 +23,11 @@
                 <form action="" method="GET" class="flex items-center w-[50%] gap-4">
                     
                     <div class="relative w-1/4 border-gray-300 border-[1px] rounded-lg h-10">
-                        <select name="category"
+                        <select onchange="this.form.submit()" name="sort"
                                 class="block appearance-none w-full text-base text-[#3551A4] h-full px-4 font-medium bg-white border border-gray-300 pr-8 rounded-lg leading-tight focus:outline-none focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-500 hover:cursor-pointer">
-                            <option value="" class="text-black">Sort</option>
-                            <option value="" class="text-black">Sort</option>
-                            <option value="" class="text-black">Sort</option>
-                            <option value="" class="text-black">Sort</option>
+                            <option value="">Sort by</option>
+                            <option value="oldest" {{ request('sort') === 'oldest' ? 'selected' : '' }}>Terlama</option>
+                            <option value="newest" {{ request('sort') === 'newest' ? 'selected' : '' }}>Terbaru</option>
                             
                         </select>
                         <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">

@@ -8,9 +8,11 @@
   {{-- JobCard --}}
   <div class="w-full flex justify-center">
         <div class="w-[90%] mb-20 flex flex-col justify-center">
-            <div class="grid grid-cols-3 w-full gap-12 mt-10 ">
+            <div class="grid grid-cols-3 w-full gap-y-8 mt-10">
                 @forelse ($jobCard as $card)
-                    <x-job-list.job-card :card="$card" ></x-job-list.job-card>
+                    <div class="flex w-full justify-center items-center">
+                        <x-job-list.job-card :card="$card" ></x-job-list.job-card>
+                    </div>
                 @empty
                     <p>There isn't a job available...</p>
                 @endforelse
