@@ -18,6 +18,25 @@ class CompanyListPageController extends Controller
     }
 
     public function show(Company $company){
-        return view('companydetail',['detail'=>$company]);
+        // Load the company with its categories and user relationship for email
+        $company->load(['categories', 'user']);
+        
+        // Get other companies for recommendations (excluding current company)
+        $companies = Company::where('id', '!=', $company->id)
+                            ->latest()
+                            ->limit(6)
+                            ->get();
+        
+        // Get paginated jobs for this company (6 per page) - using 'jobCard' to match the view
+        $jobCard = $company->jobs()
+                          ->with(['company', 'location', 'JobType', 'EducationLevel', 'disability', 'seniority'])
+                          ->latest()
+                          ->paginate(6);
+                            
+        return view('companydetail', [
+            'detail' => $company,
+            'companies' => $companies,
+            'jobCard' => $jobCard
+        ]);
     }
 }

@@ -37,7 +37,7 @@ class AddFieldsToCompanies extends Migration
                 'akta',
                 'tdp',
                 'nama_hrd',
-                'telepon_hrd',
+                'telepon_hrd'
             ]);
         });
     }

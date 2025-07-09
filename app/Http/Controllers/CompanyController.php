@@ -49,10 +49,26 @@ class CompanyController extends Controller
         return redirect()->back()->with('success', 'Data perusahaan berhasil disimpan.');
     }
 
-    public function index() {
-        $companies = Company::withCount('jobTypes')->get();
-        return view('AdminSide.admin', compact('companies'));
+    public function index(Request $request)
+{
+    $query = Company::query()->withCount('jobTypes');
+
+    if ($request->filled('search')) {
+        $query->where('name', 'like', '%' . $request->search . '%');
     }
+
+    if ($request->sort === 'oldest') {
+        $query->orderBy('created_at', 'asc');
+    } else {
+        $query->orderBy('created_at', 'desc'); // default: terbaru
+    }
+
+    $companies = $query->get();
+
+    return view('AdminSide.admin', compact('companies'));
+}
+
+
 
     public function show($id)
 {
