@@ -12,8 +12,9 @@ class CompanyDashboardController extends Controller
     public function index(Request $request){ // Tambahkan Request $request di sini
         $company = Auth::user()->company()->first();
 
+        // dd($request->all());
         $jobs = Job::where('company_id', $company->id)
-                   ->filter(request(['search'])) // Menerapkan scopeFilter untuk 'search'
+                   ->filter(request(['search','sort'])) // Menerapkan scopeFilter untuk 'search'
                    ->get(); // Atau paginate() jika Anda ingin pagination
 
         return view('CompanySide.dashboard', [

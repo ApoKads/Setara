@@ -1,8 +1,9 @@
 @props(['card'])
 {{-- <a href="" class="block"> --}}
 
+
     <div
-        class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 h-[33rem] w-[23rem] text-[#192F56] flex flex-col justify-between">
+        class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 h-[33rem] w-[25rem] text-[#192F56] flex flex-col justify-between">
         {{-- Gambar logo BCA --}}
         <div>
             <div class="h-40 flex items-center justify-center bg-red object-cover bg-blue-200">

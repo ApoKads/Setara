@@ -6,7 +6,7 @@
             <img src="{{ asset($applicant->profile->profile_image) }}" alt="profile" class="h-full w-full" style="object-fit: cover">
         </div>
     </div>
-    <div class="w-[60%] h-[100%]">
+    <div class="w-[60%] h-[100%] pr-4">
         <div class="w-full h-[60%] ">
             
             <h1 class="text-2xl font-pop font-medium">
@@ -16,7 +16,7 @@
                 {{ $applicant->profile->disabilities->first()->name }}
             </h2>
         </div>
-        <div class="w-full h-[40%] flex justify-end items-center pr-4">
+        <div class="w-full h-[40%] flex justify-end items-center">
             {{-- Added shadow to the <a> tag --}}
             <a href=""
                 class="p-2 px-4 text-sm font-pop bg-white rounded-xl text-[#3551A4] shadow-[1px_2px_3px_rgba(70,118,251,0.41)]">See
