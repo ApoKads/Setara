@@ -16,6 +16,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\CareerHistoryController;
 use App\Http\Controllers\ProfileSkillController;
+use App\Http\Controllers\AdminActivityController;
 use App\Models\Job;
 use App\Models\Company;
 
@@ -46,10 +47,16 @@ Route::middleware(['auth', AdminMiddleware::class])->prefix('admin')->group(func
     Route::put('/company/{id}', [CompanyController::class, 'update'])->name('company.update');
     Route::delete('/company/{id}', [CompanyController::class, 'destroy'])->name('company.destroy');
 
-    Route::get('/admin/company/{id}', function ($id) {
+    Route::get('/company/{id}', function ($id) {
         $company = Company::findOrFail($id);
         return view('companyProfile', compact('company'));
     })->name('company.show');
+
+    Route::get('/activity', [AdminActivityController::class, 'activityPage'])->name('admin.activity');
+    Route::post('/company/{id}/approve', [AdminActivityController::class, 'approveCompany'])->name('admin.approveCompany');
+    Route::post('/company/{id}/reject', [AdminActivityController::class, 'rejectCompany'])->name('admin.rejectCompany');
+
+
 });
 
 Route::middleware(['auth', CompanyMiddleware::class])->prefix('company')->group(function () {

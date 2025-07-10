@@ -10,12 +10,11 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Company extends Model
 {
-    /** @use HasFactory<\Database\Factories\CompanyFactory> */
     use HasFactory;
 
     protected $fillable = [
@@ -41,39 +40,36 @@ class Company extends Model
         'telepon_hrd'
     ];
     
-    public function user(): BelongsTo{
+    public function user(): BelongsTo
+    {
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function jobs(): HasMany{
-        return $this->hasMany(Job::class,'company_id');
+    public function jobs(): HasMany
+    {
+        return $this->hasMany(Job::class, 'company_id');
     }
 
-    public function categories(): BelongsToMany{
-        return $this->belongsToMany(Category::class,'category_company','company_id','category_id');
+    public function categories(): BelongsToMany
+    {
+        return $this->belongsToMany(Category::class, 'category_company', 'company_id', 'category_id');
     }
 
-    public function jobTypes()
+    public function jobTypes(): HasMany
     {
         return $this->hasMany(Job::class);
     }
 
-    public function scopeFilter(Builder $query, array $filters):void{
-        $query->when($filters['search'] ?? false,function($query,$search){
-            $query->where('name','like','%' . $search . '%');
+    public function scopeFilter(Builder $query, array $filters): void
+    {
+        $query->when($filters['search'] ?? false, function ($query, $search) {
+            $query->where('name', 'like', '%' . $search . '%');
         });
 
-        $query->when($filters['category'] ?? false, function($query, $categoryId) {
-        $query->whereHas('categories', function($q) use ($categoryId) {
-            $q->where('categories.id', $categoryId); // Filter berdasarkan ID category
+        $query->when($filters['category'] ?? false, function ($query, $categoryId) {
+            $query->whereHas('categories', function ($q) use ($categoryId) {
+                $q->where('categories.id', $categoryId);
             });
         });
-
-        // $query->when(
-        //     $filters['category'] ?? false, function($query,$category){
-        //         $query->whereHas('categories',fn($query)=> $query->where('categories.id',$category));
-        //     }
-        // );
-
     }
 }

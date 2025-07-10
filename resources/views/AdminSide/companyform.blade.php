@@ -32,7 +32,8 @@
         <!-- Nama Perusahaan -->
         <div class="mb-3">
             <label class="form-label">Nama Perusahaan *</label>
-            <input type="text" name="nama_perusahaan" class="form-control" placeholder="Masukkan nama" value="{{ old('nama_perusahaan', $isEdit ? $company->name : '') }}" required>
+            <input type="text" name="name" class="form-control" placeholder="Masukkan nama perusahaan" 
+            value="{{ old('name', $isEdit ? $company->name : ($prefillName ?? '')) }}" required>
             @error('nama_perusahaan')<div class="text-danger">{{ $message }}</div>@enderror
         </div>
 
