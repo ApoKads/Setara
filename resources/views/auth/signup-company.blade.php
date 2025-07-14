@@ -100,16 +100,14 @@
         {{-- Modal Pop-up Konfirmasi --}}
         <div id="confirmationModal"
             class="fixed inset-0 bg-gray-600 bg-opacity-75 flex items-center justify-center z-50 hidden backdrop-blur-sm">
-            {{-- PERUBAHAN: max-w-sm untuk ukuran modal yang lebih kecil --}}
             <div
                 class="bg-white rounded-2xl shadow-xl p-8 max-w-sm w-full text-center relative transform transition-all duration-300 scale-95 opacity-0">
                 {{-- Bagian Atas Modal --}}
-                <h2 class="text-2xl font-bold text-[#132442] mb-4">Thank You for Signing Up!</h2> {{-- Ukuran H2 lebih
-                kecil --}}
+                <h2 class="text-2xl font-bold text-[#132442] mb-4">Thank You for Signing Up!</h2>
                 <img src="{{ asset('images/Homepage/protect_disability.png') }}" alt="Ilustrasi Tangan Bersatu"
-                    class="mx-auto mb-4 w-48 h-auto object-contain"> {{-- Ukuran gambar disesuaikan --}}
+                    class="mx-auto mb-4 w-48 h-auto object-contain">
 
-                <p class="text-base text-gray-700 mb-6"> {{-- Ukuran teks lebih kecil --}}
+                <p class="text-base text-gray-700 mb-6">
                     Untuk menyelesaikan verifikasi, silakan hubungi kami di sini
                 </p>
 

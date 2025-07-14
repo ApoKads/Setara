@@ -16,16 +16,8 @@ class CompanySeeder extends Seeder
      */
     public function run(): void
     {
-        //
-
         Company::factory()->count(6)->create();
 
         $this->call([CategoryCompanySeeder::class]);
-
-
-        // CategoryCompany::factory(100)->recycle([
-        //     Company::all(),
-        //     Category::all()
-        // ])->create()->ensureUniqueRelationships(['company_id', 'category_id']);
     }
 }

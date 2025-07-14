@@ -21,7 +21,7 @@ class AdminFactory extends Factory
         return [
             'user_id' => User::factory()->state(function (array $attributes) {
                 return [
-                    'email' => 'setara@admin.com',
+                    'email' => 'admin@setara.com',
                     'role' => 'admin',
                     'password' => Hash::make('passwordadmin'),
                 ];

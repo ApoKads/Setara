@@ -4,59 +4,72 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\CompanyStatus;
+use App\Models\Company;
 use Illuminate\Support\Str;
 
 class AdminActivityController extends Controller
 {
+    public function activityPage(Request $request)
+    {
+        $queryPendaftar = CompanyStatus::query()->where('status', 'pending');
+        $queryHistory = CompanyStatus::query()
+            ->whereIn('status', ['accepted', 'rejected']);
 
-public function activityPage(Request $request)
-{
-    $queryPendaftar = \App\Models\CompanyStatus::query()->where('status', 'waiting');
-    $queryHistory = \App\Models\CompanyStatus::query()
-        ->where('status', 'seen')
-        ->whereIn('position', ['accepted', 'rejected']);
+        if ($request->filled('search')) {
+            $searchTerm = '%' . $request->search . '%';
+            $queryPendaftar->where('company_name', 'like', $searchTerm);
+            $queryHistory->where('company_name', 'like', $searchTerm);
+        }
 
-    if ($request->filled('search')) {
-        $queryPendaftar->where('company_name', 'like', '%' . $request->search . '%');
+        $sortOrder = $request->get('sort') === 'oldest' ? 'asc' : 'desc';
+        $pendaftarCompanies = $queryPendaftar->orderBy('created_at', $sortOrder)->get();
+        $historyCompanies = $queryHistory->orderBy('updated_at', $sortOrder)->get();
+
+        return view('AdminSide.activity', compact('pendaftarCompanies', 'historyCompanies'));
     }
 
-    $sortOrder = $request->get('sort') === 'oldest' ? 'asc' : 'desc';
-    $pendaftarCompanies = $queryPendaftar->orderBy('created_at', $sortOrder)->get();
-    $historyCompanies = $queryHistory->orderBy('updated_at', $sortOrder)->get();
-
-    return view('AdminSide.activity', compact('pendaftarCompanies', 'historyCompanies'));
-}
-
-
     public function approveCompany($id)
-{
-    $companyStatus = CompanyStatus::findOrFail($id);
+    {
+        $companyStatus = CompanyStatus::findOrFail($id);
+        $companyStatus->update(['status' => 'accepted']);
 
-    $companyStatus->update([
-        'status' => 'seen',
-        'position' => 'accepted',
-    ]);
+        $user = \App\Models\User::where('email', $companyStatus->company_name . '@example.com')->first();
 
-    $companyStatus = CompanyStatus::findOrFail($id);
-    return redirect()->route('company.create', ['prefill' => $companyStatus->company_name]);
+        if ($user && !$user->company) {
+            Company::create([
+                'user_id' => $user->id,
+                'slug' => Str::slug($companyStatus->company_name . '-' . Str::random(5)),
+                'name' => $companyStatus->company_name,
+                'location' => 'Jakarta, Indonesia',
+                'description' => 'Perusahaan yang baru disetujui oleh admin Setara.',
+                'path_banner' => null,
+                'path_logo' => null,
+                'status' => 'accepted',
+            ]);
+        }
 
-    // Simpan nama perusahaan ke session
-    session()->flash('approved_company_name', $companyStatus->company_name);
-
-    // Redirect ke halaman form company
-    return redirect()->route('company.create');
-}
+        return response()->json(['message' => 'Company approved successfully.', 'status' => 'accepted'], 200);
+    }
 
     public function rejectCompany($id)
     {
         $companyStatus = CompanyStatus::findOrFail($id);
+        $companyStatus->update(['status' => 'rejected']);
 
-        $companyStatus->update([
-            'status' => 'seen',
-            'position' => 'rejected'
-        ]);
-
-        return redirect()->route('admin.activity')->with('success', 'Company rejected.');
+        return response()->json(['message' => 'Company rejected.', 'status' => 'rejected'], 200);
     }
-    
+
+    public function checkCompanyStatusApi($id)
+    {
+        $companyStatus = CompanyStatus::find($id);
+
+        if (!$companyStatus) {
+            return response()->json(['message' => 'Company status record not found.'], 404);
+        }
+
+        return response()->json([
+            'status' => $companyStatus->status,
+            'company_name' => $companyStatus->company_name
+        ]);
+    }
 }

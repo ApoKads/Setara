@@ -18,29 +18,19 @@ class CompanyFactory extends Factory
      */
     public function definition(): array
     {
+        $statuses = ['pending', 'accepted', 'rejected'];
 
-        // Schema::create('companies', function (Blueprint $table) {
-        //     $table->id();
-        //     $table->foreignId('user_id')->constrained('users','id')->cascadeOnDelete();
-        //     $table->string('slug')->unique();
-        //     $table->string('name');
-        //     $table->string('location');
-        //     $table->text('description');
-        //     $table->string('path_banner')->nullable();
-        //     $table->string('path_logo')->nullable();
-        //     $table->timestamps();
-        // });
         return [
-            //
-            'user_id'=>User::factory()->state([
-                'role' => 'company' // Pastikan role di-set sebagai company
+            'user_id' => User::factory()->state([
+                'role' => 'company'
             ]),
-            'slug'=>Str::slug(fake()->sentence()),
-            'name'=>fake()->company(),
-            'location'=>fake()->city(),
-            'description'=>fake()->paragraph(rand(10,40)),
-            'path_banner'=>'company\BannerCompany.jpg',
-            'path_logo'=>'company\logoCompany.png'
+            'slug' => Str::slug(fake()->company() . '-' . fake()->unique()->uuid()),
+            'name' => fake()->company(),
+            'location' => fake()->city(),
+            'description' => fake()->paragraph(rand(10, 40)),
+            'path_banner' => 'company/BannerCompany.jpg',
+            'path_logo' => 'company/logoCompany.png',
+            'status' => fake()->randomElement($statuses),
         ];
     }
 }

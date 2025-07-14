@@ -37,9 +37,10 @@ class Company extends Model
         'akta',
         'tdp',
         'nama_hrd',
-        'telepon_hrd'
+        'telepon_hrd',
+        'status',
     ];
-    
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
