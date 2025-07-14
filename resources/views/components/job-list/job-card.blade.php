@@ -67,7 +67,7 @@
             <div class="ml-2 flex justify-between items-center h-10 ">
                 <div class="flex gap-2 justify-start items-center h-full ">
                     <img src="{{ asset('images/ListJobPage/WageIcon.png') }}" class="w-8" alt="WageIcon">
-                    <h1 class="font-semibold">Rp. {{ number_format($card->wage, 0, ',', '.') }}</h1>
+                    <h1 class="font-semibold">Rp{{ number_format($card->wage, 0, ',', '.') }}</h1>
                 </div>
                 <a href="{{ route('job.show', $card->slug) }}"
                     class="px-2.5 py-1.5 bg-[#3551A4] text-white rounded-lg">Selengkapnya</a>

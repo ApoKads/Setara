@@ -28,7 +28,6 @@ class ApplicantFactory extends Factory
         //     $table->timestamps();
         return [
             //
-            'name'=>fake()->name(),
             'slug'=>Str::slug(fake()->sentence()),
             'user_profile_id'=>UserProfile::factory(),
             'job_id'=>Job::factory(),

@@ -3,6 +3,26 @@
   
   <div class="min-h-screen bg-[#F2F6FF] shadow-[inset_0_5px_5px_rgba(0,0,0,0.2)]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      
+      <!-- Flash Messages -->
+      @if (session('success'))
+        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-6">
+          {{ session('success') }}
+        </div>
+      @endif
+
+      @if (session('error'))
+        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-6">
+          {{ session('error') }}
+        </div>
+      @endif
+
+      @if (session('info'))
+        <div class="bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded mb-6">
+          {{ session('info') }}
+        </div>
+      @endif
+      
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
         
         <div class="lg:col-span-2">
@@ -35,9 +55,15 @@
                   <span class="text-sm">Hingga 11 September 2021</span>
                 </div>
                 <div class="mt-4">
-                  <button class="bg-blue-700 hover:bg-blue-800 text-white px-6 py-2 rounded-lg font-medium transition-colors cursor-pointer">
-                    Lamar
-                  </button>
+                  @if($hasApplied)
+                    <button class="inline-block bg-gray-400 text-gray-600 px-6 py-2 rounded-lg font-medium cursor-not-allowed" disabled>
+                      Sudah Melamar
+                    </button>
+                  @else
+                    <a href="{{ route('job.apply', $detail->slug) }}" class="inline-block bg-blue-700 hover:bg-blue-800 text-white px-6 py-2 rounded-lg font-medium transition-colors">
+                      Lamar
+                    </a>
+                  @endif
                 </div>
               </div>
             </div>
