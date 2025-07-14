@@ -1,4 +1,5 @@
 <?php
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\JobController;
@@ -9,7 +10,6 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\SignupController;
 use App\Http\Middleware\CompanyMiddleware;
 use App\Http\Controllers\JobListPageController;
-use App\Http\Controllers\JobApplicationController;
 use App\Http\Controllers\CompanyListPageController;
 use App\Http\Controllers\CompanyDashboardController;
 use App\Http\Controllers\ProfileController;
@@ -20,6 +20,7 @@ use App\Http\Controllers\ProfileSkillController;
 use App\Http\Controllers\AdminActivityController;
 use App\Models\Job;
 use App\Models\Company;
+use App\Models\CompanyStatus;
 
 Route::controller(LoginController::class)->group(function () {
     Route::get('/login', 'showLoginForm')->name('login');
@@ -42,22 +43,21 @@ Route::middleware(['auth', AdminMiddleware::class])->prefix('admin')->group(func
 
     Route::get('/companyform', [CompanyController::class, 'create'])->name('company.create');
     Route::post('/companyform', [CompanyController::class, 'store'])->name('company.store');
-    
-    Route::get('/company/{id}', [CompanyController::class, 'show'])->name('company.show');
+
+    Route::get('/company/{id}', [CompanyController::class, 'show'])->name('company.shows');
     Route::get('/company/{id}/edit', [CompanyController::class, 'edit'])->name('company.edit');
     Route::put('/company/{id}', [CompanyController::class, 'update'])->name('company.update');
     Route::delete('/company/{id}', [CompanyController::class, 'destroy'])->name('company.destroy');
 
-    Route::get('/company/{id}', function ($id) {
-        $company = Company::findOrFail($id);
-        return view('companyProfile', compact('company'));
-    })->name('company.show');
+    // Route::get('/company/{id}', function ($id) {
+    //     $company = Company::findOrFail($id);
+    //     // Perbaikan di sini: Ubah 'companyProfile' menjadi 'CompanySide.companyProfile'
+    //     return view('CompanySide.companyProfile', compact('company'));
+    // })->name('company.show');
 
     Route::get('/activity', [AdminActivityController::class, 'activityPage'])->name('admin.activity');
     Route::post('/company/{id}/approve', [AdminActivityController::class, 'approveCompany'])->name('admin.approveCompany');
     Route::post('/company/{id}/reject', [AdminActivityController::class, 'rejectCompany'])->name('admin.rejectCompany');
-
-
 });
 
 Route::middleware(['auth', CompanyMiddleware::class])->prefix('company')->group(function () {
@@ -78,6 +78,7 @@ Route::middleware(['auth', CompanyMiddleware::class])->prefix('company')->group(
             'company' => Auth::user()->company()->first()
         ]);
     });
+    Route::get('/api/company-status-check/{id}', [AdminActivityController::class, 'checkCompanyStatusApi'])->name('api.company.status.check');
 });
 
 Route::middleware(['auth', UserMiddleware::class])->group(function () {
@@ -103,10 +104,5 @@ Route::middleware(['auth', UserMiddleware::class])->group(function () {
     Route::controller(JobListPageController::class)->group(function () {
         Route::get('/job', 'index')->name('jobs');
         Route::get('/job/{job:slug}', 'show')->name('job.show');
-    });
-
-    Route::controller(JobApplicationController::class)->group(function () {
-        Route::get('/job/{job:slug}/apply', 'show')->name('job.apply');
-        Route::post('/job/{job:slug}/apply', 'store')->name('job.apply.submit');
     });
 });

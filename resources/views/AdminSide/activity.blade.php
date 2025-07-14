@@ -1,90 +1,119 @@
-@extends('layouts.admin')
+<h2 class="text-2xl font-bold mb-4">Perusahaan Menunggu Persetujuan</h2>
 
-@section('content')
-  <div class="position-absolute w-100 h-100 top-0 start-0 overflow-hidden z-n1">
-    <img src="{{ asset('images/CompanyDashboard/ParallaxAtas.png') }}" class="position-fixed"
-    style="top: -200px; right: -200px;">
-    <img src="{{ asset('images/CompanyDashboard/ParallaxBawah.png') }}" class="position-fixed"
-    style="bottom: -100px; left: -200px;">
-  </div>
-
-  <div class="container my-5 position-relative z-1">
-    <div class="row">
-    <!-- Pendaftar -->
-    <div class="col-md-6" style="max-height: 80vh; overflow-y: auto;">
-      <h2 class="fw-bold text-dark mb-3">Pendaftar</h2>
-      <hr class="mb-4">
-
-      <div class="d-flex mb-3 gap-2">
-      <form method="GET" action="{{ route('admin.activity') }}"
-        class="d-flex justify-content-between align-items-center mb-4 w-100">
-        <div class="dropdown">
-        <button class="btn btn-light border rounded-pill px-4 py-2 fw-semibold dropdown-toggle" type="button"
-          data-bs-toggle="dropdown">
-          {{ request('sort') === 'oldest' ? 'Terlama' : 'Terbaru' }}
-        </button>
-        <ul class="dropdown-menu">
-          <li><button class="dropdown-item bg-white text-dark" name="sort" value="latest"
-            type="submit">Terbaru</button></li>
-          <li><button class="dropdown-item bg-white text-dark" name="sort" value="oldest"
-            type="submit">Terlama</button></li>
-        </ul>
-        </div>
-
-        <div class="w-50 d-flex gap-2">
-        <input type="text" name="search" class="form-control rounded-pill px-4" placeholder="Search perusahaan..."
-          value="{{ request('search') }}">
-        <button type="submit" class="btn btn-dark rounded-pill px-4">Cari</button>
-        </div>
-      </form>
-      </div>
-
-      @forelse($pendaftarCompanies as $company)
-      <div class="bg-white rounded shadow-sm p-3 mb-4 d-flex justify-content-between align-items-center hover-shadow">
-      <div class="flex-grow-1">
-      <h5 class="mb-0 fw-bold">{{ $company->company_name }}</h5>
-      <p class="mb-1 mt-2 small">Applying for long-term partnerships</p>
-      <p class="mb-0">
-      <span class="fw-semibold">Status:</span>
-      <span class="text-warning">{{ ucfirst($company->status) }}</span>
-      </p>
-      </div>
-      <div class="d-flex gap-2">
-      <form action="{{ route('admin.approveCompany', $company->id) }}" method="POST"
-      onclick="event.stopPropagation();">
+@if($pendaftarCompanies->isEmpty())
+  <p>Tidak ada perusahaan yang menunggu persetujuan.</p>
+@else
+  <div class="overflow-x-auto">
+    <table class="min-w-full bg-white rounded-lg shadow overflow-hidden">
+    <thead class="bg-gray-200 text-gray-700">
+      <tr>
+      <th class="py-3 px-4 text-left">Nama Perusahaan</th>
+      <th class="py-3 px-4 text-left">Status</th>
+      <th class="py-3 px-4 text-left">Tanggal Daftar</th>
+      <th class="py-3 px-4 text-left">Aksi</th>
+      </tr>
+    </thead>
+    <tbody>
+      @foreach($pendaftarCompanies as $companyStatus)
+      <tr class="border-b border-gray-200 hover:bg-gray-100">
+      <td class="py-3 px-4">{{ $companyStatus->company_name }}</td>
+      <td class="py-3 px-4">{{ $companyStatus->status }}</td>
+      <td class="py-3 px-4">{{ $companyStatus->created_at->format('d M Y H:i') }}</td>
+      <td class="py-3 px-4 flex space-x-2">
+      {{-- Form untuk Approve --}}
+      <form action="{{ route('admin.approveCompany', $companyStatus->id) }}" method="POST">
       @csrf
-      <button type="submit" class="btn btn-info btn-sm text-white">Approve</button>
+      <button type="submit"
+        class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg transition-colors">
+        Approve
+      </button>
       </form>
 
-      <form action="{{ route('admin.rejectCompany', $company->id) }}" method="POST"
-      onclick="event.stopPropagation();">
+      {{-- Form untuk Reject --}}
+      <form action="{{ route('admin.rejectCompany', $companyStatus->id) }}" method="POST">
       @csrf
-      <button type="submit" class="btn btn-danger btn-sm">Decline</button>
+      <button type="submit"
+        class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg transition-colors">
+        Reject
+      </button>
       </form>
-      </div>
-      </div>
-    @empty
-      <p class="text-muted">Tidak ada perusahaan yang mendaftar.</p>
-    @endforelse
-    </div>
-
-    <!-- History -->
-    <div class="col-md-6" style="max-height: 80vh; overflow-y: auto;">
-      <h2 class="fw-bold text-dark mb-3">History</h2>
-      <hr class="mb-4">
-
-      @forelse($historyCompanies as $company)
-      <div class="bg-white rounded shadow-sm p-3 mb-3 hover-shadow">
-      <p class="mb-1">
-      You <span class="fw-bold text-capitalize">{{ $company->status }}</span>
-      <span>{{ $company->company_name }}</span>
-      </p>
-      <small class="text-muted">{{ $company->updated_at->format('d-m-Y') }}</small>
-      </div>
-    @empty
-      <p class="text-muted">Belum ada riwayat aktivitas.</p>
-    @endforelse
-    </div>
-    </div>
+      </td>
+      </tr>
+    @endforeach
+    </tbody>
+    </table>
   </div>
-@endsection
+@endif
+
+<h2 class="text-2xl font-bold mt-8 mb-4">Riwayat Persetujuan</h2>
+
+@if($historyCompanies->isEmpty())
+  <p>Tidak ada riwayat persetujuan perusahaan.</p>
+@else
+  <div class="overflow-x-auto">
+    <table class="min-w-full bg-white rounded-lg shadow overflow-hidden">
+    <thead class="bg-gray-200 text-gray-700">
+      <tr>
+      <th class="py-3 px-4 text-left">Nama Perusahaan</th>
+      <th class="py-3 px-4 text-left">Status</th>
+      <th class="py-3 px-4 text-left">Terakhir Diperbarui</th>
+      </tr>
+    </thead>
+    <tbody>
+      @foreach($historyCompanies as $companyStatus)
+      <tr class="border-b border-gray-200 hover:bg-gray-100">
+      <td class="py-3 px-4">{{ $companyStatus->company_name }}</td>
+      <td class="py-3 px-4">
+      <span class="px-2 py-1 rounded-full text-xs font-semibold
+      @if($companyStatus->status === 'accepted') bg-green-100 text-green-800
+      @elseif($companyStatus->status === 'rejected') bg-red-100 text-red-800
+      @else bg-gray-100 text-gray-800
+    @endif">
+      {{ ucfirst($companyStatus->status) }}
+      </span>
+      </td>
+      <td class="py-3 px-4">{{ $companyStatus->updated_at->format('d M Y H:i') }}</td>
+      </tr>
+    @endforeach
+    </tbody>
+    </table>
+  </div>
+@endif
+
+{{-- Optional: Jika Anda ingin feedback setelah approve/reject tanpa refresh halaman --}}
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('form[action$="/approve"], form[action$="/reject"]').forEach(form => {
+      form.addEventListener('submit', async function (event) {
+        event.preventDefault(); // Mencegah submit form standar
+
+        const actionUrl = this.action;
+        const csrfToken = this.querySelector('input[name="_token"]').value;
+
+        try {
+          const response = await fetch(actionUrl, {
+            method: 'POST',
+            headers: {
+              'X-CSRF-TOKEN': csrfToken,
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({})
+          });
+
+          const result = await response.json();
+
+          if (response.ok) {
+            alert(result.message); // Ganti dengan notifikasi yang lebih elegan
+            window.location.reload(); // Refresh halaman untuk melihat perubahan
+          } else {
+            alert('Error: ' + (result.message || 'Terjadi kesalahan.'));
+          }
+        } catch (error) {
+          console.error('Error:', error);
+          alert('Terjadi kesalahan jaringan atau server.');
+        }
+      });
+    });
+  });
+</script>

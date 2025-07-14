@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\CompanyStatus;
 use App\Models\Company;
 use Illuminate\Support\Str;
+use App\Models\User;
 
 class AdminActivityController extends Controller
 {
@@ -33,18 +34,18 @@ class AdminActivityController extends Controller
         $companyStatus = CompanyStatus::findOrFail($id);
         $companyStatus->update(['status' => 'accepted']);
 
-        $user = \App\Models\User::where('email', $companyStatus->company_name . '@example.com')->first();
+        $user = User::where('email', $companyStatus->company_name . '@example.com')->first();
 
         if ($user && !$user->company) {
             Company::create([
                 'user_id' => $user->id,
                 'slug' => Str::slug($companyStatus->company_name . '-' . Str::random(5)),
                 'name' => $companyStatus->company_name,
-                'location' => 'Jakarta, Indonesia',
-                'description' => 'Perusahaan yang baru disetujui oleh admin Setara.',
+                'location' => 'Jakarta, Indonesia', // Default value
+                'description' => 'Perusahaan yang baru disetujui oleh admin Setara.', // Default value
                 'path_banner' => null,
                 'path_logo' => null,
-                'status' => 'accepted',
+                'status' => 'accepted', // Status di tabel 'companies'
             ]);
         }
 

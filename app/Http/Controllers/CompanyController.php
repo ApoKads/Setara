@@ -105,7 +105,7 @@ class CompanyController extends Controller
     public function show($id)
     {
         $company = Company::findOrFail($id);
-        return view('AdminSide.companyshow', compact('company'));
+        return view('companydetail', compact('company'));
     }
 
     public function edit($id)
