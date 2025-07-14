@@ -3,11 +3,6 @@
         Sign Up
     </x-slot:title>
 
-    @if($errors->any())
-        <div class="alert alert-danger"></div>
-        {{ $errors->first() }}
-        </div>
-    @endif
 
     <div class="container mx-auto flex flex-wrap items-center min-h-screen">
         <div class="lg:w-4/9 lg:pl-20 w-full mx-auto">

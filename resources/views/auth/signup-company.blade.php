@@ -7,7 +7,6 @@
                 <div class="lg:w-4/9 w-full mx-auto">
                     <div class="bg-white rounded-2xl shadow-lg p-6 sm:p-8">
 
-                        {{-- Header --}}
                         <div class="text-center mb-6">
                             <h1
                                 class="text-2xl leading-tight tracking-tight font-bold text-gray-900 md:text-3xl [font-family:var(--font-overpass)]">
@@ -20,11 +19,9 @@
                             </p>
                         </div>
 
-                        {{-- Form --}}
-                        <form class="space-y-4" action="{{ route('signup') }}" method="POST">
+                        <form id="companySignupForm" class="space-y-4" action="{{ route('signup') }}" method="POST">
                             @csrf
                             <input type="hidden" name="role" value="company">
-                            {{-- Full Name (Company Name) --}}
                             <div>
                                 <label for="name" class="block mb-2 text-sm font-medium text-[#444B59]">Company
                                     Name</label>
@@ -36,7 +33,6 @@
                                 @enderror
                             </div>
 
-                            {{-- Email --}}
                             <div>
                                 <label for="email" class="block mb-2 text-sm font-medium text-[#444B59]">Email</label>
                                 <input type="email" name="email" id="email" value="{{ old('email') }}"
@@ -47,7 +43,6 @@
                                 @enderror
                             </div>
 
-                            {{-- Password --}}
                             <div class="relative">
                                 <label for="password"
                                     class="block mb-2 text-sm font-medium text-[#444B59]">Password</label>
@@ -68,7 +63,6 @@
                                 @enderror
                             </div>
 
-                            {{-- Confirm Password --}}
                             <div class="relative">
                                 <label for="password_confirmation"
                                     class="block mb-2 text-sm font-medium text-[#444B59]">Confirm Password</label>
@@ -87,7 +81,7 @@
                                 </button>
                             </div>
 
-                            <button type="submit"
+                            <button type="submit" id="submitButton"
                                 class="w-full hover:scale-[102%] transition-transform text-white bg-[#132442] hover:bg-opacity-90 focus:ring-4 focus:outline-none focus:ring-[#88BBD8]/50 font-medium rounded-xl text-sm px-5 py-3 text-center cursor-pointer">
                                 Sign Up
                             </button>
@@ -105,57 +99,52 @@
 
         {{-- Modal Pop-up Konfirmasi --}}
         <div id="confirmationModal"
-            class="fixed inset-0 bg-gray-600 bg-opacity-75 flex items-center justify-center z-50 hidden">
-            <div class="bg-white rounded-2xl shadow-xl p-8 max-w-lg w-full text-center relative">
-                {{-- Close Button (Optional, bisa dihilangkan jika hanya untuk informasi) --}}
-                {{-- <button id="closeModal" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
-                        </path>
-                    </svg>
-                </button> --}}
-
-                <h2 class="text-3xl font-bold text-[#132442] mb-6">Thank You for Signing Up!</h2>
-                {{-- Menggunakan gambar protect_disability.png --}}
+            class="fixed inset-0 bg-gray-600 bg-opacity-75 flex items-center justify-center z-50 hidden backdrop-blur-sm">
+            {{-- PERUBAHAN: max-w-sm untuk ukuran modal yang lebih kecil --}}
+            <div
+                class="bg-white rounded-2xl shadow-xl p-8 max-w-sm w-full text-center relative transform transition-all duration-300 scale-95 opacity-0">
+                {{-- Bagian Atas Modal --}}
+                <h2 class="text-2xl font-bold text-[#132442] mb-4">Thank You for Signing Up!</h2> {{-- Ukuran H2 lebih
+                kecil --}}
                 <img src="{{ asset('images/Homepage/protect_disability.png') }}" alt="Ilustrasi Tangan Bersatu"
-                    class="mx-auto mb-6 w-full max-w-xs h-auto">
+                    class="mx-auto mb-4 w-48 h-auto object-contain"> {{-- Ukuran gambar disesuaikan --}}
 
-                <p class="text-lg text-gray-700 mb-8">
+                <p class="text-base text-gray-700 mb-6"> {{-- Ukuran teks lebih kecil --}}
                     Untuk menyelesaikan verifikasi, silakan hubungi kami di sini
                 </p>
 
+                {{-- Bagian Kontak --}}
                 <div class="flex flex-col items-center gap-4">
-                    {{-- Logo Setara --}}
-                    <div class="border border-gray-300 rounded-lg p-4 flex flex-col items-center shadow-sm">
-                        {{-- Menggunakan gambar setara_slogan.png --}}
+                    <div class="border border-gray-300 rounded-lg p-4 flex flex-col items-center shadow-sm w-full"> {{--
+                        w-full agar melebar --}}
                         <img src="{{ asset('images/Homepage/setara_slogan.png') }}" alt="Setara Logo"
-                            class="w-32 h-auto mb-2">
-                        <h3 class="text-xl font-semibold text-[#132442] mb-4">Contact Us</h3>
-                        <div class="flex justify-center gap-4 text-gray-600">
+                            class="w-24 h-auto mb-2 object-contain"> {{-- Ukuran logo disesuaikan --}}
+                        <h3 class="text-lg font-semibold text-[#132442] mb-3">Contact Us</h3> {{-- Ukuran H3 lebih kecil
+                        --}}
+                        <div class="flex justify-center gap-3 text-gray-600"> {{-- Gap lebih kecil --}}
                             <a href="mailto:info@setara.com" class="hover:text-[#132442] transition-colors">
-                                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                                <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
                                     <path
                                         d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0l-8 5-8-5h16zm0 12H4V8l8 5 8-5v10z">
                                     </path>
                                 </svg>
                             </a>
                             <a href="tel:+628123456789" class="hover:text-[#132442] transition-colors">
-                                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                                <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
                                     <path
                                         d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.47.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z">
                                     </path>
                                 </svg>
                             </a>
                             <a href="#" class="hover:text-[#132442] transition-colors">
-                                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                                <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
                                     <path fill-rule="evenodd"
                                         d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"
                                         clip-rule="evenodd" />
                                 </svg>
                             </a>
                             <a href="#" class="hover:text-[#132442] transition-colors">
-                                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                                <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
                                     <path
                                         d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8c1.99 0 3.6-1.61 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 1 1-2.5 0 1.25 1.25 0 0 1 2.5 0M12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10m0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6z">
                                     </path>
@@ -164,10 +153,16 @@
                         </div>
                     </div>
 
-                    {{-- Loading Indicator --}}
-                    <div class="mt-6 flex flex-col items-center">
+                    {{-- Loading Indicator dan Pesan Status --}}
+                    <div id="loadingState" class="mt-6 flex flex-col items-center">
                         <p class="text-gray-500 text-lg mb-2">Waiting...</p>
                         <div class="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-[#132442]"></div>
+                    </div>
+                    <div id="errorState" class="mt-6 flex flex-col items-center text-red-600 hidden">
+                        <p class="text-lg font-semibold mb-2">Terjadi Kesalahan!</p>
+                        <p id="errorMessage" class="text-sm text-center px-4"></p> {{-- Menambahkan px-4 --}}
+                        <button id="closeErrorModal"
+                            class="mt-4 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors">Tutup</button>
                     </div>
                 </div>
             </div>
@@ -189,29 +184,106 @@
                 }
             }
 
-            // JavaScript untuk menampilkan modal
             document.addEventListener('DOMContentLoaded', function () {
                 const modal = document.getElementById('confirmationModal');
-                // const closeModalButton = document.getElementById('closeModal'); // Jika Anda ingin tombol close
+                const form = document.getElementById('companySignupForm');
+                const submitButton = document.getElementById('submitButton');
+                const modalContent = modal.querySelector('.bg-white');
+                const loadingState = document.getElementById('loadingState');
+                const errorState = document.getElementById('errorState');
+                const errorMessage = document.getElementById('errorMessage');
+                const closeErrorModalButton = document.getElementById('closeErrorModal');
 
-                // Cek apakah ada session flash 'status' dengan nilai 'pending_approval'
-                @if (session('status') === 'pending_approval')
+                function showModal() {
                     modal.classList.remove('hidden');
-                @endif
+                    setTimeout(() => {
+                        modalContent.classList.remove('scale-95', 'opacity-0');
+                        modalContent.classList.add('scale-100', 'opacity-100');
+                        document.body.style.overflow = 'hidden';
+                    }, 10);
+                }
 
-            // Event listener untuk tombol close (jika ada)
-            // if (closeModalButton) {
-            //     closeModalButton.addEventListener('click', function() {
-            //         modal.classList.add('hidden');
-            //     });
-            // }
+                function hideModal() {
+                    modalContent.classList.remove('scale-100', 'opacity-100');
+                    modalContent.classList.add('scale-95', 'opacity-0');
+                    setTimeout(() => {
+                        modal.classList.add('hidden');
+                        document.body.style.overflow = '';
+                        loadingState.classList.remove('hidden'); // Reset to loading state for next time
+                        errorState.classList.add('hidden');
+                    }, 300);
+                }
 
-            // Opsional: Sembunyikan modal jika di-klik di luar area modal
-            // modal.addEventListener('click', function(event) {
-            //     if (event.target === modal) {
-            //         modal.classList.add('hidden');
-            //     }
-            // });
-        });
+                const sessionStatus = @json(session('status'));
+                if (sessionStatus === 'pending_approval') {
+                    showModal();
+                }
+
+                if (closeErrorModalButton) {
+                    closeErrorModalButton.addEventListener('click', hideModal);
+                }
+
+                if (form && submitButton) {
+                    form.addEventListener('submit', async function (event) {
+                        event.preventDefault();
+
+                        showModal();
+                        loadingState.classList.remove('hidden'); // Ensure loading state is shown
+                        errorState.classList.add('hidden'); // Hide error state initially
+
+                        const formData = new FormData(form);
+                        const actionUrl = form.getAttribute('action');
+
+                        try {
+                            const response = await fetch(actionUrl, {
+                                method: 'POST',
+                                headers: {
+                                    'Accept': 'application/json',
+                                    'X-Requested-With': 'XMLHttpRequest'
+                                },
+                                body: formData
+                            });
+
+                            const result = await response.json();
+
+                            if (response.ok) {
+                                if (result.status === 'pending_approval') {
+                                    // Keep modal open with success/waiting message
+                                    loadingState.classList.remove('hidden'); // Ensure loading state remains
+                                    errorState.classList.add('hidden');
+                                } else if (result.status === 'success' && result.redirect) {
+                                    window.location.href = result.redirect;
+                                }
+                            } else {
+                                loadingState.classList.add('hidden');
+                                errorState.classList.remove('hidden');
+                                errorMessage.textContent = result.message || 'Terjadi kesalahan yang tidak terduga.';
+
+                                if (response.status === 422 && result.errors) {
+                                    document.querySelectorAll('.text-red-500.text-xs.mt-1').forEach(el => el.remove());
+                                    for (const field in result.errors) {
+                                        const inputElement = document.getElementById(field);
+                                        if (inputElement) {
+                                            const errorParagraph = document.createElement('p');
+                                            errorParagraph.classList.add('text-red-500', 'text-xs', 'mt-1');
+                                            errorParagraph.textContent = result.errors[field][0];
+                                            inputElement.parentNode.appendChild(errorParagraph);
+                                        }
+                                    }
+                                    const firstError = document.querySelector('.text-red-500.text-xs.mt-1');
+                                    if (firstError) {
+                                        firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                                    }
+                                    hideModal();
+                                }
+                            }
+                        } catch (error) {
+                            loadingState.classList.add('hidden');
+                            errorState.classList.remove('hidden');
+                            errorMessage.textContent = 'Terjadi kesalahan jaringan atau server. Silakan coba lagi.';
+                        }
+                    });
+                }
+            });
         </script>
 </x-layout>
