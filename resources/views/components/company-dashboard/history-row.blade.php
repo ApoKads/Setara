@@ -1,10 +1,10 @@
 @props(['applicant'])
 <div class="w-full grid grid-cols-[3fr_3fr_2fr_2fr_2fr_2fr] bg-white gap-2 h-14 rounded-xl drop-shadow-sm">
     <div class="flex justify-start   items-center w-full  px-4">
-        <h1>{{ $applicant->profile->name }}</h1>
+        <h1>{{ $applicant->job->name }} </h1>
     </div>
     <div class="flex justify-center   items-center w-full  px-4">
-        <h1>{{ $applicant->job->name }}</h1>
+        <h1>{{ $applicant->profile->name }}</h1>
     </div>
     <div class="flex justify-center items-center w-full ">
         <h1>{{ $applicant->created_at->format('d-m-Y') }}</h1>

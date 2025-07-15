@@ -55,33 +55,54 @@
 
             {{-- Search Bar --}}
             <div class="w-full p-4 px-8 flex flex-col">
-                <form action="" method="GET" class="flex items-center w-[50%] gap-4">
+                <form action="" method="GET" class="flex items-center gap-4 w-[70%]">
 
-                    <div class="relative w-1/4 border-gray-300 border-[1px] rounded-lg h-10">
+                    {{-- Sort Dropdown --}}
+                    <div class="relative w-1/5 border-gray-300 border-[1px] rounded-lg h-10">
                         <select onchange="this.form.submit()" name="sort"
                             class="block appearance-none w-full text-base text-[#3551A4] h-full px-4 font-medium bg-white border border-gray-300 pr-8 rounded-lg leading-tight focus:outline-none focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-500 hover:cursor-pointer">
-                            <option value="">Sort by</option>
+                            <option value="">Urutkan</option>
                             <option value="oldest" {{ request('sort') === 'oldest' ? 'selected' : '' }}>Terlama</option>
                             <option value="newest" {{ request('sort') === 'newest' ? 'selected' : '' }}>Terbaru</option>
-
                         </select>
                         <div
                             class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                            <svg class="w-4 h-4 text-[#3551A4]" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg">
+                            <svg class="w-4 h-4 text-[#3551A4]" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M19 9l-7 7-7-7"></path>
+                                    d="M19 9l-7 7-7-7" />
                             </svg>
                         </div>
                     </div>
 
+                    {{-- Status Dropdown --}}
+                    <div class="relative w-1/5 border-gray-300 border-[1px] rounded-lg h-10">
+                        <select onchange="this.form.submit()" name="status"
+                            class="block appearance-none w-full text-base text-[#3551A4] h-full px-4 font-medium bg-white border border-gray-300 pr-8 rounded-lg leading-tight focus:outline-none focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-500 hover:cursor-pointer">
+                            <option value="">Status</option>
+                            <option value="Accepted" {{ request('status') === 'Accepted' ? 'selected' : '' }}>Accepted
+                            </option>
+                            <option value="Rejected" {{ request('status') === 'Rejected' ? 'selected' : '' }}>Rejected
+                            </option>
+                        </select>
+                        <div
+                            class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                            <svg class="w-4 h-4 text-[#3551A4]" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </div>
+                    </div>
 
-                    <div class="w-3/4 border-gray-300 border-[1px] rounded-lg  h-10 ">
-                        <input type="text" name="search" placeholder="Cari Pekerjaan Impianmu ..."
+                    {{-- Search Bar --}}
+                    <div class="w-3/5 border-gray-300 border-[1px] rounded-lg  h-10">
+                        <input type="text" name="search" placeholder="Cari Nama Lowongan ..."
                             class="w-full border text-base h-full bg-white px-4 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                             value="{{ request('search') }}">
                     </div>
                 </form>
+
 
                 {{-- Table --}}
                 <div class="w-full flex flex-col justify-center items-center gap-2 mt-20">

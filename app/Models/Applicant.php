@@ -7,6 +7,7 @@ use App\Models\UserProfile;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 
 class Applicant extends Model
 {
@@ -37,5 +38,29 @@ class Applicant extends Model
     public function careerHistories()
     {
         return $this->hasMany(CareerHistory::class);
+    }
+
+    public function scopeFilter(Builder $query, array $filters): void
+    {
+        // Filter by job name (relasi job)
+        $query->when($filters['search'] ?? false, function ($query, $search) {
+            $query->whereHas('job', function ($q) use ($search) {
+                $q->where('name', 'like', '%' . $search . '%');
+            });
+        });
+
+        // Sort
+        $query->when($filters['sort'] ?? false, function ($query, $sort) {
+            if ($sort === 'newest') {
+                $query->orderBy('updated_at', 'desc');
+            } elseif ($sort === 'oldest') {
+                $query->orderBy('updated_at', 'asc');
+            }
+        });
+
+        // Status (optional)
+        $query->when($filters['status'] ?? false, function ($query, $status) {
+            $query->where('status', $status);
+        });
     }
 }
