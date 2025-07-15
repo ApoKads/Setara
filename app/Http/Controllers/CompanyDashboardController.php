@@ -24,6 +24,29 @@ class CompanyDashboardController extends Controller
         ]);
     }
 
+    public function history(Request $request)
+    {
+        $company = Auth::user()->company()->first();
+
+        // Ambil semua job_id milik company ini
+        $jobIds = $company->jobs()->pluck('id');
+
+        // Ambil applicant yang job_id-nya termasuk job milik company ini
+        // dan status-nya Accepted atau Rejected
+        $applicants = Applicant::whereIn('job_id', $jobIds)
+                        ->whereIn('status', ['Accepted', 'Rejected'])
+                        ->with(['profile.user', 'job']) // preload relasi agar tidak N+1
+                        ->latest()
+                        ->get();
+
+        return view('CompanySide.history', [
+            'company' => $company,
+            'applicants' => $applicants,
+        ]);
+    }
+
+
+
     public function show(Job $job){
         return view('CompanySide.companyJobDetails',['detail'=>$job]);
     }
@@ -54,7 +77,7 @@ class CompanyDashboardController extends Controller
         $applicant->status = 'Accepted';
         $applicant->save();
 
-        return redirect()->route('company.applicant', $applicant->job_id)
+        return redirect()->route('company.history')
                         ->with('status', 'Accepted')
                         ->with('message', 'Lamaran berhasil diterima.');
     }
@@ -64,10 +87,11 @@ class CompanyDashboardController extends Controller
         $applicant->status = 'Rejected';
         $applicant->save();
 
-        return redirect()->route('company.applicant', $applicant->job_id)
+        return redirect()->route('company.history')
                         ->with('status', 'Rejected')
                         ->with('message', 'Lamaran berhasil ditolak.');
     }
+
 
 
 }

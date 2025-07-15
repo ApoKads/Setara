@@ -70,6 +70,7 @@ Route::middleware(['auth', CompanyMiddleware::class])->prefix('company')->group(
     });
     Route::controller(CompanyDashboardController::class)->group(function () {
         Route::get('/dashboard', 'index')->name('companyJob.index');
+        Route::get('/dashboard/history', 'history')->name('company.history');
         Route::get('/dashboard/{job:id}', 'show')->name('companyJob.show');
         Route::get('/dashboard/details/{job:id}', 'applicant')->name('company.applicant');
         Route::get('/dashboard/applicant/{applicant:id}', 'applicantDetail')->name('company.applicantDetails');

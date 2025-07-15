@@ -80,15 +80,30 @@
                     </div>
                 </div>
             </div>
-            <div class="mt-6 flex justify-end items-center gap-4">
-                <a href="javascript:void(0)" onclick="openDecisionModal('reject')"
-                    class="inline-block bg-red-400 text-black font-bold py-3 px-8 rounded-lg text-sm tracking-wider hover:bg-red-600 transition-colors">
-                    TOLAK LAMARAN
-                </a>
-                <a href="javascript:void(0)" onclick="openDecisionModal('accept')"
-                    class="inline-block bg-green-400 text-black font-bold py-3 px-8 rounded-lg text-sm tracking-wider hover:bg-green-600 transition-colors">
-                    TERIMA LAMARAN
-                </a>
+            <div class="mt-6 flex justify-between items-end gap-4">
+                <div class="flex flex-col w-60 justify-center items-center gap-2">
+                    <div class="">
+                        <h1 class="font-bold">Status Lamaran</h1>
+                    </div>
+                    <div
+                        class="w-40 h-10 rounded-lg flex justify-center items-center {{ $applicant->status === 'Accepted' ? 'bg-green-400' : ($applicant->status === 'Rejected' ? 'bg-red-400' : 'bg-yellow-400') }}">
+                        <h1 class="text-sm tracking-wider text-black font-bold uppercase">
+                            {{ $applicant->status }}
+                        </h1>
+                    </div>
+                </div>
+
+                <div class="flex gap-4">
+
+                    <a href="javascript:void(0)" onclick="openDecisionModal('reject')"
+                        class="inline-block bg-red-400 text-black font-bold py-3 px-8 rounded-lg text-sm tracking-wider hover:bg-red-600 transition-colors">
+                        TOLAK LAMARAN
+                    </a>
+                    <a href="javascript:void(0)" onclick="openDecisionModal('accept')"
+                        class="inline-block bg-green-400 text-black font-bold py-3 px-8 rounded-lg text-sm tracking-wider hover:bg-green-600 transition-colors">
+                        TERIMA LAMARAN
+                    </a>
+                </div>
 
             </div>
         </div>
@@ -218,29 +233,29 @@
     </div>
 
     <!-- Modal Terima / Tolak Lamaran -->
-<div id="decisionModal" class="fixed inset-0 z-50 hidden items-center justify-center h-full w-full">
-    <div class="absolute w-full h-full bg-black opacity-40"></div>
-    <div id="modalBox" class="bg-white rounded-lg p-6 w-[400px] z-50 relative transition-all duration-300">
-        <div class="flex flex-col gap-4">
-            <h2 class="text-xl font-bold" id="decisionTitle">Konfirmasi</h2>
-            <p id="decisionMessage" class="text-gray-600">Apakah Anda yakin dengan tindakan ini?</p>
-            <div class="flex justify-end gap-4 mt-4">
-                <button onclick="closeDecisionModal()"
-                    class="px-4 py-2 bg-gray-300 rounded-lg hover:brightness-95 transition duration-200 hover:cursor-pointer">
-                    Batal
-                </button>
-                <form id="decisionForm" method="POST">
-                    @csrf
-                    @method("POST")
-                    <button id="decisionButton"
-                        class="px-4 py-2 text-white font-semibold rounded-lg hover:brightness-95 transition duration-200 cursor-pointer">
-                        Konfirmasi
+    <div id="decisionModal" class="fixed inset-0 z-50 hidden items-center justify-center h-full w-full">
+        <div class="absolute w-full h-full bg-black opacity-40"></div>
+        <div id="modalBox" class="bg-white rounded-lg p-6 w-[400px] z-50 relative transition-all duration-300">
+            <div class="flex flex-col gap-4">
+                <h2 class="text-xl font-bold" id="decisionTitle">Konfirmasi</h2>
+                <p id="decisionMessage" class="text-gray-600">Apakah Anda yakin dengan tindakan ini?</p>
+                <div class="flex justify-end gap-4 mt-4">
+                    <button onclick="closeDecisionModal()"
+                        class="px-4 py-2 bg-gray-300 rounded-lg hover:brightness-95 transition duration-200 hover:cursor-pointer">
+                        Batal
                     </button>
-                </form>
+                    <form id="decisionForm" method="POST">
+                        @csrf
+                        @method('POST')
+                        <button id="decisionButton"
+                            class="px-4 py-2 text-white font-semibold rounded-lg hover:brightness-95 transition duration-200 cursor-pointer">
+                            Konfirmasi
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 
 
@@ -257,7 +272,7 @@
         const box = document.getElementById('modalBox');
         const form = document.getElementById('decisionForm');
 
-        const applicantId= "{{ $applicant->id }}";
+        const applicantId = "{{ $applicant->id }}";
         // Show modal
         modal.classList.remove('hidden');
         modal.classList.add('flex');
