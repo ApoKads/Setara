@@ -31,7 +31,8 @@ class ApplicantFactory extends Factory
             'slug'=>Str::slug(fake()->sentence()),
             'user_profile_id'=>UserProfile::factory(),
             'job_id'=>Job::factory(),
-            'note'=>fake()->paragraph(rand(10,40))
+            'note'=>fake()->paragraph(rand(10,40)),
+            'status'=>'Pending',
         ];
     }
 }

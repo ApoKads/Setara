@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->foreignId('user_profile_id')->constrained('user_profiles','id')->cascadeOnDelete();
             $table->foreignId('job_id')->constrained('jobs','id')->cascadeOnDelete();
+            $table->enum('status',['Pending','Accepted','Rejected']);
             $table->text('note');
             $table->timestamps();
         });

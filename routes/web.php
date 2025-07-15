@@ -72,6 +72,10 @@ Route::middleware(['auth', CompanyMiddleware::class])->prefix('company')->group(
         Route::get('/dashboard', 'index')->name('companyJob.index');
         Route::get('/dashboard/{job:id}', 'show')->name('companyJob.show');
         Route::get('/dashboard/details/{job:id}', 'applicant')->name('company.applicant');
+        Route::get('/dashboard/applicant/{applicant:id}', 'applicantDetail')->name('company.applicantDetails');
+        Route::post('/dashboard/applicant/{applicant:id}/accept', 'accept')->name('company.applicantAccept');
+        Route::post('/dashboard/applicant/{applicant:id}/reject', 'reject')->name('company.applicantReject');
+
     });
     Route::get('/dashboard/profile', function () {
         return view('CompanySide.companyProfile', [
