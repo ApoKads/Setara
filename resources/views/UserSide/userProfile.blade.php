@@ -71,7 +71,7 @@
                                 <span class="w-2.5 h-2.5 bg-green-400 rounded-full mr-2 animate-pulse"></span>
                                 AVAILABLE FOR HIRE
                             </div>
-                            <a href="#"
+                            <a href="mailto:{{ $user->email }}"
                                 class="block bg-cyan-400 text-black font-bold py-2.5 px-6 rounded-lg mt-3 hover:bg-cyan-300 transition-colors duration-300 text-sm">
                                 CONTACT ME
                             </a>
@@ -80,7 +80,7 @@
                 </div>
             </div>
             <div class="mt-6 flex justify-between items-center">
-                <a href="#"
+                <a href="{{ route('profile.track') }}"
                     class="inline-block bg-yellow-300 text-black font-bold py-3 px-8 rounded-lg text-sm tracking-wider hover:bg-yellow-400 transition-colors">
                     TRACK LAMARANMU!
                 </a>
@@ -212,7 +212,4 @@
             </div>
         </div>
     </div>
-
-
-
 </x-layout>

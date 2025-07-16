@@ -103,102 +103,103 @@
             <div
                 class="bg-white rounded-2xl shadow-xl p-8 max-w-sm w-full text-center relative transform transition-all duration-300 scale-95 opacity-0">
                 {{-- Konten Modal Dinamis --}}
-            <div id="modalContentArea">
-                {{-- Ini akan diisi oleh JavaScript --}}
-            </div>
-            {{-- Loading Indicator dan Pesan Status (akan disembunyikan/ditampilkan oleh JS) --}}
-            <div id="loadingState" class="mt-6 flex flex-col items-center">
-                <p class="text-gray-500 text-lg mb-2">Menunggu Persetujuan Admin...</p>
-                <div class="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-[#132442]"></div>
-            </div>
-            <div id="errorState" class="mt-6 flex flex-col items-center text-red-600 hidden">
-                <p class="text-lg font-semibold mb-2">Terjadi Kesalahan!</p>
-                <p id="errorMessage" class="text-sm text-center px-4"></p>
-                <button id="closeErrorModal"
-                    class="mt-4 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors">Tutup</button>
+                <div id="modalContentArea">
+                    {{-- Ini akan diisi oleh JavaScript --}}
+                </div>
+                {{-- Loading Indicator dan Pesan Status (akan disembunyikan/ditampilkan oleh JS) --}}
+                <div id="loadingState" class="mt-6 flex flex-col items-center">
+                    <p class="text-gray-500 text-lg mb-2">Menunggu Persetujuan Admin...</p>
+                    <div class="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-[#132442]"></div>
+                </div>
+                <div id="errorState" class="mt-6 flex flex-col items-center text-red-600 hidden">
+                    <p class="text-lg font-semibold mb-2">Terjadi Kesalahan!</p>
+                    <p id="errorMessage" class="text-sm text-center px-4"></p>
+                    <button id="closeErrorModal"
+                        class="mt-4 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors">Tutup</button>
+                </div>
             </div>
         </div>
-    </div>
 
-    <script>
-        function togglePassword(id) {
-            const input = document.getElementById(id);
-            const toggleButton = document.getElementById('toggle-button-' + id);
-            const eyeIconHTML = `<svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>`;
-            const eyeSlashIconHTML = `<svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 001.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.45 10.45 0 0112 4.5c4.756 0 8.774 3.162 10.065 7.498a10.523 10.523 0 01-4.293 5.774M6.228 6.228L3 3m3.228 3.228l3.65 3.65m7.894 7.894L21 21m-3.228-3.228l-3.65-3.65m0 0a3 3 0 10-4.243-4.243m4.243 4.243a3 3 0 01-4.243-4.243" /></svg>`;
+        <script>
+            function togglePassword(id) {
+                const input = document.getElementById(id);
+                const toggleButton = document.getElementById('toggle-button-' + id);
+                const eyeIconHTML = `<svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>`;
+                const eyeSlashIconHTML = `<svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 001.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.45 10.45 0 0112 4.5c4.756 0 8.774 3.162 10.065 7.498a10.523 10.523 0 01-4.293 5.774M6.228 6.228L3 3m3.228 3.228l3.65 3.65m7.894 7.894L21 21m-3.228-3.228l-3.65-3.65m0 0a3 3 0 10-4.243-4.243m4.243 4.243a3 3 0 01-4.243-4.243" /></svg>`;
 
-            if (input.type === "password") {
-                input.type = "text";
-                toggleButton.innerHTML = eyeSlashIconHTML;
-            } else {
-                input.type = "password";
-                toggleButton.innerHTML = eyeIconHTML;
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', function () {
-            const modal = document.getElementById('confirmationModal');
-            const form = document.getElementById('companySignupForm');
-            const submitButton = document.getElementById('submitButton');
-            const modalContentWrapper = modal.querySelector('.bg-white');
-            const modalContentArea = document.getElementById('modalContentArea');
-            const loadingState = document.getElementById('loadingState');
-            const errorState = document.getElementById('errorState');
-            const errorMessage = document.getElementById('errorMessage');
-            const closeErrorModalButton = document.getElementById('closeErrorModal');
-
-            let pollingInterval = null;
-            const POLLING_INTERVAL_MS = 5000;
-            let currentCompanyStatusId = null;
-
-            function showModal() {
-                modal.classList.remove('hidden');
-                setTimeout(() => {
-                    modalContentWrapper.classList.remove('scale-95', 'opacity-0');
-                    modalContentWrapper.classList.add('scale-100', 'opacity-100');
-                    document.body.style.overflow = 'hidden';
-                }, 10);
+                if (input.type === "password") {
+                    input.type = "text";
+                    toggleButton.innerHTML = eyeSlashIconHTML;
+                } else {
+                    input.type = "password";
+                    toggleButton.innerHTML = eyeIconHTML;
+                }
             }
 
-            function hideModal() {
-                modalContentWrapper.classList.remove('scale-100', 'opacity-100');
-                modalContentWrapper.classList.add('scale-95', 'opacity-0');
-                setTimeout(() => {
-                    modal.classList.add('hidden');
-                    document.body.style.overflow = '';
-                    modalContentArea.innerHTML = '';
-                    loadingState.classList.remove('hidden');
-                    errorState.classList.add('hidden');
-                    currentCompanyStatusId = null;
-                }, 300);
-            }
+            document.addEventListener('DOMContentLoaded', function () {
+                const modal = document.getElementById('confirmationModal');
+                const form = document.getElementById('companySignupForm');
+                const submitButton = document.getElementById('submitButton');
+                const modalContentWrapper = modal.querySelector('.bg-white');
+                const modalContentArea = document.getElementById('modalContentArea');
+                const loadingState = document.getElementById('loadingState');
+                const errorState = document.getElementById('errorState');
+                const errorMessage = document.getElementById('errorMessage');
+                const closeErrorModalButton = document.getElementById('closeErrorModal');
 
-            function updateModalContent(status) { // Hanya menerima 'status'
-                loadingState.classList.add('hidden');
+                let pollingInterval = null;
+                const POLLING_INTERVAL_MS = 5000;
+                let currentCompanyStatusId = null;
 
-                let title = '';
-                let message = '';
-                let imageSrc = '';
-                let buttonHTML = '';
-                let textColor = '';
+                function showModal() {
+                    modal.classList.remove('hidden');
+                    setTimeout(() => {
+                        modalContentWrapper.classList.remove('scale-95', 'opacity-0');
+                        modalContentWrapper.classList.add('scale-100', 'opacity-100');
+                        document.body.style.overflow = 'hidden';
+                    }, 10);
+                }
 
-                if (status === 'accepted') {
-                    title = 'Registrasi Berhasil!';
-                    message = 'Selamat! Akun perusahaan Anda telah disetujui. Anda sekarang dapat masuk dan mulai menggunakan platform kami.';
-                    imageSrc = '{{ asset('images/Homepage/protect_disability.png') }}';
-                    buttonHTML = `<button id="goToLoginButton" class="w-full px-4 py-2 bg-[#88BBD8] text-white rounded-lg hover:bg-[#70A4C8] transition-colors">Masuk Sekarang</button>`;
-                    textColor = 'text-[#132442]';
-                } else if (status === 'rejected') {
-                    title = 'Registrasi Ditolak';
-                    message = 'Maaf, registrasi perusahaan Anda ditolak. Silakan hubungi dukungan kami untuk informasi lebih lanjut jika Anda merasa ini adalah kesalahan.';
-                    imageSrc = 'https://placehold.co/192x192/FF0000/FFFFFF?text=X';
-                    buttonHTML = `<button id="closeRejectedModal" class="w-full px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors">Tutup</button>`;
-                    textColor = 'text-red-700';
-                } else { // status === 'pending'
-                    title = 'Terima Kasih Telah Mendaftar!';
-                    message = 'Untuk menyelesaikan verifikasi, silakan hubungi kami di sini. Akun Anda sedang menunggu persetujuan admin.';
-                    imageSrc = '{{ asset('images/Homepage/protect_disability.png') }}';
-                    buttonHTML = `<div class="flex flex-col items-center gap-4">
+                function hideModal() {
+                    modalContentWrapper.classList.remove('scale-100', 'opacity-100');
+                    modalContentWrapper.classList.add('scale-95', 'opacity-0');
+                    setTimeout(() => {
+                        modal.classList.add('hidden');
+                        document.body.style.overflow = '';
+                        modalContentArea.innerHTML = '';
+                        loadingState.classList.remove('hidden');
+                        errorState.classList.add('hidden');
+                        currentCompanyStatusId = null;
+                    }, 300);
+                }
+
+                function updateModalContent(status) { // Hanya menerima 'status'
+                    loadingState.classList.add('hidden');
+
+                    let title = '';
+                    let message = '';
+                    let imageSrc = '';
+                    let buttonHTML = '';
+                    let textColor = '';
+
+                    if (status === 'accepted') {
+                        title = 'Registrasi Berhasil!';
+                        message = 'Selamat! Akun perusahaan Anda telah disetujui. Anda sekarang dapat masuk dan mulai menggunakan platform kami.';
+                        imageSrc = '{{ asset('images/Homepage/protect_disability.png') }}';
+                        buttonHTML = `<button id="goToLoginButton" class="w-full px-4 py-2 bg-[#88BBD8] text-white rounded-lg hover:bg-[#70A4C8] transition-colors">Masuk Sekarang</button>`;
+                        textColor = 'text-[#132442]';
+                    } else if (status === 'rejected') {
+                        title = 'Registrasi Ditolak';
+                        message = 'Maaf, registrasi perusahaan Anda ditolak. Silakan hubungi dukungan kami untuk informasi lebih lanjut jika Anda merasa ini adalah kesalahan.';
+                        imageSrc = 'https://placehold.co/192x192/FF0000/FFFFFF?text=X';
+                        buttonHTML = `<button id="closeRejectedModal" class="w-full px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors">Tutup</button>`;
+                        textColor = 'text-red-700';
+                    } else { // status === 'pending'
+                        title = 'Terima Kasih Telah Mendaftar!';
+                        // MENGGANTI PESAN DI SINI
+                        message = 'Berhasil mengirim permintaan registrasi, tunggu admin untuk menghubungi anda.';
+                        imageSrc = '{{ asset('images/Homepage/protect_disability.png') }}';
+                        buttonHTML = `<div class="flex flex-col items-center gap-4">
                                     <div class="border border-gray-300 rounded-lg p-4 flex flex-col items-center shadow-sm w-full">
                                         <img src="{{ asset('images/Homepage/setara_slogan.png') }}" alt="Setara Logo" class="w-24 h-auto mb-2 object-contain">
                                         <h3 class="text-lg font-semibold text-[#132442] mb-3">Contact Us</h3>
@@ -226,152 +227,171 @@
                                         </div>
                                     </div>
                                 </div>`;
-                    textColor = 'text-[#132442]';
-                    loadingState.classList.remove('hidden');
-                }
+                        textColor = 'text-[#132442]';
+                        loadingState.classList.remove('hidden');
+                    }
 
-                modalContentArea.innerHTML = `
+                    modalContentArea.innerHTML = `
                     <h2 class="text-2xl font-bold ${textColor} mb-4">${title}</h2>
                     ${imageSrc ? `<img src="${imageSrc}" alt="Ilustrasi" class="mx-auto mb-4 w-48 h-auto object-contain">` : ''}
                     <p class="text-base text-gray-700 mb-6">${message}</p>
                     ${buttonHTML}
                 `;
 
-                if (status === 'accepted') {
-                    document.getElementById('goToLoginButton').addEventListener('click', () => {
-                        window.location.href = '{{ route('login') }}';
-                    });
-                } else if (status === 'rejected') {
-                    document.getElementById('closeRejectedModal').addEventListener('click', hideModal);
-                }
-            }
-
-            async function checkCompanyStatus() {
-                if (!currentCompanyStatusId) {
-                    console.warn('No CompanyStatus ID available for polling.');
-                    stopPolling();
-                    return;
-                }
-
-                try {
-                    const response = await fetch(`{{ url('/company/api/company-status-check') }}/${currentCompanyStatusId}`, {
-                        method: 'GET',
-                        headers: {
-                            'Accept': 'application/json',
-                            'X-Requested-With': 'XMLHttpRequest'
-                        }
-                    });
-
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status}`);
+                    if (status === 'accepted') {
+                        document.getElementById('goToLoginButton').addEventListener('click', () => {
+                            window.location.href = '{{ route('login') }}';
+                        });
+                    } else if (status === 'rejected') {
+                        document.getElementById('closeRejectedModal').addEventListener('click', hideModal);
                     }
+                }
 
-                    const result = await response.json();
-
-                    if (result.status === 'accepted' || result.status === 'rejected') {
+                async function checkCompanyStatus() {
+                    if (!currentCompanyStatusId) {
+                        console.warn('No CompanyStatus ID available for polling.');
                         stopPolling();
-                        updateModalContent(result.status);
-                    } else {
-                        updateModalContent(result.status);
+                        return;
                     }
-                } catch (error) {
-                    console.error('Error checking company status:', error);
-                    stopPolling();
-                    loadingState.classList.add('hidden');
-                    errorState.classList.remove('hidden');
-                    errorMessage.textContent = 'Gagal memuat status persetujuan. Silakan coba lagi nanti.';
-                }
-            }
-
-            function startPolling() {
-                if (pollingInterval) {
-                    clearInterval(pollingInterval);
-                }
-                pollingInterval = setInterval(checkCompanyStatus, POLLING_INTERVAL_MS);
-                checkCompanyStatus();
-            }
-
-            function stopPolling() {
-                if (pollingInterval) {
-                    clearInterval(pollingInterval);
-                    pollingInterval = null;
-                }
-            }
-
-            const sessionStatus = @json(session('status'));
-            const sessionCompanyStatusId = @json(session('company_status_id'));
-
-            if (sessionStatus === 'pending_approval' && sessionCompanyStatusId) {
-                currentCompanyStatusId = sessionCompanyStatusId;
-                showModal();
-                startPolling();
-            }
-
-            if (form && submitButton) {
-                form.addEventListener('submit', async function (event) {
-                    event.preventDefault();
-                    submitButton.disabled = true;
-
-                    showModal();
-                    loadingState.classList.remove('hidden');
-                    errorState.classList.add('hidden');
-                    modalContentArea.innerHTML = '';
-
-                    const formData = new FormData(form);
-                    const actionUrl = form.getAttribute('action');
 
                     try {
-                        const response = await fetch(actionUrl, {
-                            method: 'POST',
+                        const response = await fetch(`/api/company-status-check/${currentCompanyStatusId}`, {
+                            method: 'GET',
                             headers: {
                                 'Accept': 'application/json',
                                 'X-Requested-With': 'XMLHttpRequest'
-                            },
-                            body: formData
+                            }
                         });
+
+                        if (!response.ok) {
+                            // Jika respons tidak OK, tapi ID sudah ada (berarti pendaftaran awal berhasil),
+                            // kita hanya berhenti polling tanpa menampilkan error ke user.
+                            // Pesan "Menunggu Persetujuan Admin..." tetap akan terlihat.
+                            console.error('Polling failed, but initial signup was successful. Stopping polling.');
+                            stopPolling();
+                            return; // Penting untuk keluar dari fungsi
+                        }
 
                         const result = await response.json();
 
-                        if (response.ok) {
-                            if (result.status === 'pending_approval' && result.company_status_id) {
-                                currentCompanyStatusId = result.company_status_id;
-                                startPolling();
-                            } else if (result.status === 'success' && result.redirect) {
-                                window.location.href = result.redirect;
-                            }
+                        if (result.status === 'accepted' || result.status === 'rejected') {
+                            stopPolling();
+                            updateModalContent(result.status);
                         } else {
-                            loadingState.classList.add('hidden');
-                            errorState.classList.remove('hidden');
-                            errorMessage.textContent = result.message || 'Terjadi kesalahan yang tidak terduga saat pendaftaran.';
-
-                            if (response.status === 422 && result.errors) {
-                                document.querySelectorAll('.text-red-500.text-xs.mt-1').forEach(el => el.remove());
-                                for (const field in result.errors) {
-                                    const inputElement = document.getElementById(field);
-                                    if (inputElement) {
-                                        const errorParagraph = document.createElement('p');
-                                        errorParagraph.classList.add('text-red-500', 'text-xs', 'mt-1');
-                                        errorParagraph.textContent = result.errors[field][0];
-                                        inputElement.parentNode.appendChild(errorParagraph);
-                                    }
-                                }
-                                hideModal();
-                            }
+                            // Jika status masih pending, tetap tampilkan pesan pending
+                            updateModalContent(result.status);
                         }
                     } catch (error) {
-                        console.error('Error during signup submission:', error);
-                        loadingState.classList.add('hidden');
-                        errorState.classList.remove('hidden');
-                        errorMessage.textContent = 'Terjadi kesalahan jaringan atau server. Silakan coba lagi.';
-                    } finally {
-                        submitButton.disabled = false;
+                        console.error('Error checking company status:', error);
+                        // Jika terjadi error jaringan atau parsing JSON,
+                        // dan ID sudah ada (pendaftaran awal berhasil),
+                        // kita hanya berhenti polling tanpa menampilkan error ke user.
+                        // Pesan "Menunggu Persetujuan Admin..." tetap akan terlihat.
+                        if (currentCompanyStatusId) {
+                            console.error('Polling failed due to network/parsing error, but initial signup was successful. Stopping polling.');
+                            stopPolling();
+                        } else {
+                            // Jika ID belum ada (berarti pendaftaran awal gagal),
+                            // baru tampilkan error ke user.
+                            loadingState.classList.add('hidden');
+                            errorState.classList.remove('hidden');
+                            errorMessage.textContent = 'Gagal memuat status persetujuan. Silakan coba lagi nanti.';
+                            stopPolling();
+                        }
                     }
-                });
-            }
+                }
 
-            if (closeErrorModalButton) {
-                closeErrorModalButton.addEventListener('click', hideModal);
-            }
-        });
-    </script>
+                function startPolling() {
+                    if (pollingInterval) {
+                        clearInterval(pollingInterval);
+                    }
+                    pollingInterval = setInterval(checkCompanyStatus, POLLING_INTERVAL_MS);
+                    checkCompanyStatus();
+                }
+
+                function stopPolling() {
+                    if (pollingInterval) {
+                        clearInterval(pollingInterval);
+                        pollingInterval = null;
+                    }
+                }
+
+                const sessionStatus = @json(session('status'));
+                const sessionCompanyStatusId = @json(session('company_status_id'));
+
+                if (sessionStatus === 'pending_approval' && sessionCompanyStatusId) {
+                    currentCompanyStatusId = sessionCompanyStatusId;
+                    showModal();
+                    startPolling();
+                }
+
+                if (form && submitButton) {
+                    form.addEventListener('submit', async function (event) {
+                        event.preventDefault();
+                        submitButton.disabled = true;
+
+                        showModal();
+                        loadingState.classList.remove('hidden');
+                        errorState.classList.add('hidden');
+                        modalContentArea.innerHTML = '';
+
+                        const formData = new FormData(form);
+                        const actionUrl = form.getAttribute('action');
+
+                        try {
+                            const response = await fetch(actionUrl, {
+                                method: 'POST',
+                                headers: {
+                                    'Accept': 'application/json',
+                                    'X-Requested-With': 'XMLHttpRequest'
+                                },
+                                body: formData
+                            });
+
+                            const result = await response.json();
+
+                            if (response.ok) {
+                                if (result.status === 'pending_approval' && result.company_status_id) {
+                                    currentCompanyStatusId = result.company_status_id;
+                                    // Langsung tampilkan pesan pending_approval dan mulai polling
+                                    updateModalContent('pending'); // Memastikan modal menampilkan pesan pending
+                                    startPolling();
+                                } else if (result.status === 'success' && result.redirect) {
+                                    window.location.href = result.redirect;
+                                }
+                            } else {
+                                loadingState.classList.add('hidden');
+                                errorState.classList.remove('hidden');
+                                errorMessage.textContent = result.message || 'Terjadi kesalahan yang tidak terduga saat pendaftaran.';
+
+                                if (response.status === 422 && result.errors) {
+                                    document.querySelectorAll('.text-red-500.text-xs.mt-1').forEach(el => el.remove());
+                                    for (const field in result.errors) {
+                                        const inputElement = document.getElementById(field);
+                                        if (inputElement) {
+                                            const errorParagraph = document.createElement('p');
+                                            errorParagraph.classList.add('text-red-500', 'text-xs', 'mt-1');
+                                            errorParagraph.textContent = result.errors[field][0];
+                                            inputElement.parentNode.appendChild(errorParagraph);
+                                        }
+                                    }
+                                    hideModal();
+                                }
+                            }
+                        } catch (error) {
+                            console.error('Error during signup submission:', error);
+                            loadingState.classList.add('hidden');
+                            errorState.classList.remove('hidden');
+                            errorMessage.textContent = 'Terjadi kesalahan jaringan atau server. Silakan coba lagi.';
+                        } finally {
+                            submitButton.disabled = false;
+                        }
+                    });
+                }
+
+                if (closeErrorModalButton) {
+                    closeErrorModalButton.addEventListener('click', hideModal);
+                }
+            });
+        </script>
 </x-layout>

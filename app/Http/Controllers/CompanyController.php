@@ -8,6 +8,7 @@ use App\Models\Location;
 use App\Models\Category;
 use App\Models\CompanyStatus;
 use Illuminate\Support\Str;
+use App\Models\Job;
 
 class CompanyController extends Controller
 {
@@ -92,20 +93,19 @@ class CompanyController extends Controller
 
         $company->categories()->sync($validated['categories']);
 
-        // Update status perusahaan di CompanyStatus
-        CompanyStatus::where('company_name', $company->name)
-            ->update([
-                'status' => 'seen',
-                'position' => 'accepted'
-            ]);
-
-        return redirect()->route('admin.dashboard')->with('success', 'Data perusahaan berhasil disimpan.');
     }
 
     public function show($id)
     {
-        $company = Company::findOrFail($id);
-        return view('companydetail', compact('company'));
+        $detail = Company::findOrFail($id);
+
+        $jobCard = $detail->jobs()->paginate(9);
+        $companies = Company::where('id', '!=', $detail->id)
+            ->inRandomOrder()
+            ->limit(5)
+            ->get();
+
+        return view('companydetail', compact('detail', 'companies', 'jobCard'));
     }
 
     public function edit($id)

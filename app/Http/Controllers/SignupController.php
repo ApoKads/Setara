@@ -4,13 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\UserProfile;
-use App\Models\Company; // Pastikan model Company di-import
+use App\Models\Company;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Str;
+use Illuminate\Support\Str; // Pastikan ini diimpor
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log; // Untuk logging error
+use Illuminate\Support\Facades\Log;
 
 class SignupController extends Controller
 {
@@ -26,7 +26,6 @@ class SignupController extends Controller
 
     public function signup(Request $request)
     {
-        // Validasi input signup
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
@@ -46,11 +45,16 @@ class SignupController extends Controller
             $user->save();
 
             if ($validatedData['role'] === 'company') {
-                Company::create([
+                // Pastikan slug dibuat dan disertakan di sini
+                $company = Company::create([
                     'user_id' => $user->id,
                     'name' => $validatedData['name'],
-                    'is_verified' => false,
+                    'slug' => Str::slug($validatedData['name']) . '-' . Str::random(5), // FIX: Menambahkan slug
+                    'status' => 'pending',
+                    'location' => 'Not Available', // Pastikan ini juga ada jika kolomnya NOT NULL
+                    'description' => 'Perusahaan baru mendaftar.', // Pastikan ini juga ada jika kolomnya NOT NULL
                 ]);
+
             } else {
                 $user->profile()->create([
                     'name' => $validatedData['name'],
@@ -63,20 +67,20 @@ class SignupController extends Controller
 
             DB::commit();
 
-            // PERUBAHAN UTAMA: Respon untuk permintaan AJAX vs. permintaan form biasa
             if ($request->expectsJson()) {
-                // Jika ini adalah permintaan AJAX, kembalikan JSON
                 if ($validatedData['role'] === 'company') {
-                    return response()->json(['status' => 'pending_approval', 'message' => 'Pendaftaran berhasil! Menunggu verifikasi admin.']);
+                    return response()->json([
+                        'status' => 'pending_approval',
+                        'message' => 'Pendaftaran berhasil! Menunggu verifikasi admin.',
+                        'company_status_id' => $company->id
+                    ]);
                 } else {
-                    // Untuk user atau admin, bisa langsung login dan kembalikan JSON sukses
                     Auth::login($user);
                     return response()->json(['status' => 'success', 'redirect' => $this->authenticatedRedirect($user)->getTargetUrl()]);
                 }
             } else {
-                // Jika ini adalah permintaan form biasa (fallback), redirect seperti sebelumnya
                 if ($validatedData['role'] === 'company') {
-                    return redirect()->route('signup.company.form')->with('status', 'pending_approval');
+                    return redirect()->route('signup.company.form')->with('status', 'pending_approval')->with('company_status_id', $company->id);
                 } else {
                     Auth::login($user);
                     return $this->authenticatedRedirect($user);

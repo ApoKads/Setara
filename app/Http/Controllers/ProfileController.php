@@ -37,6 +37,15 @@ class ProfileController extends Controller
         ]);
     }
 
+    // public function track()
+    // {
+
+
+    //     return view('UserSide.userProfileTrack', [
+
+    //     ]);
+    // }
+
     public function update(Request $request)
     {
         $user = Auth::user();

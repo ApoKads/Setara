@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\CompanyStatus;
 use App\Models\Company;
 use Illuminate\Support\Str;
 use App\Models\User;
@@ -12,14 +11,14 @@ class AdminActivityController extends Controller
 {
     public function activityPage(Request $request)
     {
-        $queryPendaftar = CompanyStatus::query()->where('status', 'pending');
-        $queryHistory = CompanyStatus::query()
+        $queryPendaftar = Company::query()->where('status', 'pending');
+        $queryHistory = Company::query()
             ->whereIn('status', ['accepted', 'rejected']);
 
         if ($request->filled('search')) {
             $searchTerm = '%' . $request->search . '%';
-            $queryPendaftar->where('company_name', 'like', $searchTerm);
-            $queryHistory->where('company_name', 'like', $searchTerm);
+            $queryPendaftar->where('name', 'like', $searchTerm);
+            $queryHistory->where('name', 'like', $searchTerm);
         }
 
         $sortOrder = $request->get('sort') === 'oldest' ? 'asc' : 'desc';
@@ -31,22 +30,12 @@ class AdminActivityController extends Controller
 
     public function approveCompany($id)
     {
-        $companyStatus = CompanyStatus::findOrFail($id);
-        $companyStatus->update(['status' => 'accepted']);
+        $company = Company::findOrFail($id);
+        $company->update(['status' => 'accepted']);
 
-        $user = User::where('email', $companyStatus->company_name . '@example.com')->first();
-
-        if ($user && !$user->company) {
-            Company::create([
-                'user_id' => $user->id,
-                'slug' => Str::slug($companyStatus->company_name . '-' . Str::random(5)),
-                'name' => $companyStatus->company_name,
-                'location' => 'Jakarta, Indonesia', // Default value
-                'description' => 'Perusahaan yang baru disetujui oleh admin Setara.', // Default value
-                'path_banner' => null,
-                'path_logo' => null,
-                'status' => 'accepted', // Status di tabel 'companies'
-            ]);
+        $user = User::where('email', $company->name . '@example.com')->first();
+        if ($user) {
+            $user->update(['is_active' => true]);
         }
 
         return response()->json(['message' => 'Company approved successfully.', 'status' => 'accepted'], 200);
@@ -54,23 +43,28 @@ class AdminActivityController extends Controller
 
     public function rejectCompany($id)
     {
-        $companyStatus = CompanyStatus::findOrFail($id);
-        $companyStatus->update(['status' => 'rejected']);
+        $company = Company::findOrFail($id);
+        $company->update(['status' => 'rejected']);
+
+        $user = User::where('email', $company->name . '@example.com')->first();
+        if ($user) {
+            $user->update(['is_active' => false]);
+        }
 
         return response()->json(['message' => 'Company rejected.', 'status' => 'rejected'], 200);
     }
 
     public function checkCompanyStatusApi($id)
     {
-        $companyStatus = CompanyStatus::find($id);
+        $company = Company::find($id);
 
-        if (!$companyStatus) {
-            return response()->json(['message' => 'Company status record not found.'], 404);
+        if (!$company) {
+            return response()->json(['message' => 'Company record not found.'], 404);
         }
 
         return response()->json([
-            'status' => $companyStatus->status,
-            'company_name' => $companyStatus->company_name
+            'status' => $company->status,
+            'company_name' => $company->name
         ]);
     }
 }

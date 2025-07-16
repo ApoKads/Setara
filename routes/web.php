@@ -49,12 +49,6 @@ Route::middleware(['auth', AdminMiddleware::class])->prefix('admin')->group(func
     Route::put('/company/{id}', [CompanyController::class, 'update'])->name('company.update');
     Route::delete('/company/{id}', [CompanyController::class, 'destroy'])->name('company.destroy');
 
-    // Route::get('/company/{id}', function ($id) {
-    //     $company = Company::findOrFail($id);
-    //     // Perbaikan di sini: Ubah 'companyProfile' menjadi 'CompanySide.companyProfile'
-    //     return view('CompanySide.companyProfile', compact('company'));
-    // })->name('company.show');
-
     Route::get('/activity', [AdminActivityController::class, 'activityPage'])->name('admin.activity');
     Route::post('/company/{id}/approve', [AdminActivityController::class, 'approveCompany'])->name('admin.approveCompany');
     Route::post('/company/{id}/reject', [AdminActivityController::class, 'rejectCompany'])->name('admin.rejectCompany');
@@ -95,6 +89,7 @@ Route::middleware(['auth', UserMiddleware::class])->group(function () {
 
     Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
     Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::get('/profile/track', [ProfileController::class, 'track'])->name('profile.track');
     Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
 
     Route::resource('career-histories', CareerHistoryController::class)->only(['store', 'update', 'destroy']);

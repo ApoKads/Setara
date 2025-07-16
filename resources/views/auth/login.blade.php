@@ -1,4 +1,4 @@
-<x-layout title="Sign Up">
+<x-layout>
     <x-slot:title>
         Sign Up
     </x-slot:title>
@@ -51,8 +51,8 @@
                     </div>
 
                     <button type="submit"
-                        class="w-full hover:scale-[102%] transition-transform  text-white bg-[#132442] hover:bg-opacity-90 focus:ring-4 focus:outline-none focus:ring-[#88BBD8]/50 font-medium rounded-xl text-sm px-5 py-3 text-center cursor-pointer">
-                        Sign In
+                        class="w-full hover:scale-[102%] transition-transform  text-white bg-[#132442] hover:bg-opacity-90 focus:ring-4 focus:outline-none focus:ring-[#88BBD8]/50 font-medium rounded-xl text-sm px-5 py-3 text-center cursor-pointer">
+                        <span class="text-white">Sign In</span>
                     </button>
                 </form>
             </div>
