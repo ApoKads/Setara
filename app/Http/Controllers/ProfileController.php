@@ -6,6 +6,10 @@ use App\Models\Skill;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Applicant; // Pastikan model Applicant diimpor
+use App\Models\UserProfile; // Pastikan model UserProfile diimpor (sudah ada, tapi untuk kejelasan)
+use App\Models\Job; // Pastikan model Job diimpor
+use App\Models\Company; // Pastikan model Company diimpor
 
 class ProfileController extends Controller
 {
@@ -37,14 +41,38 @@ class ProfileController extends Controller
         ]);
     }
 
-    // public function track()
-    // {
+    public function track()
+    {
+
+        $user = Auth::user();
+
+        if (!$user->profile) {
+            return redirect()->back()->with('error', 'Profil pengguna tidak ditemukan. Silakan lengkapi profil Anda.');
+        }
+        $userProfileId = $user->profile->id;
+        $applicants = Applicant::where('user_profile_id', $userProfileId)
+            ->with(['job.company'])
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        // Mengelompokkan lamaran berdasarkan status untuk tampilan yang lebih terstruktur di Blade
+        $pendingApplicants = $applicants->where('status', 'pending');
+        $acceptedApplicants = $applicants->where('status', 'accepted');
+        $rejectedApplicants = $applicants->where('status', 'rejected');
+        // Untuk histori, bisa gabungan accepted dan rejected
+        $historyApplicants = $applicants->whereIn('status', ['accepted', 'rejected']);
 
 
-    //     return view('UserSide.userProfileTrack', [
-
-    //     ]);
-    // }
+        // Mengirim data yang diperlukan ke view 'UserSide.userProfileTrack'
+        return view('UserSide.userProfileTrack', [
+            'applicants' => $applicants,
+            'pendingApplicants' => $pendingApplicants,
+            'acceptedApplicants' => $acceptedApplicants,
+            'rejectedApplicants' => $rejectedApplicants,
+            'historyApplicants' => $historyApplicants,
+            'userProfile' => $user->profile
+        ]);
+    }
 
     public function update(Request $request)
     {
