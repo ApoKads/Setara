@@ -24,35 +24,20 @@
                         class="{{ request()->routeIs('companies') ? 'bg-slate-200 text-black font-medium' : 'bg-white text-gray-700 hover:bg-slate-200 hover:text-black'}} px-5 py-2 transition-all duration-300 ease-in-out rounded-3xl text-center">
                         Perusahaan
                     </a>
-                    <!-- <a href="#" 
-                        class="px-5 py-2 bg-white text-gray-700 hover:bg-slate-200 hover:text-black transition-all duration-300 ease-in-out rounded-3xl text-center">
-                        Tentang Kami
-                    </a> -->
                 </div>
 
                 @auth
                     {{-- Bagian Profile (jika user login) --}}
-                    <div
-                        class="flex justify-center items-center h-max w-fit text-lg hover:bg-slate-200 rounded-3xl transition-all duration-300 ease-in-out pl-2">
-                        <a href="{{ route('profile.show') }}" class="flex items-center text-gray-700 hover:text-black">
-                            <div>
-                                <img src="{{ Auth::user()->profile->profile_image_url ?? asset('images/Navbar/pfp-temp.png') }}"
-                                    alt="User Icon" class="h-12 w-12 object-cover rounded-full"> {{-- Menyesuaikan ukuran
-                                dan bentuk --}}
+                    <div class="flex justify-center items-center h-max {{ request()->routeIs('profile.show') ? 'bg-slate-200 text-black font-medium' : 'bg-white text-gray-700 hover:bg-slate-200 hover:text-black'}} transition-all duration-300 ease-in-out rounded-3xl text-center text-lg">
+                        <a href="{{ route('profile.show') }}" class="flex justify-center items-center rounded-3xl {{ request()->routeIs('profile.show') ? 'text-black font-medium' : 'text-gray-700 hover:bg-slate-200 hover:text-black'}}">
+                            <div class="pl-2">
+                                <img src="{{ Auth::user()->profile->image_url ?? asset('images/Navbar/pfp-temp.png') }}" alt="User Icon" class="h-8 w-8 object-cover rounded-full">
                             </div>
-                            <p class="pl-1 pr-5 py-2 cursor-pointer mb-0">
-                                Profile
+                            <p class="pl-2 pr-5 py-2 cursor-pointer mb-0">
+                                Profil
                             </p>
                         </a>
                     </div>
-
-                    <form action="{{ route('logout') }}" method="POST" class="inline-flex items-center">
-                        @csrf
-                        <button type="submit"
-                            class="px-5 py-2 bg-red-500 text-white font-medium rounded-3xl hover:bg-red-600 transition-all duration-300 ease-in-out text-center">
-                            Logout
-                        </button>
-                    </form>
                 @endauth
 
                 @guest

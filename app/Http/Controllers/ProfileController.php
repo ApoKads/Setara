@@ -16,13 +16,8 @@ class ProfileController extends Controller
     public function show()
     {
         $user = Auth::user()->load('profile.careerHistories', 'profile.skills');
-
-        // Ambil riwayat karier terakhir (jika ada)
-        // Asumsi 'careerHistories' adalah koleksi dan Anda ingin yang paling baru
-        // Anda mungkin perlu menyesuaikan berdasarkan cara data careerHistories Anda diurutkan
         $lastCareer = $user->profile->careerHistories->sortByDesc('end_date')->first();
         $lastCareerString = $lastCareer ? $lastCareer->company_name : 'Belum ada riwayat karier';
-        // Atau jika Anda ingin nama posisi: $lastCareer->position_name
 
         return view('UserSide.userProfile', compact('user', 'lastCareerString'));
     }
@@ -31,13 +26,12 @@ class ProfileController extends Controller
     {
         $user = Auth::user()->load('profile.careerHistories', 'profile.skills');
 
-        // Ambil riwayat karier terakhir (jika ada) untuk halaman edit juga
         $lastCareer = $user->profile->careerHistories->sortByDesc('end_date')->first();
         $lastCareerString = $lastCareer ? $lastCareer->company_name : 'Belum ada riwayat karier';
 
         return view('UserSide.editSkillsCareers', [
             'user' => $user,
-            'lastCareerString' => $lastCareerString, // Teruskan juga ke view edit
+            'lastCareerString' => $lastCareerString,
         ]);
     }
 
@@ -54,16 +48,11 @@ class ProfileController extends Controller
             ->with(['job.company'])
             ->orderBy('created_at', 'desc')
             ->get();
-
-        // Mengelompokkan lamaran berdasarkan status untuk tampilan yang lebih terstruktur di Blade
         $pendingApplicants = $applicants->where('status', 'pending');
         $acceptedApplicants = $applicants->where('status', 'accepted');
         $rejectedApplicants = $applicants->where('status', 'rejected');
-        // Untuk histori, bisa gabungan accepted dan rejected
         $historyApplicants = $applicants->whereIn('status', ['accepted', 'rejected']);
 
-
-        // Mengirim data yang diperlukan ke view 'UserSide.userProfileTrack'
         return view('UserSide.userProfileTrack', [
             'applicants' => $applicants,
             'pendingApplicants' => $pendingApplicants,

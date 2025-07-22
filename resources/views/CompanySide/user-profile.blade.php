@@ -1,4 +1,4 @@
-<x-layout>
+<x-layout-company>
     <x-slot:title>
         Profil: {{ $user->profile->name }}
     </x-slot:title>
@@ -261,7 +261,7 @@
 
 
 
-</x-layout>
+</x-layout-company>
 
 <script>
     function openDecisionModal(type) {

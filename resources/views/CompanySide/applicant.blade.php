@@ -1,4 +1,4 @@
-<x-layout>
+<x-layout-company>
     <x-slot:title>{{ 'List Job' }}</x-slot>
 
 
@@ -43,4 +43,4 @@
     <div class="h-40 w-1"></div>
 
 
-</x-layout>
+</x-layout-company>

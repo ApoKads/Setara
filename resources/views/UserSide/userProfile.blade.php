@@ -84,10 +84,20 @@
                     class="inline-block bg-yellow-300 text-black font-bold py-3 px-8 rounded-lg text-sm tracking-wider hover:bg-yellow-400 transition-colors">
                     TRACK LAMARANMU!
                 </a>
-                <a href="{{ route('profile.edit') }}"
-                    class="border border-gray-800 text-gray-800 rounded-full px-6 py-2 text-sm font-semibold hover:bg-gray-800 hover:text-white transition-all duration-300">
-                    EDIT PROFILE
-                </a>
+                <div class="flex gap-4">
+                    <a href="{{ route('profile.edit') }}"
+                        class="border border-gray-800 text-gray-800 rounded-full px-6 py-2 text-sm font-semibold hover:bg-gray-800 hover:text-white transition-all duration-300">
+                        EDIT PROFILE
+                    </a>
+                    <form action="{{ route('logout') }}" method="POST" class="inline-flex items-center">
+                        @csrf
+                        <button type="submit"
+                            class="border border-gray-800 text-gray-800 rounded-full px-6 py-2 text-sm font-semibold hover:border-red-600 hover:bg-red-600 hover:text-white transition-all duration-300 cursor-pointer"
+                            >
+                            LOGOUT
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
 
