@@ -1,4 +1,4 @@
-<x-layout>
+<x-layout-company>
   <x-slot:title>{{ $detail->name }} - {{ $detail->company->name }}</x-slot>
   
   <div class="min-h-screen bg-[#F2F6FF]">
@@ -163,4 +163,4 @@
     </div>
   </div>
   
-</x-layout>
+</x-layout-company>

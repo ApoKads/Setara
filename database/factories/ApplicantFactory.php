@@ -32,7 +32,7 @@ class ApplicantFactory extends Factory
             'user_profile_id'=>UserProfile::factory(),
             'job_id'=>Job::factory(),
             'note'=>fake()->paragraph(rand(10,40)),
-            'status'=>'Pending',
+            'status'=>'pending',
         ];
     }
 }

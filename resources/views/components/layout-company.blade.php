@@ -17,6 +17,9 @@
 
   
   <main>
+    @include('components/navbar-company')
+
+    {{-- Content --}}
     <div class="relative w-full min-h-screen bg-gradient-to-b from-white to-[#DCE4F1]">
       {{$slot}}
     </div>
