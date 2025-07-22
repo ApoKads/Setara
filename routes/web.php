@@ -10,6 +10,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\SignupController;
 use App\Http\Middleware\CompanyMiddleware;
 use App\Http\Controllers\JobListPageController;
+use App\Http\Controllers\JobApplicationController;
 use App\Http\Controllers\CompanyListPageController;
 use App\Http\Controllers\CompanyDashboardController;
 use App\Http\Controllers\ProfileController;
@@ -104,5 +105,10 @@ Route::middleware(['auth', UserMiddleware::class])->group(function () {
     Route::controller(JobListPageController::class)->group(function () {
         Route::get('/job', 'index')->name('jobs');
         Route::get('/job/{job:slug}', 'show')->name('job.show');
+    });
+
+    Route::controller(JobApplicationController::class)->group(function () {
+        Route::get('/job/{job:slug}/apply', 'show')->name('job.apply');
+        Route::post('/job/{job:slug}/apply', 'store')->name('job.apply.submit');
     });
 });
