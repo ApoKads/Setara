@@ -36,7 +36,7 @@ class Job extends Model
         'work_mode',
         'work_location_type'
     ];
-    protected $with = ['company', 'JobType', 'location', 'EducationLevel', 'disability', 'seniority'];
+    // protected $with = ['company', 'JobType', 'location', 'EducationLevel', 'disability', 'seniority'];
 
 
     public function company(): BelongsTo
@@ -77,12 +77,6 @@ class Job extends Model
             $query->where('name', 'like', '%' . $search . '%');
         });
 
-        // $query->when($filters['category'] ?? false, function($query, $categoryId) {
-        // $query->whereHas('categories', function($q) use ($categoryId) {
-        //     $q->where('categories.id', $categoryId); // Filter berdasarkan ID category
-        //     });
-        // });
-
         $query->when($filters['disability'] ?? false, function ($query, $disabilityId) {
             $query->where('disability_id', $disabilityId);
         });
@@ -92,7 +86,7 @@ class Job extends Model
         });
 
         $query->when($filters['salary'] ?? false, function ($query, $salaryStart) {
-            $salaryStart = (int) $salaryStart; // Cast to integer for numerical comparison
+            $salaryStart = (int) $salaryStart;
 
             if ($salaryStart === 1) {
                 $query->whereBetween('wage', [0, 5000000]);
@@ -103,26 +97,20 @@ class Job extends Model
             } elseif ($salaryStart === 20000001) {
                 $query->where('wage', '>=', 20000001);
             }
-            // Add more conditions here if you add more salary ranges
         });
 
         $query->when($filters['work_mode'] ?? false, function ($query, $workMode) {
             if ($workMode === 'Onsite') {
-                // If 'Onsite' is selected, show 'Onsite' jobs AND 'Onsite & Remote' jobs
                 $query->where(function ($q) {
                     $q->where('work_mode', 'Onsite')
                         ->orWhere('work_mode', 'Onsite & Remote');
                 });
             } elseif ($workMode === 'Remote') {
-                // If 'Remote' is selected, show 'Remote' jobs AND 'Onsite & Remote' jobs
                 $query->where(function ($q) {
                     $q->where('work_mode', 'Remote')
                         ->orWhere('work_mode', 'Onsite & Remote');
                 });
             }
-            // If $workMode is empty (default option 'Onsite & Remote'),
-            // this 'when' block won't execute, meaning no work_mode filter is applied,
-            // which effectively shows all work modes (Onsite, Remote, and Onsite & Remote).
         });
 
         $query->when($filters['location'] ?? false, function ($query, $locationId) {
@@ -136,11 +124,6 @@ class Job extends Model
         $query->when($filters['seniority'] ?? false, function ($query, $seniorityId) {
             $query->where('seniority_id', $seniorityId);
         });
-        // $query->when(
-        //     $filters['category'] ?? false, function($query,$category){
-        //         $query->whereHas('categories',fn($query)=> $query->where('categories.id',$category));
-        //     }
-        // );
 
         $query->when($filters['sort'] ?? false, function ($query, $sort) {
         if ($sort === 'newest') {

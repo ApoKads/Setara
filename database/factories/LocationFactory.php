@@ -19,9 +19,8 @@ class LocationFactory extends Factory
     public function definition(): array
     {
         return [
-            //
-            'city'->fake()->city(),
-            'province'->fake()->state()
+            'city'=>fake()->city(),
+            'province'=>fake()->state()
         ];
     }
 }

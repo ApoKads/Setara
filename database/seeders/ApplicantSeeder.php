@@ -14,10 +14,18 @@ class ApplicantSeeder extends Seeder
 {
     public function run(): void
     {
-        Applicant::factory(100)->recycle([
-            UserProfile::all(),
-            Job::all()
+        $userProfiles = UserProfile::inRandomOrder()->limit(10)->get();
 
-        ])->create();
+        $jobs = Job::without([
+            'company', 'JobType', 'location',
+            'EducationLevel', 'disability', 'seniority'
+        ])->inRandomOrder()->limit(10)->get();
+
+        Applicant::factory(10)
+            ->recycle($userProfiles)
+            ->recycle($jobs)
+            ->create();
     }
+
+
 }

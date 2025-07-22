@@ -30,7 +30,7 @@ class CompanyDashboardController extends Controller
         $jobIds = $company->jobs()->pluck('id');
 
         $applicants = Applicant::whereIn('job_id', $jobIds)
-            ->whereIn('status', ['Accepted', 'Rejected'])
+            ->whereIn('status', ['accepted', 'rejected'])
             ->filter($request->only(['search', 'sort', 'status'])) // Tambahkan filter
             ->with(['profile.user', 'job'])
             ->get();
@@ -49,7 +49,7 @@ class CompanyDashboardController extends Controller
     public function applicant(Job $job){
     // Filter hanya applicant dengan status 'Pending'
         $job->load(['applicant' => function ($query) {
-            $query->where('status', 'Pending');
+            $query->where('status', 'pending');
         }]);
 
         return view('CompanySide.applicant', ['detail' => $job]);
@@ -69,21 +69,21 @@ class CompanyDashboardController extends Controller
 
     public function accept(Applicant $applicant)
     {
-        $applicant->status = 'Accepted';
+        $applicant->status = 'accepted';
         $applicant->save();
 
         return redirect()->route('company.history')
-                        ->with('status', 'Accepted')
+                        ->with('status', 'accepted')
                         ->with('message', 'Lamaran berhasil diterima.');
     }
 
     public function reject(Applicant $applicant)
     {
-        $applicant->status = 'Rejected';
+        $applicant->status = 'rejected';
         $applicant->save();
 
         return redirect()->route('company.history')
-                        ->with('status', 'Rejected')
+                        ->with('status', 'rejected')
                         ->with('message', 'Lamaran berhasil ditolak.');
     }
 

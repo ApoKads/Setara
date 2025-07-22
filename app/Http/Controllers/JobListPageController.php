@@ -22,6 +22,7 @@ class JobListPageController extends Controller
     }
 
     public function show(Job $job){
+        // dd("test");
         $hasApplied = false;
         
         // Check if user is authenticated and has applied for this job

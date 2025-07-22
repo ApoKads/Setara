@@ -16,14 +16,7 @@ use Illuminate\Support\Str;
 class JobController extends Controller
 {
    
-
-    /**
-     * Remove the specified resource from storage.
-     */
-
     public function create(){
-        // dd("masuk");
-
         return view('CompanySide.form',[
             'disabilities'=>Disability::latest()->get(),
             'seniorities'=>Seniority::latest()->get(),
@@ -36,9 +29,9 @@ class JobController extends Controller
         // Validate the incoming request data
         $validatedData = $request->validate([
             'name'                  => 'required|string|max:255',
-            'job_type'              => 'required|string|max:255|exists:job_types,id', // Adjust based on Livewire output
-            'education_level'       => 'required|string|max:255|exists:education_levels,id', // Adjust based on Livewire output
-            'location'              => 'required|string|max:255|exists:locations,id', // Adjust based on Livewire output
+            'job_type'              => 'required|string|max:255|exists:job_types,id', 
+            'education_level'       => 'required|string|max:255|exists:education_levels,id', 
+            'location'              => 'required|string|max:255|exists:locations,id', 
             'work_mode'             => 'required', // Validate against allowed values
             'slot'                  => 'required|integer|min:1',
             'description'           => 'required|string',
@@ -50,14 +43,13 @@ class JobController extends Controller
         ]);
         
         
-        $companyId = Auth::user()->company->id; // This assumes the authenticated user's ID is the company ID.
+        $companyId = Auth::user()->company->id; 
 
-        // Create a new Job instance and fill it with validated data
         $job = new Job();
         $job->name = $validatedData['name'];
-        $job->job_type_id = $validatedData['job_type']; // This might need adjustment for Livewire
-        $job->education_level_id = $validatedData['education_level']; // This might need adjustment for Livewire
-        $job->location_id = $validatedData['location']; // This might need adjustment for Livewire
+        $job->job_type_id = $validatedData['job_type']; 
+        $job->education_level_id = $validatedData['education_level']; 
+        $job->location_id = $validatedData['location']; 
         $job->work_mode = $validatedData['work_mode'];
         $job->slot = $validatedData['slot'];
         $job->description = $validatedData['description'];
@@ -65,7 +57,7 @@ class JobController extends Controller
         $job->wage = $validatedData['wage'];
         $job->disability_id = $validatedData['disability'];
         $job->seniority_id = $validatedData['seniority'];
-        $job->company_id = $companyId; // Assign the company ID
+        $job->company_id = $companyId; 
         $job->created_at = now();
         $job->updated_at = now();
         $job->slug = $validatedData['name'];
@@ -74,7 +66,7 @@ class JobController extends Controller
             $image = $request->file('banner_image');
             $imageName = time() . '_' . $image->getClientOriginalName();
             $imagePath = $image->storeAs('job', $imageName);
-            $job->banner_image_path = 'storage/job/' . $imageName; // Simpan path yang dapat diakses publik
+            $job->banner_image_path = 'storage/job/' . $imageName; 
         }
         $job->save();
 
@@ -83,18 +75,16 @@ class JobController extends Controller
 
     public function edit(Job $job)
     {
-        // Pastikan Anda juga melewatkan data yang dibutuhkan Livewire dropdowns
         return view('CompanySide.edit-form', [
             'job' => $job,
             'disabilities' => Disability::latest()->get(),
             'seniorities' => Seniority::latest()->get(),
-            'company' => Auth::user()->company, // Asumsi company terkait dengan user yang login
+            'company' => Auth::user()->company, 
         ]);
     }
 
     public function update(Request $request, Job $job)
     {
-        // Validasi input
         $validatedData = $request->validate([
             'name'              => 'required|string|max:255',
             'job_type'          => 'required|string|max:255|exists:job_types,id',
@@ -110,7 +100,6 @@ class JobController extends Controller
             'banner_image'      => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        // Update field sesuai data validasi
         $job->name                 = $validatedData['name'];
         $job->job_type_id          = $validatedData['job_type'];
         $job->education_level_id   = $validatedData['education_level'];
@@ -122,16 +111,13 @@ class JobController extends Controller
         $job->wage                 = $validatedData['wage'];
         $job->disability_id        = $validatedData['disability'];
         $job->seniority_id         = $validatedData['seniority'];
-        $job->slug                 = $validatedData['name']; // optional, unless slug is meant to be unique & SEO-friendly
+        $job->slug                 = $validatedData['name']; 
 
-        // Jika ada gambar baru, ganti yang lama
         if ($request->hasFile('banner_image')) {
             $image = $request->file('banner_image');
             $imageName = time() . '_' . $image->getClientOriginalName();
             $imagePath = $image->storeAs('job', $imageName);
 
-            // Jika ada gambar lama dan ingin dihapus, tambahkan ini (opsional)
-            // Storage::delete('job/' . basename($job->banner_image_path));
 
             $job->banner_image_path = 'storage/job/' . $imageName;
         }
@@ -146,11 +132,8 @@ class JobController extends Controller
 
     public function destroy(Job $job)
     {
-        // Hapus job dari database
-        // dd($job);
         $job->delete();
         
-        // Redirect kembali dengan pesan sukses
         return redirect()->back()->with('success', 'Lowongan berhasil dihapus');
     }
 }

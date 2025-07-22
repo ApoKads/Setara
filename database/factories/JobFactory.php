@@ -23,18 +23,10 @@ class JobFactory extends Factory
      */
     public function definition(): array
     {
-        // $table->id();
-        //     $table->string('slug')->unique();
-        //     $table->foreignId('company_id')->constrained('companies','id')->cascadeOnDelete();
-        //     $table->string('name');
-        //     $table->string('description');
-        //     $table->float('wage');
-        //     $table->string('location');
-        //     $table->timestamps();
 
-        $minWage = 1000000; // 1 Juta
-        $maxWage = 50000000; // 50 Juta
-        $increment = 500000; // 500 Ribu
+        $minWage = 1000000;
+        $maxWage = 50000000;
+        $increment = 500000;
 
         $numberOfIncrements = ($maxWage - $minWage) / $increment;
         $randomIncrements = fake()->numberBetween(0, $numberOfIncrements);

@@ -14,11 +14,11 @@
     @if (session('message'))
         <div x-data="{ show: true }" x-show="show" x-transition
             class="fixed bottom-6 right-6 z-50 bg-white shadow-lg rounded-md p-4 w-80 flex items-start gap-3
-             {{ session('status') === 'Rejected' ? 'border-l-4 border-red-500' : 'border-l-4 border-green-500' }}">
+             {{ session('status') === 'rejected' ? 'border-l-4 border-red-500' : 'border-l-4 border-green-500' }}">
 
             {{-- Icon --}}
             <div>
-                @if (session('status') === 'Rejected')
+                @if (session('status') === 'rejected')
                     <svg class="w-6 h-6 text-red-500 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M6 18L18 6M6 6l12 12" />
@@ -80,9 +80,9 @@
                         <select onchange="this.form.submit()" name="status"
                             class="block appearance-none w-full text-base text-[#3551A4] h-full px-4 font-medium bg-white border border-gray-300 pr-8 rounded-lg leading-tight focus:outline-none focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-500 hover:cursor-pointer">
                             <option value="">Status</option>
-                            <option value="Accepted" {{ request('status') === 'Accepted' ? 'selected' : '' }}>Accepted
+                            <option value="accepted" {{ request('status') === 'accepted' ? 'selected' : '' }}>Accepted
                             </option>
-                            <option value="Rejected" {{ request('status') === 'Rejected' ? 'selected' : '' }}>Rejected
+                            <option value="rejected" {{ request('status') === 'rejected' ? 'selected' : '' }}>Rejected
                             </option>
                         </select>
                         <div

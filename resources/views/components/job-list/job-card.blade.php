@@ -69,7 +69,7 @@
                     <img src="{{ asset('images/ListJobPage/WageIcon.png') }}" class="w-8" alt="WageIcon">
                     <h1 class="font-semibold">Rp{{ number_format($card->wage, 0, ',', '.') }}</h1>
                 </div>
-                <a href="{{ route('job.show', $card->slug) }}"
+                <a href="{{ route('job.show', $card->id) }}"
                     class="px-2.5 py-1.5 bg-[#3551A4] text-white rounded-lg">Selengkapnya</a>
             </div>
         </div>

@@ -86,7 +86,7 @@
                         <h1 class="font-bold">Status Lamaran</h1>
                     </div>
                     <div
-                        class="w-40 h-10 rounded-lg flex justify-center items-center {{ $applicant->status === 'Accepted' ? 'bg-green-400' : ($applicant->status === 'Rejected' ? 'bg-red-400' : 'bg-yellow-400') }}">
+                        class="w-40 h-10 rounded-lg flex justify-center items-center {{ $applicant->status === 'accepted' ? 'bg-green-400' : ($applicant->status === 'rejected' ? 'bg-red-400' : 'bg-yellow-400') }}">
                         <h1 class="text-sm tracking-wider text-black font-bold uppercase">
                             {{ $applicant->status }}
                         </h1>

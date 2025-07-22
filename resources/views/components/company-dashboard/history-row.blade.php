@@ -16,8 +16,8 @@
     <div class="flex justify-center items-center w-full">
         <div
             class="h-8 w-28 rounded-md flex items-center justify-center
-        {{ $applicant->status === 'Accepted' ? 'bg-green-100 text-green-600' : 'bg-red-100 text-red-600' }}">
-            <h1>{{ $applicant->status ?? 'Unknown' }}</h1>
+        {{ $applicant->status === 'accepted' ? 'bg-green-100 text-green-600' : 'bg-red-100 text-red-600' }}">
+            <h1 class="uppercase">{{ $applicant->status ?? 'Unknown' }}</h1>
         </div>
     </div>
 

@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('seniorities', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
+            $table->string('name');
             $table->string('description')->nullable();
-            $table->integer('level')->unique();
+            $table->integer('level');
             $table->timestamps();
         });
     }
