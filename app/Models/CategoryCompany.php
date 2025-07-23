@@ -17,3 +17,7 @@ class CategoryCompany extends Pivot
     ];
 
 }
+
+
+
+

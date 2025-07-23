@@ -19,7 +19,7 @@ return new class extends Migration {
             $table->string('job_status')->default('dan siap untuk bekerja!');
             $table->string('profile_image')->nullable();
             $table->string('quote')->nullable();
-            $table->timestamps();
+            $table->timestampas();
         });
     }
 

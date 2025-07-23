@@ -7,7 +7,7 @@
     {{-- JobCard --}}
    
 
-    <div class="w-full flex justify-center items-center my-10 h-[75px] ">
+    <div class="w-full flex justify-center items-center pt-10 mb-10 h-[75px] ">
         <div class="w-[87.5%] flex flex-col justify-center items-center h-full">
 
             <div class="flex w-full justify-between items-center ">
@@ -30,7 +30,7 @@
         </div>
     </div>
 
-    <div class="w-full flex justify-center mt-10">
+    <div class="w-full flex justify-center mt-20">
         <div class="w-[80%] grid grid-cols-3 gap-4">
             @forelse ($detail->applicant as $applicant)
                 <x-applicant-card :applicant="$applicant"></x-applicant-card>

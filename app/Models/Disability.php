@@ -26,3 +26,7 @@ class Disability extends Model
     }
     
 }
+
+
+
+

@@ -21,3 +21,5 @@ class Location extends Model
     }
 
 }
+
+
