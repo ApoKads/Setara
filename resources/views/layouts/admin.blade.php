@@ -9,6 +9,7 @@
         rel="stylesheet">
 
     <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
+    <script src="https://cdn.tailwindcss.com"></script>
 
     <style>
         body {
@@ -19,6 +20,7 @@
 
 <body>
     <main>
+        @include('components.navbar-admin')
         @yield('content')
         @yield('scripts')
         @yield('styles')
