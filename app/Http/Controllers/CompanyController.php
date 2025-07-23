@@ -105,7 +105,7 @@ class CompanyController extends Controller
             ->limit(5)
             ->get();
 
-        return view('companydetail', compact('detail', 'companies', 'jobCard'));
+        return view('companydetail-admin', compact('detail', 'companies', 'jobCard'));
     }
 
     public function edit($id)

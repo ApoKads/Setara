@@ -10,7 +10,7 @@
   </div>
 
   <div class="container my-5 position-relative">
-    <h2 class="fw-bold mb-4">Perusahaan Terdaftar</h2>
+    <h2 class="fw-bold mb-4 fs-1">Perusahaan Terdaftar</h2>
 
     <!-- Sort dan Search -->
     <form method="GET" action="{{ route('admin.dashboard') }}"

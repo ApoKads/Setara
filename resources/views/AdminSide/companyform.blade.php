@@ -10,7 +10,7 @@
 
     <body class="form-page-bg">
         <div class="container py-5 form-container">
-            <h2 class="fw-bold mb-4">{{ $isEdit ? 'Edit Informasi Perusahaan' : 'Informasi Perusahaan' }}</h2>
+            <h2 class="fw-bold mb-4 fs-1">{{ $isEdit ? 'Edit Informasi Perusahaan' : 'Informasi Perusahaan' }}</h2>
             <hr>
 
             @if ($errors->any())
@@ -32,7 +32,7 @@
                 @endif
 
                 <!-- Nama Perusahaan -->
-                <div class="mb-3">
+                <div class="mb-3 mt-4">
                     <label class="form-label">Nama Perusahaan *</label>
                     <input type="text" name="name" class="form-control" placeholder="Masukkan nama perusahaan"
                         value="{{ old('name', $isEdit ? $company->name : ($prefillName ?? '')) }}" required>
@@ -64,9 +64,9 @@
                 </div>
 
                 <!-- Alamat -->
-                <h5 class="fw-bold mt-4">Alamat</h5>
+                <h5 class="fw-bold mt-4 fs-4">Alamat</h5>
 
-                <div class="mb-3">
+                <div class="mb-3 mt-2">
                     <label class="form-label">Jalan *</label>
                     <input type="text" name="jalan" class="form-control" placeholder="Masukkan jalan"
                         value="{{ old('jalan', $isEdit ? $company->jalan : '') }}" required>
@@ -111,9 +111,9 @@
                 </div>
 
                 <!-- Legalitas -->
-                <h5 class="fw-bold mt-4">Legalitas Perusahaan</h5>
+                <h5 class="fw-bold mt-4 fs-4">Legalitas Perusahaan</h5>
 
-                <div class="row mb-3">
+                <div class="row mb-3 mt-2">
                     <div class="col-md-6">
                         <label class="form-label">Nomor Induk Berusaha *</label>
                         <input type="text" name="nib" class="form-control" placeholder="Masukkan NIB (13 digit)"
