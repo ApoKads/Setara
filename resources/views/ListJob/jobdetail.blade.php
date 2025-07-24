@@ -60,10 +60,7 @@
                       Sudah Melamar
                     </button>
                   @else
-                    {{-- <a href="{{ route('job.apply', $detail->slug) }}" class="inline-block bg-blue-700 hover:bg-blue-800 text-white px-6 py-2 rounded-lg font-medium transition-colors">
-                      Lamar
-                    </a> --}}
-                    <a href="/test" class="inline-block bg-blue-700 hover:bg-blue-800 text-white px-6 py-2 rounded-lg font-medium transition-colors">
+                    <a href="{{ route('job.apply', $detail->slug) }}" class="inline-block bg-blue-700 hover:bg-blue-800 text-white px-6 py-2 rounded-lg font-medium transition-colors">
                       Lamar
                     </a>
                   @endif
