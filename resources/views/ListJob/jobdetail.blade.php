@@ -60,7 +60,7 @@
                       Sudah Melamar
                     </button>
                   @else
-                    <a href="{{ route('job.apply', $detail->slug) }}" class="inline-block bg-blue-700 hover:bg-blue-800 text-white px-6 py-2 rounded-lg font-medium transition-colors">
+                    <a href="{{ route('job.apply', $detail->id) }}" class="inline-block bg-blue-700 hover:bg-blue-800 text-white px-6 py-2 rounded-lg font-medium transition-colors">
                       Lamar
                     </a>
                   @endif
@@ -170,7 +170,7 @@
               </div>
               
               <!-- View Details Button -->
-               <a href="{{ route('job.show', $card->slug) }}">
+               <a href="{{ route('job.show', $card->id) }}">
                  <div class="text-blue-600 hover:text-white text-xs font-medium whitespace-nowrap bg-white hover:bg-blue-800 rounded-lg shadow-sm p-2 cursor-pointer">
                    Lihat Detail
                  </div>

@@ -108,7 +108,7 @@ Route::middleware(['auth', UserMiddleware::class])->group(function () {
     });
 
     Route::controller(JobApplicationController::class)->group(function () {
-        Route::get('/job/{job:slug}/apply', 'show')->name('job.apply');
-        Route::post('/job/{job:slug}/apply', 'store')->name('job.apply.submit');
+        Route::get('/job/{job:id}/apply', 'show')->name('job.apply');
+        Route::post('/job/{job:id}/apply', 'store')->name('job.apply.submit');
     });
 });
