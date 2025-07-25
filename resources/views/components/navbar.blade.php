@@ -44,9 +44,10 @@
                     {{-- Tombol Login/Sign Up (user BELUM login) --}}
                     <div class="flex items-center space-x-2 text-lg">
                         <a href="{{ route('login') }}"
-                            class="{{ request()->routeIs('login') ? 'bg-[#132442] text-white font-medium' : 'bg-white text-gray-700 hover:bg-slate-200 hover:text-black'}} px-5 py-2 transition-all duration-300 ease-in-out rounded-3xl text-center border border-[#132442]">
+                            class="{{ request()->routeIs('login') || request()->is('/') ? 'bg-[#132442] text-white font-medium' : 'bg-white text-gray-700 hover:bg-slate-200 hover:text-black' }} px-5 py-2 transition-all duration-300 ease-in-out rounded-3xl text-center border border-[#132442']">
                             Login
                         </a>
+                        
                         <a href="{{ route('signup.user.form') }}"
                             class="{{ request()->routeIs('signup.user.form') ? 'bg-[#132442] text-white font-medium' : 'bg-white text-gray-700 hover:bg-slate-200 hover:text-black'}} px-5 py-2 rounded-3xl transition-all duration-300 ease-in-out text-center border border-[#132442]">
                             Sign Up
