@@ -27,11 +27,11 @@
                 <div class="flex flex-col sm:flex-row mb-5 gap-4 justify-center md:justify-start">
                     <a href="#"
                         class="bg-[#132442] text-white font-bold py-3 px-8 rounded-full hover:bg-[#0B182E] transition duration-300 shadow-md">
-                        See Jobs
+                        Lihat Lowongan
                     </a>
                     <a href="#"
                         class="bg-white text-[#132442] font-semibold py-3 px-8 rounded-full border border-[#132442] hover:bg-gray-100 transition duration-300 shadow-md">
-                        See Company
+                        Lihat Perusahaan
                     </a>
                 </div>
             </div>
