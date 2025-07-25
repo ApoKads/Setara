@@ -25,7 +25,7 @@
                         {{ request()->routeIs('admin.activity') 
                             ? 'bg-slate-200 text-black font-medium' 
                             : '!bg-white !text-gray-700 hover:!bg-slate-200 hover:!text-black' }}">
-                        Activity
+                        Aktivitas
                     </a>
                 </div>
 
@@ -35,7 +35,7 @@
                     <button type="submit"
                         class="px-5 py-2 text-lg rounded-3xl text-center cursor-pointer font-medium 
                         !bg-red-500 !text-white hover:!bg-red-700 transition-all duration-300 ease-in-out">
-                        Logout
+                        Keluar
                     </button>
                 </form>
             </div>

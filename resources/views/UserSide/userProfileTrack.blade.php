@@ -69,7 +69,7 @@
                                         <span class="text-gray-500 text-xs">Diajukan:
                                             {{ $applicant->created_at->format('d M Y') }}</span>
                                     </div>
-                                    <a href="{{ route('job.show', $applicant->job->slug) }}"
+                                    <a href="{{ route('job.show', $applicant->job->id) }}"
                                         class="mt-3 inline-block text-blue-600 hover:text-blue-800 text-sm font-medium">Lihat
                                         Detail Pekerjaan</a>
                                 </div>
@@ -97,7 +97,7 @@
                                         <span class="text-gray-500 text-xs">Diajukan:
                                             {{ $applicant->created_at->format('d M Y') }}</span>
                                     </div>
-                                    <a href="{{ route('job.show', $applicant->job->slug) }}"
+                                    <a href="{{ route('job.show', $applicant->job->id) }}"
                                         class="mt-3 inline-block text-blue-600 hover:text-blue-800 text-sm font-medium">Lihat
                                         Detail Pekerjaan</a>
                                 </div>
@@ -125,7 +125,7 @@
                                         <span class="text-gray-500 text-xs">Diajukan:
                                             {{ $applicant->created_at->format('d M Y') }}</span>
                                     </div>
-                                    <a href="{{ route('job.show', $applicant->job->slug) }}"
+                                    <a href="{{ route('job.show', $applicant->job->id) }}"
                                         class="mt-3 inline-block text-blue-600 hover:text-blue-800 text-sm font-medium">Lihat
                                         Detail Pekerjaan</a>
                                 </div>
@@ -168,7 +168,7 @@
                                             </td>
                                             <td class="py-3 px-4">{{ $applicant->created_at->format('d M Y') }}</td>
                                             <td class="py-3 px-4">
-                                                <a href="{{ route('job.show', $applicant->job->slug) }}"
+                                                <a href="{{ route('job.show', $applicant->job->id) }}"
                                                     class="text-blue-600 hover:text-blue-800 text-sm font-medium">Lihat
                                                     Detail</a>
                                             </td>
