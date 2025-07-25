@@ -13,11 +13,9 @@ class JobApplicationController extends Controller
     /**
      * Show the job application form
      */
-    public function show($slug)
+    public function show(Job $job)
     {
-        $job = Job::with(['company', 'seniority', 'JobType', 'location', 'EducationLevel'])
-            ->where('slug', $slug)
-            ->firstOrFail();
+        $job->load(['company', 'seniority', 'JobType', 'location', 'EducationLevel']);
 
         $user = Auth::user();
 
@@ -28,7 +26,7 @@ class JobApplicationController extends Controller
                 ->first();
 
             if ($existingApplication) {
-                return redirect()->route('job.show', $job->slug)
+                return redirect()->route('job.show', $job->id)
                     ->with('info', 'You have already applied for this position.');
             }
         }
@@ -39,13 +37,12 @@ class JobApplicationController extends Controller
     /**
      * Store the job application
      */
-    public function store(Request $request, $slug)
+    public function store(Request $request, Job $job)
     {
         $request->validate([
             'application_reason' => 'required|string|max:1000',
         ]);
 
-        $job = Job::where('slug', $slug)->firstOrFail();
         $user = Auth::user();
 
         // Check if user has a profile
@@ -70,7 +67,7 @@ class JobApplicationController extends Controller
             'slug' => Str::uuid(),
         ]);
 
-        return redirect()->route('job.show', $job->slug)
+        return redirect()->route('job.show', $job->id)
             ->with('success', 'Your application has been submitted successfully!');
     }
 }

@@ -27,7 +27,7 @@
     <!-- Application Form Section -->
     <div class="w-full shadow-[inset_0_5px_5px_rgba(0,0,0,0.1)]">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-            <form action="{{ route('job.apply.submit', $job->slug) }}" method="POST" class="space-y-8">
+            <form action="{{ route('job.apply.submit', $job->id) }}" method="POST" class="space-y-8">
                 @csrf
                 
                 <!-- Error and Success Messages -->
