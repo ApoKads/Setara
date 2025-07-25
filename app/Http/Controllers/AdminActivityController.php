@@ -38,7 +38,7 @@ class AdminActivityController extends Controller
             $user->update(['is_active' => true]);
         }
 
-        return response()->json(['message' => 'Company approved successfully.', 'status' => 'accepted'], 200);
+        return response()->json(['message' => 'Perusahaan berhasil didaftarkan.', 'status' => 'accepted'], 200);
     }
 
     public function rejectCompany($id)
@@ -51,7 +51,7 @@ class AdminActivityController extends Controller
             $user->update(['is_active' => false]);
         }
 
-        return response()->json(['message' => 'Company rejected.', 'status' => 'rejected'], 200);
+        return response()->json(['message' => 'Perusahaan ditolak.', 'status' => 'rejected'], 200);
     }
 
     public function checkCompanyStatusApi($id)
@@ -59,7 +59,7 @@ class AdminActivityController extends Controller
         $company = Company::find($id);
 
         if (!$company) {
-            return response()->json(['message' => 'Company record not found.'], 404);
+            return response()->json(['message' => 'Perusahaan tidak dapat ditemukan.'], 404);
         }
 
         return response()->json([
