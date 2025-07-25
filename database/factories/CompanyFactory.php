@@ -30,7 +30,8 @@ class CompanyFactory extends Factory
             'description' => fake()->paragraph(rand(10, 40)),
             'path_banner' => 'company/BannerCompany.jpg',
             'path_logo' => 'company/logoCompany.png',
-            'status' => fake()->randomElement($statuses),
+            // 'status' => fake()->randomElement($statuses),
+            'status'=>$statuses[1]
         ];
     }
 }

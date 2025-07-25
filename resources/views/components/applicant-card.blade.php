@@ -3,7 +3,8 @@
 <div class=" flex w-full h-[200px] pt-6 pb-4 bg-white rounded-xl shadow-[0px_0px_4px_1px_rgba(0,0,0,0.25)]">
     <div class="w-[40%] h-[100%]  flex justify-end items-start">
         <div class="h-[7rem] w-[7rem] rounded-full overflow-hidden mr-4 border-[1px] border-black">
-            <img src="{{ asset($applicant->profile->profile_image) }}" alt="profile" class="h-full w-full" style="object-fit: cover">
+            <img src="{{ asset('storage/profile_images/' . $applicant->profile->profile_image) }}" alt="profile" class="h-full w-full" style="object-fit: cover">
+
         </div>
     </div>
     <div class="w-[60%] h-[100%] pr-4">
