@@ -19,9 +19,9 @@ class ApplicantSeeder extends Seeder
         $jobs = Job::without([
             'company', 'JobType', 'location',
             'EducationLevel', 'disability', 'seniority'
-        ])->inRandomOrder()->limit(100)->get();
+        ])->inRandomOrder()->limit(10)->get();
 
-        Applicant::factory(100)
+        Applicant::factory(10)
             ->recycle($userProfiles)
             ->recycle($jobs)
             ->create();
