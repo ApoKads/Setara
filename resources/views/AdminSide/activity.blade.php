@@ -36,18 +36,32 @@
         <div class="bg-white rounded shadow-sm p-3 mb-4 d-flex justify-content-between align-items-center hover-shadow">
           <div class="flex-grow-1">
             <h5 class="mb-0 fw-bold">{{ $company->name }}</h5>
-            <p class="mb-0"><span class="fw-semibold">Status:</span> <span class="text-warning">{{ ucfirst($company->status) }}</span></p>
+            <p class="mb-0">
+  <span class="fw-semibold">Status:</span>
+  <span class="text-warning">
+    @if($company->status === 'pending')
+      Menunggu
+    @elseif($company->status === 'accepted')
+      Diterima
+    @elseif($company->status === 'rejected')
+      Ditolak
+    @else
+      {{ ucfirst($company->status) }}
+    @endif
+  </span>
+</p>
+
             <small class="text-muted">Didaftarkan: {{ $company->created_at->format('d M Y H:i') }}</small>
           </div>
           <div class="d-flex gap-2">
             <form action="{{ route('admin.approveCompany', $company->id) }}" method="POST" class="approve-form">
               @csrf
-              <button type="submit" class="btn btn-info btn-sm text-white">Approve</button>
+              <button type="submit" class="btn btn-info btn-sm text-white">Terima</button>
             </form>
 
             <form action="{{ route('admin.rejectCompany', $company->id) }}" method="POST" class="reject-form">
               @csrf
-              <button type="submit" class="btn btn-danger btn-sm">Decline</button>
+              <button type="submit" class="btn btn-danger btn-sm">Tolak</button>
             </form>
           </div>
         </div>
@@ -58,18 +72,24 @@
 
     <!-- History -->
     <div class="col-md-6" style="max-height: 80vh; overflow-y: auto;">
-      <h2 class="fw-bold text-dark mb-3 fs-1">History</h2>
+      <h2 class="fw-bold text-dark mb-3 fs-1">Riwayat</h2>
       <hr class="mb-4">
 
       @forelse($historyCompanies as $company)
         <div class="bg-white rounded shadow-sm p-3 mb-3 hover-shadow">
           <h6 class="fw-bold mb-1">{{ $company->name }}</h6>
           <span class="badge 
-            @if($company->status === 'accepted') bg-success 
-            @elseif($company->status === 'rejected') bg-danger 
-            @else bg-secondary 
-            @endif">
-            {{ ucfirst($company->status) }}
+          @if($company->status === 'accepted') bg-success 
+          @elseif($company->status === 'rejected') bg-danger 
+          @else bg-secondary 
+          @endif">
+  @if($company->status === 'accepted')
+    Diterima
+  @elseif($company->status === 'rejected')
+    Ditolak
+  @else
+    {{ ucfirst($company->status) }}
+  @endif
           </span>
           <br>
           <small class="text-muted">Terakhir diperbarui: {{ $company->updated_at->format('d M Y H:i') }}</small>

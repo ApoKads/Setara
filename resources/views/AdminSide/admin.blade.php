@@ -61,7 +61,7 @@
         <a href="{{ route('company.shows', $company->id) }}"
         class="btn rounded-pill px-3 py-1 fw-medium see-profile-btn"
         style="background-color: #ffffff; color: #3551A4; border: 1.5px solid #d5e3ff; box-shadow: 0 2px 4px rgba(0, 76, 255, 0.1);">
-        See Profile
+        Lihat Profil
         </a>
 
         <!-- Edit Icon -->
