@@ -16,8 +16,8 @@
     </div>
     <div class="flex justify-center items-center w-full ">
         <a href="{{ route('companyJob.show', $job->id) }}"
-            class="bg-white p-2 px-4 rounded-lg text-[#3551A4] shadow-[1px_2px_3px_0px_rgba(70,118,251,0.41)] hover:brightness-95 transition duration-200">See
-            Details</a>
+            class="bg-white p-2 px-4 rounded-lg text-[#3551A4] shadow-[1px_2px_3px_0px_rgba(70,118,251,0.41)] hover:brightness-95 transition duration-200">Lihat
+            Detail</a>
     </div>
     <div class="flex justify-start items-center w-full gap-4">
         {{-- <h1>Icon</h1> --}}

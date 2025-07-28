@@ -2,7 +2,7 @@
     <div class="col-start-2 row-start-1">
         <div class="min-h-full min-w-full flex flex-col justify-end items-center">
             <img src="{{ asset('images/Footer/FootLogo.svg') }}" alt="Logo" class="object-center h-28">
-            <div class="pb-2 font-pop font-bold text-xl">Contact Us</div>
+            <div class="pb-2 font-pop font-bold text-xl">Kontak Kami</div>
             <div class="h-fit w-full flex justify-center items-center gap-8">
                 <a href="#">
                     <img src="{{ asset('images/Footer/email.svg') }}" alt="Logo" class="w-8 h-8 transition-all hover:drop-shadow-[0_5px_5px_rgba(0,0,0,0.25)] duration-300 ease-in-out">

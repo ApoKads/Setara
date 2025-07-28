@@ -73,7 +73,7 @@
                             </div>
                             <a href="mailto:{{ $user->email }}"
                                 class="block bg-cyan-400 text-black font-bold py-2.5 px-6 rounded-lg mt-3 hover:bg-cyan-300 transition-colors duration-300 text-sm">
-                                CONTACT ME
+                                KONTAK SAYA
                             </a>
                         </div>
                     </div>
@@ -87,14 +87,14 @@
                 <div class="flex gap-4">
                     <a href="{{ route('profile.edit') }}"
                         class="border border-gray-800 text-gray-800 rounded-full px-6 py-2 text-sm font-semibold hover:bg-gray-800 hover:text-white transition-all duration-300">
-                        EDIT PROFILE
+                        EDIT PROFIL
                     </a>
                     <form action="{{ route('logout') }}" method="POST" class="inline-flex items-center">
                         @csrf
                         <button type="submit"
                             class="border border-gray-800 text-gray-800 rounded-full px-6 py-2 text-sm font-semibold hover:border-red-600 hover:bg-red-600 hover:text-white transition-all duration-300 cursor-pointer"
                             >
-                            LOGOUT
+                            KELUAR
                         </button>
                     </form>
                 </div>
@@ -174,7 +174,7 @@
                         class="rounded-2xl shadow-xl w-full max-w-xs object-cover">
                 </div>
                 <div class="w-full md:w-2/3">
-                    <h3 class="text-4xl font-bold text-gray-900 mb-6">Skills & Experiences</h3>
+                    <h3 class="text-4xl font-bold text-gray-900 mb-6">Keahlian & Pengalaman</h3>
                     <div class="space-y-5">
                         @forelse ($user->profile->skills as $skill)
                             <div>
@@ -198,7 +198,7 @@
 
         <div class="bg-[#0B153D] text-white py-20">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <h3 class="text-4xl font-bold text-center mb-12">Career & Education History</h3>
+                <h3 class="text-4xl font-bold text-center mb-12">Karir & Riwayat Pendidikan</h3>
                 <div class="max-w-3xl mx-auto">
                     @forelse ($user->profile->careerHistories as $history)
                         <div class="relative pl-8 sm:pl-10 py-6 group">

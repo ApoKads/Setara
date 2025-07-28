@@ -10,12 +10,11 @@
                 <div class="text-center mb-6">
                     <h1
                         class="text-2xl leading-tight tracking-tight font-bold text-gray-900 md:text-3xl [font-family:var(--font-overpass)]">
-                        WELCOME TO SETARA!
+                        Selamat Datang!
                     </h1>
                     <p class="text-sm font-light text-gray-500 mt-2">
-                        Don't have an account?
-                        <a href="/signup" class="font-medium text-[#88BBD8] hover:underline">Sign Up
-                            Here!</a>
+                        Belum memiliki akun?
+                        <a href="/signup" class="font-medium text-[#88BBD8] hover:underline">Daftar disini!</a>
                     </p>
                 </div>
                 <form method="POST" action="{{ route('login') }}" class="space-y-6">
@@ -52,7 +51,7 @@
 
                     <button type="submit"
                         class="w-full hover:scale-[102%] transition-transform  text-white bg-[#132442] hover:bg-opacity-90 focus:ring-4 focus:outline-none focus:ring-[#88BBD8]/50 font-medium rounded-xl text-sm px-5 py-3 text-center cursor-pointer">
-                        <span class="text-white">Sign In</span>
+                        <span class="text-white">Masuk</span>
                     </button>
                 </form>
             </div>

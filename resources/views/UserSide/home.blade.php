@@ -13,25 +13,24 @@
             class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-end justify-between relative z-10">
             <div class="ml-10 w-full md:w-2/5 text-center md:text-left mb-12 md:mb-0">
                 <h1 class="text-4xl lg:text-6xl text-[#132442] mb-6 leading-tight">
-                    Find Your
+                    Temukan
                     <img src="{{ asset('images/Homepage/arrow_right_home.svg') }}" alt="Arrow Right"
                         class="inline-block mx-2 w-16 h-10 align-middle">
                     <span class="inline-flex items-center font-bold text-[#132442]">
-                        DREAM JOB
-                    </span> Here
+                        PEKERJAAN IMPIAN
+                    </span> Anda
                 </h1>
                 <p class="text-lg text-gray-600 mb-8 leading-relaxed">
-                    Break the Limitations, Find Your Perfect Job, and Unlock
-                    Your Potential with Our Tailored Opportunities.
+                    Patahkan Keterbatasan, Cari Pekerjaan Impian Anda, dan Temukan Potensi Melalui Kesempatan Hebat.
                 </p>
                 <div class="flex flex-col sm:flex-row mb-5 gap-4 justify-center md:justify-start">
                     <a href="#"
                         class="bg-[#132442] text-white font-bold py-3 px-8 rounded-full hover:bg-[#0B182E] transition duration-300 shadow-md">
-                        See Jobs
+                        Lihat Lowongan
                     </a>
                     <a href="#"
                         class="bg-white text-[#132442] font-semibold py-3 px-8 rounded-full border border-[#132442] hover:bg-gray-100 transition duration-300 shadow-md">
-                        See Company
+                        Lihat Perusahaan
                     </a>
                 </div>
             </div>

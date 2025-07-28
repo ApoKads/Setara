@@ -118,7 +118,7 @@
                             </div>
                             @empty
                                 <p class="w-full text-center p-4">
-                                    No jobs available ...
+                                    Belum ada Lowongan yang ditambahkan ...
                                 </p>
                         @endforelse                  
                     </div>

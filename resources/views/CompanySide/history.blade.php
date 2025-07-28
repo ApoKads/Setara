@@ -49,7 +49,7 @@
         <div class="w-[90%] flex flex-col mt-10 gap-4">
 
             <div>
-                <h1 class="font-bold text-5xl mb-4 text-[#132442]">History Lamaran</h1>
+                <h1 class="font-bold text-5xl mb-4 text-[#132442]">Riwayat Lamaran</h1>
             </div>
             <hr class="border-[1.5px] border-[#132442]">
 
@@ -139,7 +139,7 @@
                             <x-company-dashboard.history-row :applicant="$applicant"></x-company-dashboard.history-row>
                         @empty
                             <p class="w-full text-center p-4">
-                                No jobs available ...
+                                Belum ada Lowongan yang ditambahkan ...
                             </p>
                         @endforelse
                     </div>

@@ -10,12 +10,11 @@
                         <div class="text-center mb-6">
                             <h1
                                 class="text-2xl leading-tight tracking-tight font-bold text-gray-900 md:text-3xl [font-family:var(--font-overpass)]">
-                                Together, Let’s make accessibility a priority!
+                                Bersama, kita prioritaskan aksesibilitas!
                             </h1>
                             <p class="text-sm font-light text-gray-500 mt-2">
-                                Are you an applicant?
-                                <a href="/signup" class="font-medium text-[#88BBD8] hover:underline">Sign Up
-                                    Here!</a>
+                                Apakah anda pelamar?
+                                <a href="/signup" class="font-medium text-[#88BBD8] hover:underline">Daftar disini!</a>
                             </p>
                         </div>
 
@@ -65,7 +64,7 @@
 
                             <div class="relative">
                                 <label for="password_confirmation"
-                                    class="block mb-2 text-sm font-medium text-[#444B59]">Confirm Password</label>
+                                    class="block mb-2 text-sm font-medium text-[#444B59]">Konfirmasi Password</label>
                                 <input type="password" name="password_confirmation" id="password_confirmation"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-xl focus:ring-[#88BBD8] focus:border-[#88BBD8] block w-full p-3"
                                     placeholder="••••••••" required>
@@ -83,7 +82,7 @@
 
                             <button type="submit" id="submitButton"
                                 class="w-full hover:scale-[102%] transition-transform text-white bg-[#132442] hover:bg-opacity-90 focus:ring-4 focus:outline-none focus:ring-[#88BBD8]/50 font-medium rounded-xl text-sm px-5 py-3 text-center cursor-pointer">
-                                Sign Up
+                                Daftar
                             </button>
                         </form>
                     </div>
