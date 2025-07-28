@@ -57,7 +57,7 @@
                 @forelse ($companyCard as $card)
                     <x-company-list.company-card :card="$card" ></x-company-list.company-card>
                 @empty
-                    <p>There isn't a company available...</p>
+                    <p>Tidak ada perusahaan tersedia...</p>
                 @endforelse
             </div>
             <div class="flex flex-col justify-center items-center mt-10">

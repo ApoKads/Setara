@@ -180,7 +180,7 @@
             @forelse ($jobCard as $card)
         <x-job-list.job-card :card="$card"></x-job-list.job-card>
       @empty
-        <p>There isn't a job available...</p>
+        <p>Tidak ada lowongan tersedia...</p>
       @endforelse
           </div>
           <div class="flex flex-col justify-center items-center mt-10">

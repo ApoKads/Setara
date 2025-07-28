@@ -13,7 +13,7 @@
                                 Bersama, kita prioritaskan aksesibilitas!
                             </h1>
                             <p class="text-sm font-light text-gray-500 mt-2">
-                                Apakah anda pelamar?
+                                Ingin daftar sebagai pelamar?
                                 <a href="/signup" class="font-medium text-[#88BBD8] hover:underline">Daftar disini!</a>
                             </p>
                         </div>
@@ -22,8 +22,7 @@
                             @csrf
                             <input type="hidden" name="role" value="company">
                             <div>
-                                <label for="name" class="block mb-2 text-sm font-medium text-[#444B59]">Company
-                                    Name</label>
+                                <label for="name" class="block mb-2 text-sm font-medium text-[#444B59]">Nama Perusahaan</label>
                                 <input type="text" name="name" id="name" value="{{ old('name') }}"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-xl focus:ring-[#88BBD8] focus:border-[#88BBD8] block w-full p-3"
                                     placeholder="Your Company Name" required>

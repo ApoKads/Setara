@@ -25,8 +25,7 @@
         <div class="w-full h-[40%] flex justify-end items-center">
             {{-- Added shadow to the <a> tag --}}
                 <a href="{{ route('company.applicantDetails', $applicant->id) }}"
-                    class="p-2 px-4 text-sm font-pop bg-white rounded-xl text-[#3551A4] shadow-[1px_2px_3px_rgba(70,118,251,0.41)]">See
-                    Profile</a>
+                    class="p-2 px-4 text-sm font-pop bg-white rounded-xl text-[#3551A4] shadow-[1px_2px_3px_rgba(70,118,251,0.41)]">Lihat Profil</a>
         </div>
     </div>
 </div>

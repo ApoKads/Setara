@@ -35,7 +35,7 @@
             @forelse ($detail->applicant as $applicant)
                 <x-applicant-card :applicant="$applicant"></x-applicant-card>
             @empty
-                <p>There isn't an applicant for this job yet...</p>
+                <p>Belum ada pendaftar...</p>
             @endforelse
         </div>
     </div>
