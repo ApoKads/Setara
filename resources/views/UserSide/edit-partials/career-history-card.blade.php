@@ -12,8 +12,7 @@
 
         <div class="space-y-4">
             @forelse ($user->profile->careerHistories as $history)
-                <div class="border rounded-lg p-4 flex items-start hover:bg-gray-50">
-                    {{-- IMPROVEMENT: Menambahkan ikon --}}
+                <div class="border rounded-lg p-4 flex items-start hover:bg-gray-50 transition-colors duration-200">
                     <div class="flex-shrink-0 mr-4">
                         <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center">
                             <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -33,19 +32,16 @@
                             <div class="flex space-x-3 flex-shrink-0 ml-4">
                                 <button @click="editModal = true; selectedHistory = {{ $history->toJson() }}"
                                     class="text-sm font-medium text-yellow-600 hover:text-yellow-800 cursor-pointer">Edit</button>
-                                <form action="{{ route('career-histories.destroy', $history) }}" method="POST"
-                                    onsubmit="return confirm('Yakin ingin menghapus?');">
-                                    @csrf @method('DELETE')
-                                    <button type="submit"
-                                        class="text-sm font-medium text-red-600 hover:text-red-800 cursor-pointer">Hapus</button>
-                                </form>
+
+                                <button type="button"
+                                    onclick="openDeleteConfirmModal('{{ route('career-histories.destroy', $history->id) }}')"
+                                    class="text-sm font-medium text-red-600 hover:text-red-800 cursor-pointer">Hapus</button>
                             </div>
                         </div>
                         <p class="text-sm text-gray-500 mt-1">
                             {{ \Carbon\Carbon::parse($history->start_date)->isoFormat('MMMM Y') }} -
                             {{ $history->end_date ? \Carbon\Carbon::parse($history->end_date)->isoFormat('MMMM Y') : 'Sekarang' }}
                         </p>
-                        {{-- IMPROVEMENT: Menampilkan deskripsi pekerjaan --}}
                         <p class="mt-2 text-gray-600 text-sm">{{ $history->description }}</p>
                     </div>
                 </div>
@@ -61,7 +57,7 @@
         x-cloak>
         <div @click.away="addModal = false"
             class="relative mx-auto p-6 md:p-8 border w-full max-w-2xl shadow-2xl rounded-2xl bg-white">
-            <h3 class="text-xl leading-6 font-bold text-gray-900 cursor-pointer">Tambah Riwayat Pekerjaan</h3>
+            <h3 class="text-xl leading-6 font-bold text-gray-900">Tambah Riwayat Pekerjaan</h3>
             <form action="{{ route('career-histories.store') }}" method="POST" class="mt-4 space-y-4">
                 @csrf
                 @include('UserSide.edit-partials.career-history-form')
@@ -83,7 +79,8 @@
             class="relative mx-auto p-6 md:p-8 border w-full max-w-2xl shadow-2xl rounded-2xl bg-white">
             <h3 class="text-xl leading-6 font-bold text-gray-900">Edit Riwayat Pekerjaan</h3>
             <form :action="`/career-histories/${selectedHistory?.id}`" method="POST" class="mt-4 space-y-4">
-                @csrf @method('PUT')
+                @csrf
+                @method('PUT')
                 @include('UserSide.edit-partials.career-history-form')
                 <div class="flex items-center justify-end space-x-4 pt-4">
                     <button @click="editModal = false" type="button"

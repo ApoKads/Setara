@@ -37,6 +37,7 @@
         @endif
 
         <div class="space-y-8">
+            {{-- Form Profil Utama --}}
             <div class="bg-white overflow-hidden shadow-lg rounded-2xl p-6 md:p-8">
                 <h2 class="text-2xl font-bold text-gray-800 border-b pb-4">Edit Profil Utama</h2>
                 <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data" class="mt-6">
@@ -97,8 +98,56 @@
                     </div>
                 </form>
             </div>
+
+            {{-- Include Partials --}}
             @include('UserSide.edit-partials.career-history-card')
             @include('UserSide.edit-partials.skills-card')
         </div>
     </div>
+
+    {{-- Modal Hapus & Script --}}
+    <div id="deleteConfirmModal"
+        class="fixed inset-0 z-50 hidden items-center justify-center h-full w-full bg-black bg-opacity-50">
+        <div class="bg-white rounded-lg p-6 w-full max-w-md z-50 mx-4">
+            <h2 class="text-xl font-bold text-red-600">Konfirmasi Penghapusan</h2>
+            <p class="text-gray-600 mt-2">Apakah Anda yakin ingin menghapus item ini? Tindakan ini tidak dapat
+                diurungkan.</p>
+            <div class="flex justify-end gap-4 mt-6">
+                <button type="button" onclick="closeDeleteConfirmModal()"
+                    class="px-4 py-2 bg-gray-300 text-gray-800 rounded-lg hover:bg-gray-400 transition duration-200">
+                    Batal
+                </button>
+                <form id="deleteConfirmForm" action="" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit"
+                        class="px-4 py-2 text-white font-semibold rounded-lg bg-red-500 hover:bg-red-600 transition duration-200">
+                        Hapus
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openDeleteConfirmModal(url) {
+            const modal = document.getElementById('deleteConfirmModal');
+            const form = document.getElementById('deleteConfirmForm');
+            if (modal && form) {
+                form.action = url;
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+                document.body.classList.add('overflow-hidden');
+            }
+        }
+
+        function closeDeleteConfirmModal() {
+            const modal = document.getElementById('deleteConfirmModal');
+            if (modal) {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+                document.body.classList.remove('overflow-hidden');
+            }
+        }
+    </script>
 </x-layout>

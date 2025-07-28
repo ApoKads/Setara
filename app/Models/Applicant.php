@@ -13,11 +13,27 @@ class Applicant extends Model
 {
     /** @use HasFactory<\Database\Factories\ApplicantFactory> */
     use HasFactory;
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
     protected $fillable = [
         'user_profile_id',
         'job_id',
         'note',
-        'slug'
+        'slug',
+        'status',
+    ];
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array<string, string>
+     */
+    protected $casts = [
+        'status' => 'string', // <-- PERBAIKAN: Memastikan status selalu diperlakukan sebagai string
     ];
 
     public function job(): BelongsTo

@@ -92,8 +92,7 @@
                     <form action="{{ route('logout') }}" method="POST" class="inline-flex items-center">
                         @csrf
                         <button type="submit"
-                            class="border border-gray-800 text-gray-800 rounded-full px-6 py-2 text-sm font-semibold hover:border-red-600 hover:bg-red-600 hover:text-white transition-all duration-300 cursor-pointer"
-                            >
+                            class="border border-gray-800 text-gray-800 rounded-full px-6 py-2 text-sm font-semibold hover:border-red-600 hover:bg-red-600 hover:text-white transition-all duration-300 cursor-pointer">
                             KELUAR
                         </button>
                     </form>

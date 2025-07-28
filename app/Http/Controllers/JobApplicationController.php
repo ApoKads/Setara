@@ -7,6 +7,7 @@ use App\Models\Applicant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB; // <-- PERBAIKAN: Tambahkan DB facade
 
 class JobApplicationController extends Controller
 {
@@ -19,7 +20,6 @@ class JobApplicationController extends Controller
 
         $user = Auth::user();
 
-        // Check if user has already applied for this job
         if ($user && $user->profile) {
             $existingApplication = Applicant::where('user_profile_id', $user->profile->id)
                 ->where('job_id', $job->id)
@@ -45,12 +45,10 @@ class JobApplicationController extends Controller
 
         $user = Auth::user();
 
-        // Check if user has a profile
         if (!$user->profile) {
             return redirect()->back()->with('error', 'Please complete your profile before applying for jobs.');
         }
 
-        // Check if user has already applied for this job
         $existingApplication = Applicant::where('user_profile_id', $user->profile->id)
             ->where('job_id', $job->id)
             ->first();
@@ -59,12 +57,15 @@ class JobApplicationController extends Controller
             return redirect()->back()->with('error', 'You have already applied for this position.');
         }
 
-        // Create the application
-        Applicant::create([
+        // PERBAIKAN FINAL: Menggunakan Query Builder untuk memastikan data tersimpan dengan benar
+        DB::table('applicants')->insert([
             'user_profile_id' => $user->profile->id,
             'job_id' => $job->id,
             'note' => $request->application_reason,
             'slug' => Str::uuid(),
+            'status' => 'pending',
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
 
         return redirect()->route('job.show', $job->id)

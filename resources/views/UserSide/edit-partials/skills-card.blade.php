@@ -15,17 +15,14 @@
         </div>
         <hr class="my-4">
 
-        {{-- Form Tambah Skill --}}
         <form action="{{ route('profile.skills.store') }}" method="POST"
             class="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
             @csrf
             <div class="md:col-span-2">
-                {{-- PERUBAHAN: Mengganti <select> dengan <input type="text"> --}}
-                    <label for="skill_name" class="block text-sm font-medium text-gray-700">Nama Keahlian</label>
-                    <input type="text" name="skill_name" id="skill_name"
-                        placeholder="Contoh: Laravel, Photoshop, Public Speaking"
-                        class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                        required>
+                <label for="skill_name" class="block text-sm font-medium text-gray-700">Nama Keahlian</label>
+                <input type="text" name="name" id="skill_name" placeholder="Contoh: Laravel, Photoshop"
+                    class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                    required>
             </div>
             <div>
                 <label for="score" class="block text-sm font-medium text-gray-700">Skor (0-100)</label>
@@ -39,7 +36,6 @@
             </button>
         </form>
 
-        {{-- Daftar Skill yang dimiliki (tidak ada perubahan di sini) --}}
         <div class="mt-8 space-y-4">
             @forelse ($user->profile->skills as $skill)
                 <div class="flex justify-between items-center bg-gray-50 p-3 rounded-lg">
@@ -51,17 +47,15 @@
                     </div>
                     <div class="flex items-center space-x-3 flex-shrink-0">
                         <span class="text-sm font-bold text-gray-700 w-12 text-right">{{ $skill->pivot->score }}/100</span>
-                        <form action="{{ route('profile.skills.destroy', $skill) }}" method="POST"
-                            onsubmit="return confirm('Yakin ingin menghapus skill ini?');">
-                            @csrf @method('DELETE')
-                            <button type="submit" class="text-gray-400 hover:text-red-500 cursor-pointer transition-colors"
-                                title="Hapus Skill">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M6 18L18 6M6 6l12 12"></path>
-                                </svg>
-                            </button>
-                        </form>
+
+                        <button type="button"
+                            onclick="openDeleteConfirmModal('{{ route('profile.skills.destroy', $skill->id) }}')"
+                            class="text-gray-400 hover:text-red-500 cursor-pointer transition-colors" title="Hapus Skill">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                        </button>
                     </div>
                 </div>
             @empty
