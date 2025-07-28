@@ -90,7 +90,7 @@ class JobController extends Controller
             'education_level' => 'required|string|max:255|exists:education_levels,id',
             'location' => 'required|string|max:255|exists:locations,id',
             'work_mode' => 'required',
-            'slot' => 'required|integer|min:1',
+            'slot' => 'required|integer|min:0',
             'description' => 'required|string',
             'responsibilities' => 'required|string',
             'wage' => 'required|numeric|min:0',

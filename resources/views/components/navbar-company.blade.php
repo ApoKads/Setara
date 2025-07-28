@@ -17,7 +17,7 @@
                     </a>
                     <a href="{{ route('company.history') }}"
                         class="{{ request()->routeIs('company.history') ? 'bg-slate-200 text-black font-medium' : 'bg-white text-gray-700 hover:bg-slate-200 hover:text-black'}} px-5 py-2 transition-all duration-300 ease-in-out rounded-3xl text-center">
-                        History
+                        Riwayat
                     </a>
                 </div>
 
@@ -36,7 +36,7 @@
                     @csrf
                     <button type="submit"
                         class="px-5 py-2 text-lg bg-red-500 text-white font-medium rounded-3xl hover:bg-red-700 transition-all duration-300 ease-in-out text-center cursor-pointer">
-                        Logout
+                        Keluar
                     </button>
                 </form>
             </div>

@@ -69,6 +69,24 @@ class CompanyDashboardController extends Controller
 
     public function accept(Applicant $applicant)
     {
+        // Ambil job dari applicant
+        $job = $applicant->job;
+
+        // Cek apakah job tidak ada atau slot penuh
+        if (!$job || $job->slot <= 0) {
+            return redirect()->route('company.history')
+                            ->with('status', 'failed')
+                            ->with('message', 'Lamaran gagal diterima karena slot sudah penuh.');
+        }
+
+        // Cek apakah status sebelumnya bukan 'accepted'
+        if ($applicant->status !== 'accepted') {
+            // Kurangi slot job
+            $job->slot -= 1;
+            $job->save();
+        }
+
+        // Update status
         $applicant->status = 'accepted';
         $applicant->save();
 
@@ -77,8 +95,20 @@ class CompanyDashboardController extends Controller
                         ->with('message', 'Lamaran berhasil diterima.');
     }
 
+
+
     public function reject(Applicant $applicant)
     {
+        // Cek jika sebelumnya status-nya adalah 'accepted'
+        if ($applicant->status === 'accepted') {
+            $job = $applicant->job;
+            if ($job) {
+                $job->slot += 1;
+                $job->save();
+            }
+        }
+
+        // Update status ke 'rejected'
         $applicant->status = 'rejected';
         $applicant->save();
 
@@ -86,6 +116,7 @@ class CompanyDashboardController extends Controller
                         ->with('status', 'rejected')
                         ->with('message', 'Lamaran berhasil ditolak.');
     }
+
 
 
 

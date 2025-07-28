@@ -33,7 +33,7 @@ class UserProfileFactory extends Factory
             'user_id' => User::factory(),
             'age' => fake()->numberBetween(18, 65),
             'about'=> fake()->paragraph(rand(10,40)),
-            'profile_image'=>'storage/applicant/undra.jpg'
+            'profile_image'=>'default.jpg'
 
         ];
     }

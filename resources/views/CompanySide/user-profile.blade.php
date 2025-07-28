@@ -94,16 +94,24 @@
                 </div>
 
                 <div class="flex gap-4">
-
                     <a href="javascript:void(0)" onclick="openDecisionModal('reject')"
                         class="inline-block bg-red-400 text-black font-bold py-3 px-8 rounded-lg text-sm tracking-wider hover:bg-red-600 transition-colors">
                         TOLAK LAMARAN
                     </a>
-                    <a href="javascript:void(0)" onclick="openDecisionModal('accept')"
-                        class="inline-block bg-green-400 text-black font-bold py-3 px-8 rounded-lg text-sm tracking-wider hover:bg-green-600 transition-colors">
-                        TERIMA LAMARAN
-                    </a>
+
+                    @if ($applicant->job->slot == 0)
+                        <span
+                            class="inline-block bg-gray-300 text-gray-600 font-bold py-3 px-8 rounded-lg text-sm tracking-wider cursor-not-allowed">
+                            SLOT PENUH
+                        </span>
+                    @else
+                        <a href="javascript:void(0)" onclick="openDecisionModal('accept')"
+                            class="inline-block bg-green-400 text-black font-bold py-3 px-8 rounded-lg text-sm tracking-wider hover:bg-green-600 transition-colors">
+                            TERIMA LAMARAN
+                        </a>
+                    @endif
                 </div>
+
 
             </div>
         </div>
