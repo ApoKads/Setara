@@ -24,11 +24,11 @@
                     Patahkan Keterbatasan, Cari Pekerjaan Impian Anda, dan Temukan Potensi Melalui Kesempatan Hebat.
                 </p>
                 <div class="flex flex-col sm:flex-row mb-5 gap-4 justify-center md:justify-start">
-                    <a href="#"
+                    <a href="{{ route('jobs') }}"
                         class="bg-[#132442] text-white font-bold py-3 px-8 rounded-full hover:bg-[#0B182E] transition duration-300 shadow-md">
                         Lihat Lowongan
                     </a>
-                    <a href="#"
+                    <a href="{{ route('companies') }}"
                         class="bg-white text-[#132442] font-semibold py-3 px-8 rounded-full border border-[#132442] hover:bg-gray-100 transition duration-300 shadow-md">
                         Lihat Perusahaan
                     </a>
