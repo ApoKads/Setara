@@ -32,7 +32,7 @@
                     <button @click="activeTab = 'accepted'"
                         :class="{ 'border-blue-500 text-blue-600': activeTab === 'accepted', 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300': activeTab !== 'accepted' }"
                         class="whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm transition-colors duration-200">
-                        Diterima ({{ $acceptedApplicants->count() }})
+                        Tahap Selanjutnya ({{ $acceptedApplicants->count() }})
                     </button>
                     <button @click="activeTab = 'rejected'"
                         :class="{ 'border-blue-500 text-blue-600': activeTab === 'rejected', 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300': activeTab !== 'rejected' }"
@@ -81,7 +81,7 @@
                 <!-- Diterima Tab -->
                 <div x-show="activeTab === 'accepted'" x-transition:enter="transition ease-out duration-300"
                     x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100">
-                    <h2 class="text-xl font-semibold text-gray-800 mb-4">Lamaran Diterima</h2>
+                    <h2 class="text-xl font-semibold text-gray-800 mb-4">Lamaran Lolos Tahap Selanjutnya</h2>
                     @if($acceptedApplicants->isEmpty())
                         <p class="text-gray-600">Tidak ada lamaran yang telah diterima.</p>
                     @else
@@ -92,7 +92,7 @@
                                     <p class="text-gray-600 text-sm">{{ $applicant->job->company->name }}</p>
                                     <div class="mt-2 flex items-center justify-between">
                                         <span class="px-3 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-800">
-                                            Diterima
+                                            Tahap Selanjutnya
                                         </span>
                                         <span class="text-gray-500 text-xs">Diajukan:
                                             {{ $applicant->created_at->format('d M Y') }}</span>

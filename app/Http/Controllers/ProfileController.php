@@ -86,7 +86,7 @@ class ProfileController extends Controller
             $request->profile_image->storeAs('profile_images', $imageName, 'public');
             $validated['profile_image'] = $imageName;
         }
-
+        // dd($validated);   
         $profile->update($validated);
 
         return redirect()->route('profile.show')->with('success', 'Profile updated successfully!');

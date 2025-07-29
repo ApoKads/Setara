@@ -80,6 +80,20 @@
                     </div>
                 </div>
             </div>
+
+            {{-- Catatan Pelamar --}}
+            <div class="mt-12 bg-white shadow-xl rounded-2xl p-8 mx-auto h-[18rem]">
+                <h3 class="text-2xl font-bold text-gray-800 mb-4">Catatan dari Pelamar</h3>
+                @if (!empty($applicant->note))
+                    <div class="prose max-w-none text-gray-700">
+                        {!! nl2br(e($applicant->note)) !!}
+                    </div>
+                @else
+                    <p class="text-gray-400 italic">Pelamar belum menuliskan catatan khusus.</p>
+                @endif
+            </div>
+
+
             <div class="mt-6 flex justify-between items-end gap-4">
                 <div class="flex flex-col w-60 justify-center items-center gap-2">
                     <div class="">
