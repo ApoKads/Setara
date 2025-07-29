@@ -20,7 +20,8 @@
             @csrf
             <div class="md:col-span-2">
                 <label for="skill_name" class="block text-sm font-medium text-gray-700">Nama Keahlian</label>
-                <input type="text" name="name" id="skill_name" placeholder="Contoh: Laravel, Photoshop"
+                {{-- PERBAIKAN: Mengubah name="name" menjadi name="skill_name" --}}
+                <input type="text" name="skill_name" id="skill_name" placeholder="Contoh: Laravel, Photoshop"
                     class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                     required>
             </div>
